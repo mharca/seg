@@ -13,6 +13,7 @@ public class JanPrincipal extends JFrame{
 	
 	public JanPrincipal(){
 		setSize(800, 600);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -50,7 +51,8 @@ public class JanPrincipal extends JFrame{
 								node_3.add(new DefaultMutableTreeNode("Placa"));
 								node_3.add(new DefaultMutableTreeNode("Visitante"));
 								node_3.add(new DefaultMutableTreeNode("Visitado"));
-							node_2.add(node_3);
+								node_3.add(new DefaultMutableTreeNode("Detran"));
+							node_1.add(node_3);
 						node_1.add(node_2);
 					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Achados e perdidos");
@@ -70,16 +72,34 @@ public class JanPrincipal extends JFrame{
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 				if( node.getParent().toString() == "Chaves"){ 
+						setTitle("Chaves");
 						if (node.getUserObject() == "Emprestar")
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanEmprestarChave());
 						else if (node.getUserObject() == "Devolver")
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanDevolverChave());
 						else if (node.getUserObject() == "Listar")
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanListarChave());
-							
-					
+					}
+				else if( node.getParent().toString() == "Garagem"){
+					setTitle("Garagem");
+					if (node.getUserObject() == "Cadastrar")
+						splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemCadastro());
+					else if (node.getUserObject() == "Gerar planilha")
+						splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemPlanilha());
+															
 				}
-					
+				if ( (node.getUserObject() == "Placa") && (node.getParent().toString() == "Procurar")){
+					splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemListarPlaca());
+				}
+				if ( (node.getUserObject() == "Visitante") && (node.getParent().toString() == "Procurar")){
+					splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemListarVisitante());
+				}
+				else if ( (node.getUserObject() == "Visitado") && (node.getParent().toString() == "Procurar")){
+					splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemListarVisitado());
+				}
+				if ( (node.getUserObject() == "Detran") && (node.getParent().toString() == "Procurar")){
+					splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemListarDetran());
+				}
 				
 				
 			}

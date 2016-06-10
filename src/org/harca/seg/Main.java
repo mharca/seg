@@ -1,4 +1,4 @@
-package seg;
+package org.harca.seg;
 import org.harca.seg.ui.*;
 
 public class Main {
