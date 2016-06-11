@@ -1,6 +1,7 @@
 package org.harca.seg.garagem.ui;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -52,13 +53,14 @@ public class JanGaragemListarDetran extends JPanel {
 				panel.add(lblImagem);
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "Foto não encontrada");
 				e.printStackTrace();
 			}
 			
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				
+				JOptionPane.showMessageDialog(null, "Não foi possível conectar");
+				System.out.println("Não foi possível conectar");
 		}
 		
 		
