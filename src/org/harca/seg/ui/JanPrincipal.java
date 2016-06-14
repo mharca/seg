@@ -100,7 +100,18 @@ public class JanPrincipal extends JFrame{
 				if ( (node.getUserObject() == "Detran") && (node.getParent().toString() == "Procurar")){
 					splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemListarDetran());
 				}
-				
+				if ( (node.getUserObject() == "Cadastrar") && (node.getParent().toString() == "Achados e perdidos")){
+					//splitPane.setLayout(new BorderLayout());
+					JPanel p = new JPanel(new BorderLayout());
+					setTitle("Achados e perdidos");
+					p.add(BorderLayout.CENTER,new org.harca.seg.achados.ui.JanCadastro());
+					//splitPane.setRightComponent(new org.harca.seg.achados.ui.JanCadastro());
+					splitPane.setRightComponent(p);
+				}
+				if ( (node.getUserObject() == "Data") && (node.getParent().toString() =="Procurar") && (node.getParent().getParent().toString() == "Achados e perdidos")){
+					setTitle("Achados e perdidos");
+					splitPane.setRightComponent(new org.harca.seg.achados.ui.JanBuscarData());
+				}
 				
 			}
 		});
