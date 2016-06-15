@@ -300,7 +300,7 @@ public void deletar(String id){
 		//String query = "SELECT objetoNome,objetoDescricao,lugarEncontrado,escaninho FROM achadoseperdidos WHERE diaEncontrado=11";//+data.substring(0, 2);
 		String query = "SELECT id,objetoNome, objetoDescricao, lugarEncontrado,"
 					+ "encontrouMatricula,diaEncontrado,mesEncontrado,anoEncontrado,horaEncontrado,minutoEncontrado,"
-					+ "matriculaIsi,diaRecebido,mesRecebido,anoRecebido,horaRecebido,minutoRecebido,escaninho FROM achadoseperdidos WHERE objetoNome='"+data+"';";
+					+ "matriculaIsi,diaRecebido,mesRecebido,anoRecebido,horaRecebido,minutoRecebido,escaninho FROM achadoseperdidos WHERE objetoNome LIKE '%"+data+"%';";
 		List<List<String>> lista2 = new ArrayList<>();
 		
 		try {
