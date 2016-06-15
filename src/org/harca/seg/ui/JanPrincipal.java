@@ -60,6 +60,8 @@ public class JanPrincipal extends JFrame{
 						node_2 = new DefaultMutableTreeNode("Procurar");
 							node_2.add(new DefaultMutableTreeNode("Data"));
 							node_2.add(new DefaultMutableTreeNode("Objeto"));
+							node_2.add(new DefaultMutableTreeNode("Todos"));
+							node_2.add(new DefaultMutableTreeNode("Devolvidos"));
 						node_1.add(node_2);
 						node_1.add(new DefaultMutableTreeNode("Listar"));
 					add(node_1);
@@ -111,6 +113,18 @@ public class JanPrincipal extends JFrame{
 				if ( (node.getUserObject() == "Data") && (node.getParent().toString() =="Procurar") && (node.getParent().getParent().toString() == "Achados e perdidos")){
 					setTitle("Achados e perdidos");
 					splitPane.setRightComponent(new org.harca.seg.achados.ui.JanBuscarData());
+				}
+				if ( (node.getUserObject() == "Objeto") && (node.getParent().toString() =="Procurar") && (node.getParent().getParent().toString() == "Achados e perdidos")){
+					setTitle("Achados e perdidos");
+					splitPane.setRightComponent(new org.harca.seg.achados.ui.JanBuscarObjeto());
+				}
+				if ( (node.getUserObject() == "Todos") && (node.getParent().toString() =="Procurar") && (node.getParent().getParent().toString() == "Achados e perdidos")){
+					setTitle("Achados e perdidos");
+					splitPane.setRightComponent(new org.harca.seg.achados.ui.JanBuscarTodos());
+				}
+				if ( (node.getUserObject() == "Devolvidos") && (node.getParent().toString() =="Procurar") && (node.getParent().getParent().toString() == "Achados e perdidos")){
+					setTitle("Achados e perdidos");
+					splitPane.setRightComponent(new org.harca.seg.achados.ui.JanBuscarDevolvidos());
 				}
 				
 			}
