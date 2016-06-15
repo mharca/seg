@@ -12,9 +12,9 @@ import org.jsoup.select.Elements;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+//import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
+//import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.*;
 
 public class HtmlParser {
@@ -34,7 +34,7 @@ public class HtmlParser {
 			try {
 				final HtmlPage startPage = webclient.getPage(site);
 							
-				List<HtmlForm> listaForm = startPage.getForms();
+				//List<HtmlForm> listaForm = startPage.getForms();
 			//	HtmlForm form = listaForm.get(0);
 				
 						
