@@ -4,8 +4,10 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -131,6 +133,10 @@ public class JanPrincipal extends JFrame{
 		});
 		
 		splitPane.setLeftComponent(tree);
+		Color c = new Color(0);
+		JPanel jp = new JPanel();
+		jp.setBackground(c);
+		splitPane.setRightComponent( jp);
 		setVisible(true);
 	}
 }
