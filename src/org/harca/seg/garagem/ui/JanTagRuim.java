@@ -2,6 +2,7 @@ package org.harca.seg.garagem.ui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
@@ -14,15 +15,24 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.swing.JCheckBox;
 
 public class JanTagRuim extends JPanel {
 	private JTextField textChaveMat;
 	private JFormattedTextField textPlaca;
 	private JTextField textNome;
 	private JTextArea textAreaObs;
+	private JFormattedTextField textData;
+	JCheckBox chckbxManterData;
 	public JanTagRuim() {
 		setLayout(null);
 		
@@ -47,7 +57,7 @@ public class JanTagRuim extends JPanel {
 			}
 		});
 		try{
-			MaskFormatter mf = new MaskFormatter("AAA-####");
+			MaskFormatter mf = new MaskFormatter("UUU-####");
 			mf.install(textPlaca);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -72,15 +82,48 @@ public class JanTagRuim extends JPanel {
 		textAreaObs = new JTextArea();
 		scrollPane.setViewportView(textAreaObs);
 		
+		textData = new JFormattedTextField();
+		try{
+			MaskFormatter mf = new MaskFormatter("##/##/####");
+			mf.install(textData);
+			
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			Date data = new Date();
+			
+			textData.setText(df.format(data));
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		textData.setBounds(174, 121, 86, 20);
+		add(textData);
+		textData.setColumns(10);
+		
+		JLabel lblData = new JLabel("Data:");
+		lblData.setBounds(36, 123, 46, 14);
+		add(lblData);
+		
 		JButton btnProcurar = new JButton("Preencher");
 		btnProcurar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String matricula = textChaveMat.getText();
 			
-				org.harca.seg.garagem.model.HtmlParser parser = new org.harca.seg.garagem.model.HtmlParser(matricula);
-				textNome.setText(parser.getNome());
+			public void actionPerformed(ActionEvent arg0) {
+				textNome.setText("Procurando nome, aguarde...");
+				textNome.setBackground(new Color(255,0,0));
 				
-			}
+				Runnable r = new Runnable(){
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						buscar();
+						
+					}
+				};
+				Thread t = new Thread(r);
+				t.start();
+				textPlaca.requestFocus();
+			}	
+			
 		});
 		btnProcurar.setBounds(297, 44, 112, 23);
 		add(btnProcurar);
@@ -91,14 +134,29 @@ public class JanTagRuim extends JPanel {
 		lblObservao.setBounds(36, 164, 72, 14);
 		add(lblObservao);
 		
+		chckbxManterData = new JCheckBox("Manter data");
+		chckbxManterData.setBounds(268, 119, 112, 24);
+		add(chckbxManterData);
+		
 		JButton btnInserir = new JButton("Inserir");
 		btnInserir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TagUser t = new TagUser(textChaveMat.getText(), textPlaca.getText(), textNome.getText(), textAreaObs.getText());
-				Control c = new Control();
-				c.insertTag(t);
-				limpar();
+				if(!textChaveMat.getText().isEmpty()){
+					TagUser t = new TagUser(textChaveMat.getText(), textPlaca.getText(), textNome.getText(), textData.getText(), textAreaObs.getText());
+					Control c = new Control();
+					c.insertTag(t);
+					String aux = textData.getText();
+					limpar();
+					if(chckbxManterData.isEnabled())
+						textData.setText(aux);
+					else
+						textData.setText("");
+					
+				}else{
+					JOptionPane.showMessageDialog(null, "Campos vazios");
+				}
 				
+				textChaveMat.requestFocus();
 				
 			}
 		});
@@ -131,6 +189,33 @@ public class JanTagRuim extends JPanel {
 		});
 		btnTrocaCarro.setBounds(36, 245, 113, 26);
 		add(btnTrocaCarro);
+		
+		JButton btnNewButton = new JButton("Aguardando tag");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textAreaObs.append("Aguardando Tag");
+
+			}
+		});
+		btnNewButton.setBounds(36, 276, 113, 26);
+		add(btnNewButton);
+		
+		
+		
+		
+	}
+	private void buscar(){
+		String matricula = textChaveMat.getText();
+		if(!textChaveMat.getText().isEmpty()){
+			
+			org.harca.seg.garagem.model.HtmlParser parser = new org.harca.seg.garagem.model.HtmlParser(matricula);
+			textNome.setText(parser.getNome());
+			textNome.setBackground(null);
+		}else{
+			JOptionPane.showMessageDialog(null, "Campos vazios");
+
+		}
+
 	}
 	private void limpar()
 	{
@@ -138,5 +223,6 @@ public class JanTagRuim extends JPanel {
 		textChaveMat.setText("");
 		textNome.setText("");
 		textPlaca.setText("");
+		textData.setText("");
 	}
 }

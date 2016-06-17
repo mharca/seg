@@ -14,11 +14,11 @@ public class TagTabelaModelo extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	String[] colunas = {"Nome","Chave/Matricula","placa","Observacao"};
+	String[] colunas = {"ID","Nome","Chave/Matricula","Placa","Data","Observação"};
 	List<List<String>> l2 = new ArrayList<>();
 	
 	public TagTabelaModelo(List<String> l1){
-		Control c = new Control();
+	//	Control c = new Control();
 		this.limpar();
 		l2.add(l1);
 	}
@@ -46,11 +46,12 @@ public class TagTabelaModelo extends AbstractTableModel{
 		switch(coluna){
 		
 		
-		case 0: return l2.get(linha).get(2);
-		case 1: return l2.get(linha).get(1);
-		case 2: return l2.get(linha).get(0);
-		case 3: return l2.get(linha).get(3);
-		//case 4: return l2.get(linha).get(4);
+		case 0: return l2.get(linha).get(0);
+		case 1: return l2.get(linha).get(3);
+		case 2: return l2.get(linha).get(2);
+		case 3: return l2.get(linha).get(1);
+		case 4: return l2.get(linha).get(4);
+		case 5: return l2.get(linha).get(5);
 		}
 		return null;
 	}

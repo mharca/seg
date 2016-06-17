@@ -16,4 +16,8 @@ public class Control {
 		return sql.selectTag();
 		
 	}
+	public void delete(int i){
+		Sql sql = new Sql();
+		sql.delete(i);
+	}
 }

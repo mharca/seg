@@ -17,6 +17,8 @@ public class JanPrincipal extends JFrame{
 		setSize(800, 600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		 setLocationRelativeTo(null);
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -141,9 +143,10 @@ public class JanPrincipal extends JFrame{
 		});
 		
 		splitPane.setLeftComponent(tree);
-		Color c = new Color(0);
+		Color c = new Color(153,217,234);
 		JPanel jp = new JPanel();
-		jp.setBackground(c);
+		//jp.setBackground(c);
+		splitPane.setBackground(c);
 		splitPane.setRightComponent( jp);
 		setVisible(true);
 	}

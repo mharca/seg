@@ -5,6 +5,7 @@ public class TagUser {
 	String nome;
 	String placa = null;
 	String obs = null;
+	String data = null;
 	
 	public String getNome() {
 		return nome;
@@ -33,13 +34,22 @@ public class TagUser {
 		this.obs = obs;
 	}
 	
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
+	
 	//**********************************************//
 	
-	public TagUser(String chavematr, String placa, String nome, String obs){
+	
+	public TagUser(String chavematr, String placa, String nome, String data, String obs){
 		this.setChaveMat(chavematr);
 		this.setPlaca(placa);
 		this.setNome(nome);
 		this.setObs(obs);
+		this.setData(data);
 		
 	}
 }
