@@ -53,6 +53,7 @@ public class JanPrincipal extends JFrame{
 								node_3.add(new DefaultMutableTreeNode("Placa"));
 								node_3.add(new DefaultMutableTreeNode("Visitante"));
 								node_3.add(new DefaultMutableTreeNode("Visitado"));
+								node_3.add(new DefaultMutableTreeNode("Tag"));
 								node_3.add(new DefaultMutableTreeNode("Detran"));
 							node_1.add(node_3);
 						node_1.add(node_2);
@@ -106,6 +107,11 @@ public class JanPrincipal extends JFrame{
 				if ( (node.getUserObject() == "Detran") && (node.getParent().toString() == "Procurar")){
 					splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemListarDetran());
 				}
+				
+				if ( (node.getUserObject() == "Tag") && (node.getParent().toString() == "Procurar")){
+					splitPane.setRightComponent(new org.harca.seg.garagem.ui.JanGaragemListarTag());
+				}
+				
 				if ( (node.getUserObject() == "Cadastrar") && (node.getParent().toString() == "Achados e perdidos")){
 					//splitPane.setLayout(new BorderLayout());
 					JPanel p = new JPanel(new BorderLayout());
