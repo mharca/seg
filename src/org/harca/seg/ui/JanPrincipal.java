@@ -34,6 +34,7 @@ public class JanPrincipal extends JFrame{
 		mnArquivo.add(mntmSair);
 		
 		final JSplitPane splitPane = new JSplitPane();
+		
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		final JTree tree = new JTree();
@@ -141,8 +142,11 @@ public class JanPrincipal extends JFrame{
 				
 			}
 		});
+	//	JScrollPane jsp = new JScrollPane();
+		//jsp.add(tree);
 		
 		splitPane.setLeftComponent(tree);
+		//splitPane.getLeftComponent().setBackground(new Color(0,0,230));
 		Color c = new Color(153,217,234);
 		JPanel jp = new JPanel();
 		//jp.setBackground(c);

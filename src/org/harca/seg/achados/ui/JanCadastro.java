@@ -160,7 +160,7 @@ public class JanCadastro extends JPanel{
 		btnVerificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-			
+			/*
 						if(Desktop.isDesktopSupported())
 						{
 						  try {
@@ -175,16 +175,26 @@ public class JanCadastro extends JPanel{
 						}
 						  
 						}
-						
-						try{
-		
-							String nome = new Control().getNomeByChave(matriculaTexto.getText());
-							nomeLocalizou.setText(nome);
-						}catch(Exception e){
-							nomeLocalizou.setText("");
-							JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome");
+				*/		
+						Thread t = new Thread(new Runnable() {
 							
-						}
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								try{
+									
+									String nome = new Control().getNomeByChave(matriculaTexto.getText());
+									nomeLocalizou.setText(nome);
+								}catch(Exception e){
+									nomeLocalizou.setText("");
+									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome");
+									
+								}
+								
+							}
+						});
+						t.run();
+						
 			
 					
 				}

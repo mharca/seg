@@ -4,18 +4,23 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
 import org.harca.seg.achados.model.HtmlParser;
 import org.harca.seg.garagem.control.Control;
 import org.harca.seg.garagem.control.TagUser;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -35,6 +40,7 @@ public class JanTagRuim extends JPanel {
 	JCheckBox chckbxManterData;
 	public JanTagRuim() {
 		setLayout(null);
+		//setBorder(BorderFactory.createLineBorder(getForeground()));
 		
 		JLabel lblChaveOuMatrcula = new JLabel("Chave ou matr\u00EDcula:");
 		lblChaveOuMatrcula.setBounds(36, 48, 128, 14);
