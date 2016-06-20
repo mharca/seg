@@ -36,12 +36,14 @@ public class JanDevolver extends JFrame{
 	public JanDevolver(final List<String>lista) {
 		setTitle("Devolu\u00E7\u00E3o");
 		this.setSize(410, 680);
+		 setLocationRelativeTo(null);
+
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		c = new Control();
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Registrar devolução", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(null, "Registrar devoluï¿½ï¿½o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 11, 370, 67);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
@@ -66,7 +68,7 @@ public class JanDevolver extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 						
 				if(matriculaTexto.getText().length() == 0){
-					JOptionPane.showMessageDialog(null, "Campo matrícula ou chave está vazio.");
+					JOptionPane.showMessageDialog(null, "Campo matrï¿½cula ou chave estï¿½ vazio.");
 				}
 				else if(matriculaTexto.getText().length() > 5){ // matricula, maior que 5 chars.
 					fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+matriculaTexto.getText()+".jpg";
@@ -183,7 +185,7 @@ public class JanDevolver extends JFrame{
 		textField.setColumns(10);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(null, "Descrição", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setBorder(new TitledBorder(null, "Descriï¿½ï¿½o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBounds(4, 34, 340, 122);
 		panel.add(panel_4);
 		panel_4.setLayout(null);

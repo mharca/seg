@@ -1,5 +1,6 @@
 package org.harca.seg.ui;
 import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -12,7 +13,10 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class JanPrincipal extends JFrame{
-	
+	JToolBar jtoolbar;
+	JTextField tbusca;
+	JButton bbuscar;
+	final JSplitPane splitPane;
 	public JanPrincipal(){
 		setSize(800, 600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,8 +37,56 @@ public class JanPrincipal extends JFrame{
 		});
 		mnArquivo.add(mntmSair);
 		
-		final JSplitPane splitPane = new JSplitPane();
+		JMenu mnTemas = new JMenu("Temas");
+		menuBar.add(mnTemas);
 		
+		JMenuItem mntmMotif = new JMenuItem("Motif");
+		mntmMotif.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			     
+				try {
+					for (LookAndFeelInfo manager : UIManager.getInstalledLookAndFeels()){
+						System.out.println(manager.getClassName());
+					}
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+					
+
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		});
+		
+		mnTemas.add(mntmMotif);
+		
+		 jtoolbar = new JToolBar();
+		 jtoolbar.add(new JLabel("Buscar chave/matricula: "));
+
+		 	tbusca = new JTextField();
+		 	jtoolbar.add(tbusca);
+		 bbuscar = new JButton("Buscar");
+		 jtoolbar.add(bbuscar);
+		 jtoolbar.addSeparator();
+		//add(jtoolbar);
+		
+		 splitPane = new JSplitPane();
+		getContentPane().add(jtoolbar, BorderLayout.NORTH);
+
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		final JTree tree = new JTree();
@@ -43,7 +95,7 @@ public class JanPrincipal extends JFrame{
 				{
 					DefaultMutableTreeNode node_1;
 					DefaultMutableTreeNode node_2;
-					DefaultMutableTreeNode node_3;
+					//DefaultMutableTreeNode node_3;
 					node_1 = new DefaultMutableTreeNode("Chaves");
 						node_1.add(new DefaultMutableTreeNode("Emprestar"));
 						node_1.add(new DefaultMutableTreeNode("Devolver"));
@@ -51,14 +103,14 @@ public class JanPrincipal extends JFrame{
 					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Garagem");
 						node_1.add(new DefaultMutableTreeNode("Cadastrar"));
-						node_2 = new DefaultMutableTreeNode("Tag ruim");
-							node_3 = new DefaultMutableTreeNode("Procurar");
-								node_3.add(new DefaultMutableTreeNode("Placa"));
-								node_3.add(new DefaultMutableTreeNode("Visitante"));
-								node_3.add(new DefaultMutableTreeNode("Visitado"));
-								node_3.add(new DefaultMutableTreeNode("Tag"));
-								node_3.add(new DefaultMutableTreeNode("Detran"));
-							node_1.add(node_3);
+						node_1.add(new DefaultMutableTreeNode("Tag ruim"));
+							node_2 = new DefaultMutableTreeNode("Procurar");
+								node_2.add(new DefaultMutableTreeNode("Placa"));
+								node_2.add(new DefaultMutableTreeNode("Visitante"));
+								node_2.add(new DefaultMutableTreeNode("Visitado"));
+								node_2.add(new DefaultMutableTreeNode("Tag"));
+								node_2.add(new DefaultMutableTreeNode("Detran"));
+							node_1.add(node_2);
 						node_1.add(node_2);
 					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Achados e perdidos");
@@ -144,7 +196,6 @@ public class JanPrincipal extends JFrame{
 		});
 	//	JScrollPane jsp = new JScrollPane();
 		//jsp.add(tree);
-		
 		splitPane.setLeftComponent(tree);
 		//splitPane.getLeftComponent().setBackground(new Color(0,0,230));
 		Color c = new Color(153,217,234);
