@@ -33,22 +33,22 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 public class JanGaragemCadastro extends JPanel{
-	//private JTextField textField;
+	//JPanels
 	Pvisitante pv;
 	Pvisitado pvtado;
 	Pperiodo pp;
 	Pcarro pcarro;
 	public JanGaragemCadastro(){
-		//setLayout(new GridLayout());
+		setLayout(new GridLayout(5,2));
 		
 		pv = new Pvisitante();
 		pcarro = new Pcarro();
 		pp = new Pperiodo();
 		pvtado = new Pvisitado();
 		
-		JPanel p1 = new JPanel(new BorderLayout());
-		JPanel p2 = new JPanel(new BorderLayout());
-		JPanel p3 = new JPanel(new FlowLayout());
+		JPanel p1 = new JPanel(new GridLayout());
+		JPanel p2 = new JPanel(new GridLayout());
+		JPanel p3 = new JPanel(new GridLayout());
 
 		p1.add(pv,BorderLayout.WEST);
 		p1.add(pvtado, BorderLayout.EAST);
@@ -71,7 +71,7 @@ public class JanGaragemCadastro extends JPanel{
 				
 			}
 		});
-		
+		p3.setLayout(new GridLayout());
 		p3.add(btnCadastrar);
 		p3.add(btnCadastrarEcarro);
 		p3.setBorder(BorderFactory.createEtchedBorder());

@@ -1,30 +1,36 @@
 package org.harca.seg.chaves.ui;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+
 import javax.swing.JLabel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class JanDevolverChave extends JPanel {
-	private JTextField textField;
+	private JTextField tnumero;
+	JButton bdevolver;
+	JTable jtable;
+	JScrollPane jsp;
 	public JanDevolverChave(){
-		setLayout(null);
+		setLayout(new BorderLayout());
+		JLabel lnumero = new JLabel("Numero: ");
+		tnumero = new JTextField();
+		JPanel jp = new JPanel(new GridLayout(1,2));
+		bdevolver = new JButton("Devolver");
+		jp.add(lnumero);
+		jp.add(tnumero);
+		jp.add(bdevolver);
+		jtable = new JTable(new ModeloDevolverTabela());
+		jsp = new JScrollPane(jtable);
 		
-		JLabel lblNmero = new JLabel("N\u00FAmero: ");
-		lblNmero.setBounds(109, 35, 76, 14);
-		add(lblNmero);
-		
-		textField = new JTextField();
-		textField.setBounds(195, 32, 292, 20);
-		add(textField);
-		textField.setColumns(10);
-		
-		JButton btnDevolver = new JButton("Devolver");
-		btnDevolver.setBounds(264, 65, 91, 23);
-		add(btnDevolver);
-		
+		add(jp,BorderLayout.NORTH);
+		add(jsp,BorderLayout.CENTER);
 	}
 }

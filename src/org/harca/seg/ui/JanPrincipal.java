@@ -20,6 +20,7 @@ public class JanPrincipal extends JFrame{
 	final JSplitPane splitPane;
 	public JanPrincipal(){
 		setSize(800, 600);
+		setTitle("Controle de seguranca");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		 setLocationRelativeTo(null);
@@ -96,6 +97,15 @@ public class JanPrincipal extends JFrame{
 		 jtoolbar.add(btEscala);
 		 btTelUteis = new JButton("Tel. Uteis");
 		 jtoolbar.add(btTelUteis);
+		 btTelUteis.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				splitPane.setRightComponent(new TelefonesPanel());
+
+			}
+		});
 		 splitPane = new JSplitPane();
 		getContentPane().add(jtoolbar, BorderLayout.NORTH);
 
