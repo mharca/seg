@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
+import org.harca.seg.util.*;
 
-import org.harca.seg.achados.model.HtmlParser;
 import org.harca.seg.garagem.control.Control;
 import org.harca.seg.garagem.control.TagUser;
 

@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import org.harca.seg.achados.control.Control;
 import org.harca.seg.achados.model.*;
-
+import org.harca.seg.util.*;
 public class Sql {
 
 	Connection c = null;
@@ -250,7 +250,7 @@ public void deletar(String id){
 		c.close();
 	}catch(Exception e){
 		e.printStackTrace();
-		JOptionPane.showMessageDialog(null, "Não foi possível deletar");
+		JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel deletar");
 	}
 	
 	

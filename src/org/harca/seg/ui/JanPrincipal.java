@@ -15,7 +15,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class JanPrincipal extends JFrame{
 	JToolBar jtoolbar;
 	JTextField tbusca;
-	JButton bbuscar;
+	JButton bbuscar,btEscala,btTelUteis;
+	
 	final JSplitPane splitPane;
 	public JanPrincipal(){
 		setSize(800, 600);
@@ -51,8 +52,9 @@ public class JanPrincipal extends JFrame{
 					for (LookAndFeelInfo manager : UIManager.getInstalledLookAndFeels()){
 						System.out.println(manager.getClassName());
 					}
-					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-					
+				//	UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+					UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+					//UIManager.setLookAndFeel(“com.jtattoo.plaf.aluminium.AluminiumLookAndFeel”);
 
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -82,8 +84,18 @@ public class JanPrincipal extends JFrame{
 		 bbuscar = new JButton("Buscar");
 		 jtoolbar.add(bbuscar);
 		 jtoolbar.addSeparator();
-		//add(jtoolbar);
-		
+		 btEscala = new JButton("Escala");
+		 btEscala.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				splitPane.setRightComponent(new EscalaPanel());
+}
+		});
+		 jtoolbar.add(btEscala);
+		 btTelUteis = new JButton("Tel. Uteis");
+		 jtoolbar.add(btTelUteis);
 		 splitPane = new JSplitPane();
 		getContentPane().add(jtoolbar, BorderLayout.NORTH);
 

@@ -1,5 +1,7 @@
 package org.harca.seg.achados.control;
 import org.harca.seg.achados.dao.*;
+import org.harca.seg.util.*;
+
 import org.harca.seg.achados.model.*;
 
 import java.util.ArrayList;
