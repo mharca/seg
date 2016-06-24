@@ -26,11 +26,11 @@ public class HtmlParser {
 		//	webclient.getOptions().setJavaScriptEnabled(true);
 		//	webclient.setAjaxController(new NicelyResynchronizingAjaxController());
 		    webclient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-
+/*
 			CookieManager cookieManager = webclient.getCookieManager();
 			cookieManager.setCookiesEnabled(true);
 			webclient.getOptions().setRedirectEnabled(true);
-			
+	*/		
 			try {
 				final HtmlPage startPage = webclient.getPage(site);
 							
@@ -136,6 +136,9 @@ public class HtmlParser {
 		}
 		public String getMatricula(){
 			return empregado.getMatricula();
+		}
+		public String getEmpresa(){
+			return empregado.getEmpresa();
 		}
 		
 }

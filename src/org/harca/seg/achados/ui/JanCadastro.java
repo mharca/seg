@@ -182,9 +182,12 @@ public class JanCadastro extends JPanel{
 							public void run() {
 								// TODO Auto-generated method stub
 								try{
-									
+									nomeLocalizou.setBackground(Color.RED);
+									nomeLocalizou.setText("Procurando");
 									String nome = new Control().getNomeByChave(matriculaTexto.getText());
 									nomeLocalizou.setText(nome);
+									nomeLocalizou.setBackground(Color.WHITE);
+									
 								}catch(Exception e){
 									nomeLocalizou.setText("");
 									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome");
@@ -193,7 +196,7 @@ public class JanCadastro extends JPanel{
 								
 							}
 						});
-						t.run();
+						t.start();
 						
 			
 					

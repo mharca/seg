@@ -6,10 +6,17 @@ import javax.swing.event.TreeSelectionListener;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.awt.event.ActionEvent;
 
 import javax.swing.tree.DefaultTreeModel;
+
+import com.sun.accessibility.internal.resources.accessibility;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class JanPrincipal extends JFrame{
@@ -22,6 +29,9 @@ public class JanPrincipal extends JFrame{
 		setSize(800, 600);
 		setTitle("Controle de seguranca");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		JScrollPane jsp = new JScrollPane();
+		
 		
 		 setLocationRelativeTo(null);
 		
@@ -55,7 +65,7 @@ public class JanPrincipal extends JFrame{
 					}
 				//	UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 					UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-					//UIManager.setLookAndFeel(“com.jtattoo.plaf.aluminium.AluminiumLookAndFeel”);
+					//UIManager.setLookAndFeel(â€œcom.jtattoo.plaf.aluminium.AluminiumLookAndFeelâ€�);
 
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -81,8 +91,25 @@ public class JanPrincipal extends JFrame{
 		 jtoolbar.add(new JLabel("Buscar chave/matricula: "));
 
 		 	tbusca = new JTextField();
+		 	tbusca.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					buscar();
+					
+				}
+			});
 		 	jtoolbar.add(tbusca);
 		 bbuscar = new JButton("Buscar");
+		 bbuscar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				buscar();
+				
+			}
+		});
 		 jtoolbar.add(bbuscar);
 		 jtoolbar.addSeparator();
 		 btEscala = new JButton("Escala");
@@ -102,12 +129,19 @@ public class JanPrincipal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				splitPane.setRightComponent(new TelefonesPanel());
-
+				TelefonesPanel tp = new TelefonesPanel();
+				JScrollPane jsp = new JScrollPane();
+				jsp.add(tp);
+				jsp.setViewportView(tp);
+				//splitPane.setRightComponent(new TelefonesPanel());
+				splitPane.setRightComponent(jsp);
 			}
 		});
 		 splitPane = new JSplitPane();
-		getContentPane().add(jtoolbar, BorderLayout.NORTH);
+		 jsp.add(splitPane);
+		 jsp.setViewportView(splitPane);
+		 this.getContentPane().add(jsp);
+		 getContentPane().add(jtoolbar, BorderLayout.NORTH);
 
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 		
@@ -216,15 +250,40 @@ public class JanPrincipal extends JFrame{
 				
 			}
 		});
-	//	JScrollPane jsp = new JScrollPane();
-		//jsp.add(tree);
-		splitPane.setLeftComponent(tree);
+		JScrollPane jsp1 = new JScrollPane();
+		jsp1.add(tree);
+		jsp1.setViewportView(tree);
+		splitPane.setLeftComponent(jsp1);
 		//splitPane.getLeftComponent().setBackground(new Color(0,0,230));
 		Color c = new Color(153,217,234);
 		JPanel jp = new JPanel();
 		//jp.setBackground(c);
 		splitPane.setBackground(c);
-		splitPane.setRightComponent( jp);
+		
+		JScrollPane jspDir = new JScrollPane();
+		jspDir.add(jp);
+		jspDir.setViewportView(jp);
+		splitPane.setRightComponent( jspDir);
 		setVisible(true);
+	}
+	
+	private void buscar(){
+		
+		
+				if(Desktop.isDesktopSupported())
+				{
+				  try {
+					Desktop.getDesktop().browse(new URI("http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=dctm_landing_page_localizador_de_pessoas_a_petrobras&origem=buscalope&unico="+tbusca.getText()+"&locale=pt"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					
+					e.printStackTrace();
+				}
+			
+			
+	}
 	}
 }
