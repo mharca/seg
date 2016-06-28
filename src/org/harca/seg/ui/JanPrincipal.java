@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.tree.DefaultTreeModel;
 
+//import org.harca.seg.chaves.ui.LerPlanilha;
+
 import com.sun.accessibility.internal.resources.accessibility;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -39,7 +41,19 @@ public class JanPrincipal extends JFrame{
 		setJMenuBar(menuBar);
 		
 		JMenu mnArquivo = new JMenu("Arquivo");
-		menuBar.add(mnArquivo);
+		
+		
+		JMenuItem mnLerPlanilha = new JMenuItem("Ler planilha");
+		mnLerPlanilha.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("sdfsefsdfsdf");
+				new JanLerPlanilha();
+				
+			}
+		});
+		mnArquivo.add(mnLerPlanilha);
+		
 		
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mntmSair.addActionListener(new ActionListener() {
@@ -50,7 +64,9 @@ public class JanPrincipal extends JFrame{
 		mnArquivo.add(mntmSair);
 		
 		JMenu mnTemas = new JMenu("Temas");
+		menuBar.add(mnArquivo);
 		menuBar.add(mnTemas);
+		
 		
 		JMenuItem mntmMotif = new JMenuItem("Motif");
 		mntmMotif.addActionListener(new ActionListener() {
@@ -285,5 +301,7 @@ public class JanPrincipal extends JFrame{
 			
 			
 	}
+				
 	}
+	
 }

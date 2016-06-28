@@ -22,6 +22,7 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 
@@ -64,54 +65,27 @@ public class JanDevolver extends JFrame{
 		
 		
 		JButton verificarBotao = new JButton("Verificar");
-		verificarBotao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-						
-				if(matriculaTexto.getText().length() == 0){
-					JOptionPane.showMessageDialog(null, "Campo matr�cula ou chave est� vazio.");
-				}
-				else if(matriculaTexto.getText().length() > 5){ // matricula, maior que 5 chars.
-					fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+matriculaTexto.getText()+".jpg";
-				}else { // chave
-				
-						//fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+new Control().getMatriculaByChave(matriculaTexto.getText())+".jpg";
-						fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+c.getMatriculaByChave(matriculaTexto.getText())+".jpg";
-						
-						}
-				
-				System.out.println(fotoUrl); // debug
-				try{
-														
-					URL url = new URL(fotoUrl);
-					BufferedImage image = ImageIO.read(url);
-					
-					labelImagem = new JLabel(new ImageIcon(image));
-					labelImagem.setBounds(10, 21, 350, 283);
-					panel_2.setBounds(10, 279, 370, 315);
-					panel_2.add(labelImagem);
-					getContentPane().add(panel_2);
-					
-					System.out.println("OK");
-				}catch(Exception e ){
-					labelImagem = new JLabel("Sem foto");
-					labelImagem.setBounds(10, 21, 350, 283);
-					
-					//labelImagem.setText("SEM FOTO");
-					panel_2.add(labelImagem);
-					panel_2.setBounds(10, 279, 370, 315);
-					getContentPane().add(panel_2);
-					
-					e.printStackTrace();
-				}
 		
-				//getContentPane().add(panel_2);
-				
-				panel_2.setBounds(10, 279, 370, 315);
-				panel_2.add(labelImagem);
-				
-						
+		verificarBotao.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+			
+				Thread t = new Thread(new Runnable() {
 					
-			}		
+					@Override
+					public void run() {
+						
+						botaoVerificarApertado();
+						
+					}
+				});
+				t.start();
+				
+			}
+				
+			
+			
+				
 			
 		});
 		
@@ -197,4 +171,61 @@ public class JanDevolver extends JFrame{
 		JTextArea textArea = new JTextArea(lista.get(2));
 		scrollPane.setViewportView(textArea);
 	}
+	//***********************************************************************************************************************************/
+		
+		private void botaoVerificarApertado(){
+			String stringAux = matriculaTexto.getText();
+			
+			matriculaTexto.setBackground(Color.RED);
+			matriculaTexto.setText("Buscando na petronet...");
+			
+			if(stringAux.length() == 0){
+				JOptionPane.showMessageDialog(null, "Campo matr�cula ou chave est� vazio.");
+			}
+			else if(stringAux.length() > 5){ // matricula, maior que 5 chars.
+				fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+stringAux+".jpg";
+			}else { // chave
+			
+					//fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+new Control().getMatriculaByChave(matriculaTexto.getText())+".jpg";
+					fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+c.getMatriculaByChave(stringAux)+".jpg";
+					
+					}
+			matriculaTexto.setBackground(Color.WHITE);
+			matriculaTexto.setText(stringAux);
+			
+			
+			System.out.println(fotoUrl); // debug
+			try{
+													
+				URL url = new URL(fotoUrl);
+				BufferedImage image = ImageIO.read(url);
+				
+				labelImagem = new JLabel(new ImageIcon(image));
+				labelImagem.setBounds(10, 21, 350, 283);
+				panel_2.setBounds(10, 279, 370, 315);
+				panel_2.add(labelImagem);
+				getContentPane().add(panel_2);
+				
+				System.out.println("OK");
+			}catch(Exception e ){
+				labelImagem = new JLabel("Sem foto");
+				labelImagem.setBounds(10, 21, 350, 283);
+				
+				//labelImagem.setText("SEM FOTO");
+				panel_2.add(labelImagem);
+				panel_2.setBounds(10, 279, 370, 315);
+				getContentPane().add(panel_2);
+				
+				e.printStackTrace();
+			}
+	
+			//getContentPane().add(panel_2);
+			
+			panel_2.setBounds(10, 279, 370, 315);
+			panel_2.add(labelImagem);
+			
+					
+				
+		}		
+		
 }

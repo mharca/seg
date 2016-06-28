@@ -27,12 +27,13 @@ public class Pvisitante extends JPanel{
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				// TODO Auto-generated method stub
-				perdeFoco();
+				if (tmatricula.getText().length() > 3)
+					perdeFoco();
 			}
 			
 			@Override
 			public void focusGained(FocusEvent arg0) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 		});
