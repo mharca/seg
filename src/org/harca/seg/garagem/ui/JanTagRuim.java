@@ -1,5 +1,5 @@
 package org.harca.seg.garagem.ui;
-
+import org.harca.seg.util.*;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -214,7 +214,7 @@ public class JanTagRuim extends JPanel {
 		String matricula = textChaveMat.getText();
 		if(!textChaveMat.getText().isEmpty()){
 			
-			org.harca.seg.garagem.model.HtmlParser parser = new org.harca.seg.garagem.model.HtmlParser(matricula);
+			HtmlParser parser = new HtmlParser(matricula);
 			textNome.setText(parser.getNome());
 			textNome.setBackground(null);
 		}else{
