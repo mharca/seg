@@ -16,7 +16,7 @@ public class Sql {
 		 
 		    try {
 		      Class.forName("org.sqlite.JDBC");
-		      c = DriverManager.getConnection("jdbc:sqlite:garagem.db");
+		      c = DriverManager.getConnection("jdbc:sqlite:bancodedados/garagem.db");
 		      c.setAutoCommit(false);
 		    }catch(Exception e){
 		    	e.printStackTrace();

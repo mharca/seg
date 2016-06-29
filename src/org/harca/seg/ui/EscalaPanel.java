@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 public class EscalaPanel extends JPanel
 {
-	private String fotoUrl="escala2016.gif";
+	private String fotoUrl="Arquivos/escala2016.gif";
 
 	public EscalaPanel(){
 		

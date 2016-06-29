@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class TelefonesPanel extends JPanel{
-	private String fotoUrl="Ramais2.jpg";
+	private String fotoUrl="Arquivos/Ramais2.jpg";
 
 	public TelefonesPanel(){
 		

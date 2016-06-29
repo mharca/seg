@@ -24,7 +24,7 @@ package org.harca.seg.chaves.dao;
 			 
 			    try {
 			      Class.forName("org.sqlite.JDBC");
-			      c = DriverManager.getConnection("jdbc:sqlite:chaves.db");
+			      c = DriverManager.getConnection("jdbc:sqlite:bancodedados/chaves.db");
 			      c.setAutoCommit(false);
 			    }catch(Exception e){
 			    	e.printStackTrace();
