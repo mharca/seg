@@ -78,7 +78,7 @@ public class CriaWord {
 		        FileOutputStream fos = new FileOutputStream("document2.doc");
 		        doc.write(fos);
 
-		        File arquivo = new File("document2.doc");
+		        File arquivo = new File("Arquivos/document2.doc");
 				Desktop.getDesktop().open(arquivo);
 		        
 				

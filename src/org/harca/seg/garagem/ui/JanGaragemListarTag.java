@@ -2,6 +2,7 @@ package org.harca.seg.garagem.ui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.awt.print.PrinterException;
 
@@ -14,6 +15,8 @@ import org.harca.seg.garagem.control.Control;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Cache;
 
+import net.miginfocom.layout.Grid;
+
 public class JanGaragemListarTag extends JPanel{
 	private JTable table;
 	TagTabelaModelo ttm;
@@ -24,6 +27,8 @@ public class JanGaragemListarTag extends JPanel{
 		ttm = new TagTabelaModelo();
 		 table = new JTable();
 		table.setModel(ttm);
+		table.setLayout(new GridLayout(1,1)); // tantando dar um resize na tabela.
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		JScrollPane jsp = new JScrollPane();
 		jsp.setViewportView(table);
 		
@@ -38,15 +43,27 @@ public class JanGaragemListarTag extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				try {
-					table.print();
-				} catch (PrinterException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 			
-		});
+				Thread t = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+				
+						try {
+							table.print();
+						} catch (PrinterException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
+					}
+				});
+				
+			
+		}
+			});
+		
 		JButton btnApagar = new JButton("Apagar selecionados");
 		btnApagar.addActionListener(new ActionListener() {
 			
