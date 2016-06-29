@@ -1,4 +1,4 @@
-package org.harca.seg.model;
+package org.harca.seg.chaves.model;
 
 public class Key {
 	private double numero;

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.harca.seg.model.LerPlanilha;
+import org.harca.seg.chaves.model.LerPlanilha;
 
 public class JanLerPlanilha extends JFrame {
 	JTextField tplanilhaPath;
@@ -49,6 +49,6 @@ public class JanLerPlanilha extends JFrame {
 		
 	}
 	private void lerPlanilha(){
-		new LerPlanilha("a.xls", 4);
+		new LerPlanilha("b.xlsx");
 	}
 }
