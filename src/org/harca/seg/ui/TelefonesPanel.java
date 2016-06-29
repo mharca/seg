@@ -3,9 +3,10 @@ package org.harca.seg.ui;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class TelefonesPanel extends JPanel{
-	private String fotoUrl="escala2015.png";
+	private String fotoUrl="Ramais2.jpg";
 
 	public TelefonesPanel(){
 		
@@ -14,9 +15,13 @@ public class TelefonesPanel extends JPanel{
 		//	URL url = new URL(fotoUrl);
 			//BufferedImage image = ImageIO.read(url);
 			JLabel jl = new JLabel(new ImageIcon(fotoUrl));
-			add(jl);
+			JScrollPane jsp = new JScrollPane();
+			jsp.add(jl);
+			jsp.setViewportView(jl);
+			add(jsp);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 	}
 }

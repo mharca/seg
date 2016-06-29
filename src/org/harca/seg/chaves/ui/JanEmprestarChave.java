@@ -14,8 +14,11 @@ import javax.swing.JTextField;
 
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -34,6 +37,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.harca.seg.garagem.model.HtmlParser;
+
 public class JanEmprestarChave extends JPanel{
 	JLabel lmat, lnome,llocal, ltorre, landar;
 	JComboBox ctorre,candar;
@@ -43,6 +48,7 @@ public class JanEmprestarChave extends JPanel{
 	JPanel jp,jpessoa,jpchave;
 	Vector<Integer> andaresa,andaresb;
 	JTable jtable;
+	HtmlParser parser;
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
 		lmat = new JLabel("Matricula:");
@@ -82,6 +88,32 @@ public class JanEmprestarChave extends JPanel{
 		jpessoa.setBorder(BorderFactory.createTitledBorder("Pessoa"));
 		jpessoa.add(lmat);
 		tmat=new JTextField();
+		tmat.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						perdeFoco();
+					}
+				});
+				if(tnome.getText().equals(""))
+					t.start();
+			
+				
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		jpessoa.add(tmat);
 		jpessoa.add(lnome);
 		tnome=new JTextField();
@@ -111,6 +143,24 @@ public class JanEmprestarChave extends JPanel{
 
 		add(jp,BorderLayout.NORTH);
 		add(jsp,BorderLayout.CENTER);
+	}
+	public void perdeFoco(){
+		
+				// TODO Auto-generated method stub
+				String s;
+				tnome.setBackground(Color.RED);
+				tnome.setText("Buscando nome");
+				
+				
+				if(tmat.getText().length()!=0){
+					parser = new HtmlParser(tmat.getText());
+								
+					s = parser.getNome();
+					tnome.setText(s);
+					tnome.setBackground(Color.WHITE);
+				}
+		
+		
 	}
 
 }
