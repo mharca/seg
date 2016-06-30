@@ -1,4 +1,4 @@
-package org.harca.seg.chaves.model;
+package org.harca.seg.chaves.control;
 
 public class Key {
 	private int numero;

@@ -14,7 +14,7 @@ public class TagTabelaModelo extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	String[] colunas = {"ID","Nome","Chave/Matricula","Placa","Data","Observa��o"};
+	String[] colunas = {"ID","Nome","Chave/Matricula","Placa","Data","Observacao"};
 	List<List<String>> l2 = new ArrayList<>();
 	
 	public TagTabelaModelo(List<String> l1){

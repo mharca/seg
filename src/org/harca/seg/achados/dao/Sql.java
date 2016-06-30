@@ -137,7 +137,7 @@ public class Sql {
 					
 					stmt.close();
 					c.commit();
-					c.close();
+				//	c.close();
 					
 		}catch(Exception e){
 			e.printStackTrace();

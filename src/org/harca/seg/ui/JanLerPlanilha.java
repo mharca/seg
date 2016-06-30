@@ -49,6 +49,6 @@ public class JanLerPlanilha extends JFrame {
 		
 	}
 	private void lerPlanilha(){
-		new LerPlanilha("Arquivos/b.xlsx");
+		new LerPlanilha("Arquivos/a.xlsx");
 	}
 }

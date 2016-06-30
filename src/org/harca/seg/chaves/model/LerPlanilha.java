@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.harca.seg.chaves.control.Key;
 import org.harca.seg.chaves.dao.Sql;
 //import org.chave.dao.Sql;
 //import org.chave.excel.Key;
@@ -26,8 +27,9 @@ public class LerPlanilha {
 	private static final int AMARELO = 8; 
 	
 	Sql sql;
+	String torre;
 	public LerPlanilha(String path){
-	//	Sql sql = new Sql();
+		Sql sql = new Sql();
 		corFonte = new XSSFColor();
 		font = new XSSFFont(null);
 		style = new XSSFCellStyle(null);
@@ -36,6 +38,10 @@ public class LerPlanilha {
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 					//folha = workbook.getSheetAt(pagina);
 			int qtdPaginas = workbook.getNumberOfSheets();
+			if(qtdPaginas > 17)
+				torre = "A";
+			else
+				torre="B";
 			System.out.println(qtdPaginas);
 			
 			for(int i=0; i<qtdPaginas; i++){
@@ -43,13 +49,14 @@ public class LerPlanilha {
 					for(Row row:folha){
 						Key key = new Key();
 						for(Cell cell:row){
-							System.out.println(" Andar ->"+(i-2));
+							System.out.print(" Andar ->     "+(i-2));
 							switch(cell.getCellType()){
+							
 							case Cell.CELL_TYPE_NUMERIC:
 								key.setNumero((int)cell.getNumericCellValue());
-								System.out.print(" Numero: "+cell.getNumericCellValue()+" - ");
+								System.out.print(" Numero: "+key.getNumero()+" - ");
 								
-								break;
+							break;
 								
 							case Cell.CELL_TYPE_STRING:
 								
@@ -57,7 +64,7 @@ public class LerPlanilha {
 										key.setLocalizacao(cell.getStringCellValue().toString());
 										style = (XSSFCellStyle) cell.getCellStyle();
 																				
-										System.out.print(" Cor: "+ style.getFont().getColor()); 
+										//System.out.print(" Cor: "+ style.getFont().getColor()); 
 										String aux = null;
 										if(style.getFont().getColor() ==VERDE )
 											aux="verde";
@@ -65,8 +72,14 @@ public class LerPlanilha {
 											aux="amarelo";
 										
 										key.setCor(aux);
+										key.setAndar(Integer.toString(i-2));
+										key.setTorre(torre);
+										System.out.println("KKKKKKKK"+key.getNumero()+"/"+key.getLocalizacao()+"/"+key.getTorre());
+										sql.inserir(key);
+
 										
-										System.out.print("Cor:"+aux+" Local: --> "+ key.getLocalizacao()+"\n");
+										
+										//System.out.print("Cor:"+aux+" Local: --> "+ key.getLocalizacao()+"\n");
 									break;
 										
 								} if(cell.getColumnIndex()==1){
@@ -79,9 +92,18 @@ public class LerPlanilha {
 								break;
 							
 						}
-					}
+							if(true){
+								
+								//key.setTorre(torre);
+								//key.setAndar(Integer.toString(i-2));
+							}
 					
-					//	sql.inserir(key.getNumero(), key.getSetor(), key.getLocalizacao(),folha);
+							
+					}
+						
+						
+					
+						
 					}	
 					
 					
@@ -93,6 +115,7 @@ public class LerPlanilha {
 		}
 		
 	}
+	/*
 	public Vector getResultado()
 	{
 	//	Sql sql = new Sql();
@@ -101,6 +124,7 @@ public class LerPlanilha {
 		System.out.println("*****> "+v);
 		return v;
 	}
+	*/
 }
 
 
