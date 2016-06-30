@@ -190,7 +190,10 @@ public class JanCadastro extends JPanel{
 									
 								}catch(Exception e){
 									nomeLocalizou.setText("");
-									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome");
+									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome\nEdite o nome manualmente.");
+									nomeLocalizou.setEditable(true);
+									nomeLocalizou.setBackground(Color.WHITE);
+									nomeLocalizou.selectAll();
 									
 								}
 								

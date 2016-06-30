@@ -21,7 +21,7 @@ public class Sql {
 		 
 		    try {
 		      Class.forName("org.sqlite.JDBC");
-		      c = DriverManager.getConnection("jdbc:sqlite:achados2.db");
+		      c = DriverManager.getConnection("jdbc:sqlite:bancodedados/achados2.db");
 		      c.setAutoCommit(false);
 		    }catch(Exception e){
 		    	e.printStackTrace();

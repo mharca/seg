@@ -26,7 +26,7 @@ public class CriaWord {
 			
 		//System.out.println(ls);
 		try{
-			FileInputStream fis = new FileInputStream("achadosword97.doc");
+			FileInputStream fis = new FileInputStream("Arquivos/achadosword97.doc");
 			POIFSFileSystem fs = new POIFSFileSystem(fis);
 			HWPFDocument doc = new HWPFDocument(fs);
 			 Range range = doc.getRange();
@@ -78,7 +78,7 @@ public class CriaWord {
 		        FileOutputStream fos = new FileOutputStream("document2.doc");
 		        doc.write(fos);
 
-		        File arquivo = new File("document2.doc");
+		        File arquivo = new File("Arquivos/document2.doc");
 				Desktop.getDesktop().open(arquivo);
 		        
 				
