@@ -22,6 +22,7 @@ public class Pvisitante extends JPanel{
 		lnome = new JLabel("Nome:");
 		lempresa = new JLabel("Empresa: ");
 		tmatricula = new JTextField();
+		//tmatricula.setBounds(2, 20, 100, 100);
 		tmatricula.addFocusListener(new FocusListener() {
 			
 			@Override

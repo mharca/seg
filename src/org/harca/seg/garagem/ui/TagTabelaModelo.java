@@ -14,13 +14,15 @@ public class TagTabelaModelo extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	String[] colunas = {"ID","Nome","Chave/Matricula","Placa","Data","Observação"};
+	String[] colunas = {"ID","Nome","Chave/Matricula","Placa","Data","Observaï¿½ï¿½o"};
 	List<List<String>> l2 = new ArrayList<>();
 	
 	public TagTabelaModelo(List<String> l1){
 	//	Control c = new Control();
 		this.limpar();
-		l2.add(l1);
+		//if(!l2.isEmpty())
+			l2.add(l1);
+		
 	}
 	public TagTabelaModelo() {
 		Control c = new Control();

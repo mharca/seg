@@ -37,7 +37,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import org.harca.seg.garagem.model.HtmlParser;
+import org.harca.seg.util.HtmlParser;
 
 public class JanEmprestarChave extends JPanel{
 	JLabel lmat, lnome,llocal, ltorre, landar;
@@ -98,7 +98,8 @@ public class JanEmprestarChave extends JPanel{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						perdeFoco();
+						if(tmat.getText().length() > 3)
+							perdeFoco();
 					}
 				});
 				if(tnome.getText().equals(""))
@@ -144,9 +145,10 @@ public class JanEmprestarChave extends JPanel{
 		add(jp,BorderLayout.NORTH);
 		add(jsp,BorderLayout.CENTER);
 	}
-	public void perdeFoco(){
+	private void perdeFoco(){
 		
 				// TODO Auto-generated method stub
+		
 				String s;
 				tnome.setBackground(Color.RED);
 				tnome.setText("Buscando nome");

@@ -7,6 +7,9 @@ import javax.swing.event.TreeSelectionListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
@@ -17,7 +20,10 @@ import javax.swing.tree.DefaultTreeModel;
 
 //import org.harca.seg.chaves.ui.LerPlanilha;
 
-import com.sun.accessibility.internal.resources.accessibility;
+
+
+
+import org.harca.seg.util.HtmlParser;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -31,6 +37,8 @@ public class JanPrincipal extends JFrame{
 		setSize(800, 600);
 		setTitle("Controle de seguranca");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		
 		
 		JScrollPane jsp = new JScrollPane();
 		
@@ -134,7 +142,12 @@ public class JanPrincipal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				splitPane.setRightComponent(new EscalaPanel());
+				EscalaPanel ep = new EscalaPanel();
+				JScrollPane jsp = new JScrollPane();
+				jsp.add(ep);
+			//	jsp.setSize(splitPane.getRightComponent().getWidth(), splitPane.getRightComponent().getWidth());
+				jsp.setViewportView(ep);
+				splitPane.setRightComponent(jsp);
 }
 		});
 		 jtoolbar.add(btEscala);
@@ -154,9 +167,12 @@ public class JanPrincipal extends JFrame{
 			}
 		});
 		 splitPane = new JSplitPane();
+		//splitPane.setLayout(new GridBagLayout());
+		 
 		 jsp.add(splitPane);
 		 jsp.setViewportView(splitPane);
 		 this.getContentPane().add(jsp);
+		 
 		 getContentPane().add(jtoolbar, BorderLayout.NORTH);
 
 		getContentPane().add(splitPane, BorderLayout.CENTER);

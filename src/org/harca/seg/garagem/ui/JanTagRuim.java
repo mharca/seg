@@ -172,6 +172,7 @@ public class JanTagRuim extends JPanel {
 		JButton btnTagRuim = new JButton(" Tag ruim ");
 		btnTagRuim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textAreaObs.setText("");
 				textAreaObs.append("Tag com problemas");
 			}
 		});
@@ -181,6 +182,7 @@ public class JanTagRuim extends JPanel {
 		JButton btnSemTag = new JButton(" Sem tag ");
 		btnSemTag.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textAreaObs.setText("");
 				textAreaObs.append("Sem tag");
 			}
 		});
@@ -190,6 +192,7 @@ public class JanTagRuim extends JPanel {
 		JButton btnTrocaCarro = new JButton(" Troca carro ");
 		btnTrocaCarro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textAreaObs.setText("");
 				textAreaObs.append("Troca de carro");
 			}
 		});
@@ -199,6 +202,7 @@ public class JanTagRuim extends JPanel {
 		JButton btnNewButton = new JButton("Aguardando tag");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textAreaObs.setText("");
 				textAreaObs.append("Aguardando Tag");
 
 			}

@@ -51,6 +51,7 @@ public class Sql {
 			stmt = c.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			
+			if(! rs.wasNull())
 			while(rs.next()){
 				List<String> lista = new ArrayList<>();
 				lista.add(rs.getString("id"));
@@ -68,6 +69,7 @@ public class Sql {
 			c.close();
 	}catch(Exception e){
 		e.printStackTrace();
+		System.out.println("Erro tabela");
 	}
 		
 		return l2;
@@ -87,7 +89,7 @@ public class Sql {
 			c.close();
 		}catch(Exception e){
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Não foi possível deletar");
+			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel deletar");
 		
 		}
 	}
