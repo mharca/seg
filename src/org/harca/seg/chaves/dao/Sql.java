@@ -9,7 +9,8 @@ package org.harca.seg.chaves.dao;
 
 	import org.harca.seg.achados.control.Control;
 	import org.harca.seg.achados.model.*;
-	import org.harca.seg.util.*;
+import org.harca.seg.chaves.model.Key;
+import org.harca.seg.util.*;
 	public class Sql {
 
 		Connection c = null;
@@ -32,6 +33,10 @@ package org.harca.seg.chaves.dao;
 			    
 		}
 		
+		public void inserir(Key key){
+			query = "INSERT INTO KEY ()VALUES";
+			
+		}
 		public void selectByAndarEtorre(int andar, int torre){
 			query = "SELECT * from chaves WHERE ";
 		}

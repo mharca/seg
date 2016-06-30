@@ -8,15 +8,29 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.harca.seg.chaves.dao.Sql;
 //import org.chave.dao.Sql;
 //import org.chave.excel.Key;
 
 public class LerPlanilha {
 	XSSFSheet folha;
+	XSSFCellStyle style;
+	XSSFFont font;
+	XSSFColor corFonte;
+	private static final int VERDE = 0;
+	private static final int AMARELO = 8; 
+	
+	Sql sql;
 	public LerPlanilha(String path){
 	//	Sql sql = new Sql();
+		corFonte = new XSSFColor();
+		font = new XSSFFont(null);
+		style = new XSSFCellStyle(null);
 		try{
 			FileInputStream file = new FileInputStream(new File(path));
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -32,7 +46,7 @@ public class LerPlanilha {
 							System.out.println(" Andar ->"+(i-2));
 							switch(cell.getCellType()){
 							case Cell.CELL_TYPE_NUMERIC:
-								key.setNumero(cell.getNumericCellValue());
+								key.setNumero((int)cell.getNumericCellValue());
 								System.out.print(" Numero: "+cell.getNumericCellValue()+" - ");
 								
 								break;
@@ -41,13 +55,24 @@ public class LerPlanilha {
 								
 								if(cell.getColumnIndex() == 2){
 										key.setLocalizacao(cell.getStringCellValue().toString());
-										System.out.print(" Local: --> "+ key.getLocalizacao()+"\n");
-										break;
+										style = (XSSFCellStyle) cell.getCellStyle();
+																				
+										System.out.print(" Cor: "+ style.getFont().getColor()); 
+										String aux = null;
+										if(style.getFont().getColor() ==VERDE )
+											aux="verde";
+										else if (style.getFont().getColor() == AMARELO)
+											aux="amarelo";
+										
+										key.setCor(aux);
+										
+										System.out.print("Cor:"+aux+" Local: --> "+ key.getLocalizacao()+"\n");
+									break;
 										
 								} if(cell.getColumnIndex()==1){
 										key.setSetor(cell.getRichStringCellValue().toString());
 										System.out.print(" Setor: --> "+ key.getSetor());
-										break;
+									break;
 								}
 							
 							case Cell.CELL_TYPE_BLANK:
@@ -55,7 +80,11 @@ public class LerPlanilha {
 							
 						}
 					}
-					}	//	sql.inserir(key.getNumero(), key.getSetor(), key.getLocalizacao(),pagina);
+					
+					//	sql.inserir(key.getNumero(), key.getSetor(), key.getLocalizacao(),folha);
+					}	
+					
+					
 			}
 		workbook.close();
 		}catch(Exception e){
