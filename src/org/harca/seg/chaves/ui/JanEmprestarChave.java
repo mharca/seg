@@ -37,6 +37,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.util.HtmlParser;
 
 public class JanEmprestarChave extends JPanel{
@@ -49,6 +50,7 @@ public class JanEmprestarChave extends JPanel{
 	Vector<Integer> andaresa,andaresb;
 	JTable jtable;
 	HtmlParser parser;
+	ModeloTabela modeloTabela;
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
 		lmat = new JLabel("Matricula:");
@@ -68,20 +70,56 @@ public class JanEmprestarChave extends JPanel{
 		
 		System.out.println(andaresa);
 		String storre[] = {"A","B"};
+		candar = new JComboBox(new DefaultComboBoxModel(andaresa));
 		
+		
+		modeloTabela = new ModeloTabela();
+		jtable = new JTable(modeloTabela);
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				Controle c = new Controle();
+				int andar = 10;
 				if(ctorre.getSelectedItem().equals("A")){
 					candar.setModel(new DefaultComboBoxModel(andaresa));
+					//andar = candar.getSelectedIndex();
+					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
+
+					modeloTabela = new ModeloTabela(c.selectByAndarEtorre(2, "A"));
+					modeloTabela.limpar();
+					modeloTabela.fireTableDataChanged();
+					jtable.setModel(modeloTabela);
+					*/
 				}else if (ctorre.getSelectedItem().equals("B")){
 					candar.setModel(new DefaultComboBoxModel(andaresb));
+					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
+					modeloTabela = new ModeloTabela(c.selectByAndarEtorre(6, "B"));
+					modeloTabela.limpar();
+
+					modeloTabela.fireTableDataChanged();
+					jtable.setModel(modeloTabela);
+
+*/
 				}
+				jtable.setModel(modeloTabela);
+
 			}
 		});
+		candar.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						Controle c = new Controle();
+						int andar = Integer.parseInt(candar.getSelectedItem().toString());
+						modeloTabela = new ModeloTabela(c.selectByAndarEtorre(andar, ctorre.getSelectedItem().toString()));
+						modeloTabela.fireTableChanged(null);
+						jtable.setModel(modeloTabela);
+					}
+				});
 		
 		jp = new JPanel(new GridLayout());
 		jpessoa = new JPanel(new GridLayout(2,2));
@@ -126,14 +164,13 @@ public class JanEmprestarChave extends JPanel{
 		jpchave.add(ltorre);
 		jpchave.add(ctorre);
 		jpchave.add(landar);
-		candar = new JComboBox(new DefaultComboBoxModel(andaresa));
 		
 		jpchave.add(candar);
 		jpchave.add(llocal);
 		tlocal = new JTextField();
 		jpchave.add(tlocal);
 		
-		jtable = new JTable(new ModeloTabela());
+		jtable = new JTable(modeloTabela);
 		JScrollPane jsp = new JScrollPane(jtable);
 		jsp.setViewportView(jtable);
 		//jsp.add(jtable);

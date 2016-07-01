@@ -82,15 +82,15 @@ import org.harca.seg.util.*;
 				}
 				stmt.close();
 				//c.close();
-			}catch(Exception e){
+			}catch(SQLException e){
 				e.printStackTrace();
 			}
 			
 			return listaChaves;
 			
 		}
-		public List<Key> selectByAndarEtorre(int andar, int torre){
-			query = "SELECT * from chaves WHERE andar="+andar+" AND torre="+torre;
+		public List<Key> selectByAndarEtorre(int andar, String torre){
+			query = ("SELECT * from chave WHERE andar='"+andar+"' AND torre='"+torre+"'");
 			
 			return select(query);
 		}
