@@ -48,9 +48,9 @@ import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.util.HtmlParser;
 
 public class JanEmprestarChave extends JPanel{
-	JLabel lmat, lnome,llocal, ltorre, landar, lNumero;
+	JLabel lmat, lnome,lempresa,llocal, ltorre, landar, lNumero;
 	JComboBox ctorre,candar;
-	JTextField tlocal,tnome,tNumero;
+	JTextField tlocal,tnome,tNumero, tEmpresa;
 	JTextField tmat;
 	List andarA,AndarB;
 	JPanel jp,jpessoa,jpchave,jpNumero;
@@ -63,6 +63,7 @@ public class JanEmprestarChave extends JPanel{
 		setLayout(new BorderLayout());
 		lmat = new JLabel("Matricula:");
 		lnome = new JLabel("Nome:");
+		lempresa = new JLabel("Empresa:");
 		llocal = new JLabel("Localizacao(busca):");
 		ltorre = new JLabel("Torre:");
 		landar = new JLabel("Andar");
@@ -70,6 +71,8 @@ public class JanEmprestarChave extends JPanel{
 		
 		tNumero = new JTextField(30);
 		tNumero.setEditable(false);
+		
+		tEmpresa = new JTextField();
 		
 		andaresa = new Vector<>();
 		andaresb = new Vector<>();
@@ -137,7 +140,7 @@ public class JanEmprestarChave extends JPanel{
 				});
 		
 		jp = new JPanel(new GridLayout(2,2));
-		jpessoa = new JPanel(new GridLayout(2,2));
+		jpessoa = new JPanel(new GridLayout(3,2));
 		jpessoa.setBorder(BorderFactory.createTitledBorder("Pessoa"));
 		jpessoa.add(lmat);
 		tmat=new JTextField();
@@ -170,9 +173,15 @@ public class JanEmprestarChave extends JPanel{
 		});
 		jpessoa.add(tmat);
 		jpessoa.add(lnome);
+		
+		
 		tnome=new JTextField();
 		tnome.setEditable(false);
 		jpessoa.add(tnome);
+		
+		tEmpresa.setEditable(false);
+		jpessoa.add(lempresa);
+		jpessoa.add(tEmpresa);
 		
 		jpchave = new JPanel(new GridLayout(3,1));
 		jpchave.setBorder(BorderFactory.createTitledBorder("Chave"));
@@ -268,7 +277,11 @@ public class JanEmprestarChave extends JPanel{
 					parser = new HtmlParser(tmat.getText());
 								
 					s = parser.getNome();
-					tnome.setText(s);
+						tnome.setText(s);
+					
+					//s = parser.getEmpresa();
+					//	tEmpresa.setText(s);
+					
 					tnome.setBackground(Color.WHITE);
 				}
 		
