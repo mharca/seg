@@ -18,4 +18,7 @@ public class Controle {
 	public List<Key> selectByAndarEtorre(int andar,String torre){
 		return sql.selectByAndarEtorre(andar, torre);
 	}
+	public List<Key> selectByWord(String s){
+		return sql.selectByWord(s);
+	}
 }

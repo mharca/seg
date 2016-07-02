@@ -99,6 +99,12 @@ import org.harca.seg.util.*;
 			return select(query);
 			
 		}
+		public List<Key> selectByWord(String palavra){
+			query = "SELECT * FROM chave WHERE localizacao LIKE '"+palavra+"%'";
+			return select(query);
+			
+		}
+		
 		
 		
 }

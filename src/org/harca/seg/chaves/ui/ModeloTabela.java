@@ -25,10 +25,18 @@ public class ModeloTabela extends AbstractTableModel{
 		
 	}
 	public ModeloTabela(List<Key>lista){
-		this.c = new Controle();
+		this.c = new Controle(); // alterar depois
 		//limpar();
 		listaChaves = new ArrayList<Key>();
 		listaChaves = lista;
+
+
+	}
+	
+	public ModeloTabela(String palavra){
+		this.c = new Controle(); // alterar depois 
+		listaChaves = new ArrayList<Key>();
+		listaChaves = c.selectByWord(palavra);
 	}
 	@Override
 	public int getColumnCount() {

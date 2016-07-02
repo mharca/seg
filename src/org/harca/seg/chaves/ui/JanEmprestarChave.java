@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -169,6 +171,26 @@ public class JanEmprestarChave extends JPanel{
 		jpchave.add(candar);
 		jpchave.add(llocal);
 		tlocal = new JTextField();
+		tlocal.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				procurar();
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		jpchave.add(tlocal);
 		
 		jtable = new JTable(modeloTabela);
@@ -200,6 +222,13 @@ public class JanEmprestarChave extends JPanel{
 					tnome.setBackground(Color.WHITE);
 				}
 		
+		
+	}
+	private void procurar(){
+		Controle c = new Controle();
+		modeloTabela = new ModeloTabela(tlocal.getText());
+		jtable.setModel(modeloTabela);
+		jtable.repaint();
 		
 	}
 
