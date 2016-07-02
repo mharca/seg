@@ -51,7 +51,7 @@ public class Sql {
 			stmt = c.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			
-			if(! rs.wasNull())
+		
 			while(rs.next()){
 				List<String> lista = new ArrayList<>();
 				lista.add(rs.getString("id"));

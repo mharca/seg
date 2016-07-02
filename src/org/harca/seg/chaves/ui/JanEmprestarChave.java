@@ -104,6 +104,7 @@ public class JanEmprestarChave extends JPanel{
 
 */
 				}
+				modeloTabela.fireTableDataChanged();
 				jtable.setModel(modeloTabela);
 
 			}
