@@ -1,5 +1,6 @@
 package org.harca.seg.chaves.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -18,6 +19,7 @@ public class ModeloTabela extends AbstractTableModel{
 	public ModeloTabela() {
 		this.c = new Controle();
 		//limpar();
+		listaChaves = new ArrayList<Key>();
 		listaChaves = c.selectAll();
 		
 		
@@ -25,6 +27,7 @@ public class ModeloTabela extends AbstractTableModel{
 	public ModeloTabela(List<Key>lista){
 		this.c = new Controle();
 		//limpar();
+		listaChaves = new ArrayList<Key>();
 		listaChaves = lista;
 	}
 	@Override
@@ -37,7 +40,7 @@ public class ModeloTabela extends AbstractTableModel{
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return listaChaves.toArray().length+1;
+		return listaChaves.toArray().length;
 	}
 
 	@Override
