@@ -69,6 +69,7 @@ public class JanEmprestarChave extends JPanel{
 		lNumero = new JLabel("Chaves:");
 		
 		tNumero = new JTextField(30);
+		tNumero.setEditable(false);
 		
 		andaresa = new Vector<>();
 		andaresb = new Vector<>();
@@ -209,15 +210,16 @@ public class JanEmprestarChave extends JPanel{
 			
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			//	tNumero.setText( jtable.getValueAt(jtable.getSelectedRow(),0).toString() );
-				int[] rows = jtable.getSelectedRows();
 				ArrayList<String> aux = new ArrayList<String>();
+			//	aux.add(jtable.getValueAt(jtable.getSelectedRow(), 0).toString());
+				int[] rows = jtable.getSelectedRows();
+				
+			
 				for (int i = 0; i < rows.length; i++)
-					aux.add(jtable.getValueAt(i, 0).toString());
+					aux.add(jtable.getValueAt(rows[i], 0).toString());
 					
 				tNumero.setText(aux.toString());
+				
 				
 			}
 		});
