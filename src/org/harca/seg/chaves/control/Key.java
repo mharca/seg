@@ -7,7 +7,16 @@ public class Key {
 	private String cor;
 	private String torre;
 	private String andar;
+	private int id;
 	
+public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 public Key(){
 	
 }

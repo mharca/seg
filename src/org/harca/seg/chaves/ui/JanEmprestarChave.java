@@ -97,6 +97,7 @@ public class JanEmprestarChave extends JPanel{
 				int andar = 10;
 				if(ctorre.getSelectedItem().equals("A")){
 					candar.setModel(new DefaultComboBoxModel(andaresa));
+					tlocal.setText("");
 					//andar = candar.getSelectedIndex();
 					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
 
@@ -107,6 +108,7 @@ public class JanEmprestarChave extends JPanel{
 					*/
 				}else if (ctorre.getSelectedItem().equals("B")){
 					candar.setModel(new DefaultComboBoxModel(andaresb));
+					tlocal.setText("");
 					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
 					modeloTabela = new ModeloTabela(c.selectByAndarEtorre(6, "B"));
 					modeloTabela.limpar();

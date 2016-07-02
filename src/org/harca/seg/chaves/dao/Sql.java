@@ -78,6 +78,7 @@ import org.harca.seg.util.*;
 					key.setNumero(rs.getInt("numero"));
 					key.setSetor(rs.getString("setor"));
 					key.setTorre(rs.getString("torre"));
+					key.setId(rs.getInt("id"));
 					listaChaves.add(key);
 				}
 				stmt.close();

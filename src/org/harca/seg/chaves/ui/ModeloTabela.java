@@ -13,7 +13,7 @@ public class ModeloTabela extends AbstractTableModel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String[] colunas = {"Numero", "Localizacao", "Andar", "Setor", "Torre"};
+	private String[] colunas = {"Numero", "Localizacao", "Andar", "Setor", "Torre","Cor","ID"};
 	Controle c;
 	List<Key> listaChaves;
 	public ModeloTabela() {
@@ -61,6 +61,8 @@ public class ModeloTabela extends AbstractTableModel{
 				case 2: return listaChaves.get(linha).getAndar();
 				case 3: return listaChaves.get(linha).getSetor();
 				case 4: return listaChaves.get(linha).getTorre();
+				case 5: return listaChaves.get(linha).getCor();
+				case 6: return listaChaves.get(linha).getId();
 			}
 		
 		return null;
