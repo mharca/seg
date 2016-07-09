@@ -1,22 +1,30 @@
 package org.harca.seg.achados.ui;
 import org.harca.seg.achados.control.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+
 import java.awt.GridLayout;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.Desktop;
 
 import javax.swing.border.EtchedBorder;
+
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +33,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.image.BufferedImage;
 
 public class JanCadastro extends JPanel{
 	private JTextField tipoObjeto;
@@ -47,16 +56,15 @@ public class JanCadastro extends JPanel{
 	}
 	
 	public JanCadastro() {
-		this.setSize(350, 532);
+		this.setSize(618, 532);
 		
 		
 		//setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		//setTitle("Cadastro");
 		setLayout(null);
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Objeto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 0, 314, 217);
+		panel.setBounds(10, 105, 314, 217);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -130,84 +138,7 @@ public class JanCadastro extends JPanel{
 		}
 		panel.add(horaEncontrado);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Respons\u00E1vel pela localiza\u00E7\u00E3o do objeto.", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 228, 314, 89);
-		add(panel_1);
-		panel_1.setLayout(null);
 		
-		JLabel lblMatricula = new JLabel("Matricula / chave:");
-		lblMatricula.setBounds(10, 25, 101, 14);
-		panel_1.add(lblMatricula);
-		
-		matriculaTexto = new JTextField();
-		matriculaTexto.setBounds(121, 22, 89, 20);
-		panel_1.add(matriculaTexto);
-		matriculaTexto.setColumns(10);
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(10, 50, 46, 14);
-		panel_1.add(lblNome);
-		
-		nomeLocalizou = new JTextField();
-		nomeLocalizou.setBounds(55, 50, 249, 20);
-		panel_1.add(nomeLocalizou);
-		nomeLocalizou.setColumns(10);
-		nomeLocalizou.setEditable(false);
-		
-		
-		JButton btnVerificar = new JButton("Verificar");
-		btnVerificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			/*
-						if(Desktop.isDesktopSupported())
-						{
-						  try {
-							Desktop.getDesktop().browse(new URI("http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=dctm_landing_page_localizador_de_pessoas_a_petrobras&origem=buscalope&unico="+matriculaTexto.getText()+"&locale=pt"));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (URISyntaxException e) {
-							// TODO Auto-generated catch block
-							
-							e.printStackTrace();
-						}
-						  
-						}
-				*/		
-						Thread t = new Thread(new Runnable() {
-							
-							@Override
-							public void run() {
-								// TODO Auto-generated method stub
-								try{
-									nomeLocalizou.setBackground(Color.RED);
-									nomeLocalizou.setText("Procurando");
-									String nome = new Control().getNomeByChave(matriculaTexto.getText());
-									nomeLocalizou.setText(nome);
-									nomeLocalizou.setBackground(Color.WHITE);
-									
-								}catch(Exception e){
-									nomeLocalizou.setText("");
-									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome\nEdite o nome manualmente.");
-									nomeLocalizou.setEditable(true);
-									nomeLocalizou.setBackground(Color.WHITE);
-									nomeLocalizou.selectAll();
-									
-								}
-								
-							}
-						});
-						t.start();
-						
-			
-					
-				}
-			
-		});
-		btnVerificar.setBounds(213, 21, 91, 23);
-		panel_1.add(btnVerificar);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Recebido pelo inspetor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -314,6 +245,102 @@ public class JanCadastro extends JPanel{
 		escaninho.setBounds(93, 422, 65, 20);
 		add(escaninho);
 		escaninho.setColumns(10);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 12, 314, 89);
+		add(panel_1);
+		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Respons\u00E1vel pela localiza\u00E7\u00E3o do objeto.", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setLayout(null);
+		
+		JLabel lblMatricula = new JLabel("Matricula / chave:");
+		lblMatricula.setBounds(10, 25, 101, 14);
+		panel_1.add(lblMatricula);
+		
+		matriculaTexto = new JTextField();
+		matriculaTexto.setBounds(121, 22, 89, 20);
+		panel_1.add(matriculaTexto);
+		matriculaTexto.setColumns(10);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(10, 50, 46, 14);
+		panel_1.add(lblNome);
+		
+		nomeLocalizou = new JTextField();
+		nomeLocalizou.setBounds(55, 50, 249, 20);
+		panel_1.add(nomeLocalizou);
+		nomeLocalizou.setColumns(10);
+		nomeLocalizou.setEditable(false);
+		
+		
+		JButton btnVerificar = new JButton("Verificar");
+		btnVerificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+						Thread t = new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								try{
+									nomeLocalizou.setBackground(Color.RED);
+									nomeLocalizou.setText("Procurando");
+									String nome = new Control().getNomeByChave(matriculaTexto.getText());
+									nomeLocalizou.setText(nome);
+									nomeLocalizou.setBackground(Color.WHITE);
+									
+								}catch(Exception e){
+									nomeLocalizou.setText("");
+									JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel buscar o nome\nEdite o nome manualmente.");
+									nomeLocalizou.setEditable(true);
+									nomeLocalizou.setBackground(Color.WHITE);
+									nomeLocalizou.selectAll();
+									
+								}
+								
+							}
+						});
+						t.start();
+						
+			
+					
+				}
+			
+		});
+		btnVerificar.setBounds(213, 21, 91, 23);
+		panel_1.add(btnVerificar);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setBounds(337, 17, 274, 426);
+		add(panel_4);
+		panel_4.setLayout(null);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(5, 16, 264, 405);
+		panel_4.add(panel_3);
+		
+		try{
+			
+			Thread t = new Thread();
+			//URL fotoUrl = new URL("foto.jpg");
+			String fotoUrl = "foto.jpg";
+			String fotoErro = "semfoto.jpg";
+			//BufferedImage image = ImageIO.read(fotoUrl);
+			JLabel lblNewLabel;
+			lblNewLabel	 = new JLabel(new ImageIcon(fotoErro));
+
+			ImageIcon imageIcon = new ImageIcon("semfoto.jpg");
+			try{
+				imageIcon = new ImageIcon("foto.jpg");
+			}catch(Exception e){
+				imageIcon = new ImageIcon("semfoto.jpg");
+			}
+			
+			lblNewLabel	 = new JLabel(imageIcon);
+						
+			
+				panel_3.add(lblNewLabel);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
-	
 }

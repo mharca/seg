@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 import java.awt.List;
@@ -43,6 +44,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.util.HtmlParser;
@@ -89,7 +91,15 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		modeloTabela = new ModeloTabela();
-		jtable = new JTable(modeloTabela);
+		jtable = new JTable(modeloTabela){
+			public Component prepareRenderer(TableCellRenderer renderer, int row,int col){
+				Component c = super.prepareRenderer(renderer, 2, 2);
+				c.setForeground(Color.green);
+				
+				return c;
+			}
+		};
+		
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
@@ -123,6 +133,7 @@ public class JanEmprestarChave extends JPanel{
 				}
 				modeloTabela.fireTableDataChanged();
 				jtable.setModel(modeloTabela);
+				
 
 			}
 		});
@@ -136,6 +147,7 @@ public class JanEmprestarChave extends JPanel{
 						modeloTabela = new ModeloTabela(c.selectByAndarEtorre(andar, ctorre.getSelectedItem().toString()));
 						modeloTabela.fireTableChanged(null);
 						jtable.setModel(modeloTabela);
+						//jtable.setFont(new Font());
 					}
 				});
 		
@@ -217,6 +229,13 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		jtable = new JTable(modeloTabela);
+		
+		
+		
+	
+		//jtable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		jtable.getColumnModel().getColumn(2).setWidth(500);
+		
 		jtable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -226,9 +245,15 @@ public class JanEmprestarChave extends JPanel{
 				int[] rows = jtable.getSelectedRows();
 				
 			
-				for (int i = 0; i < rows.length; i++)
+				for (int i = 0; i < rows.length; i++){
 					aux.add(jtable.getValueAt(rows[i], 0).toString());
-					
+				/*	System.out.println(jtable.getValueAt(rows[i], 5).toString());
+					if(jtable.getValueAt(rows[i], 5).toString().equals("verde")){
+						System.out.println("ok");
+						
+					}
+					*/
+				}
 				tNumero.setText(aux.toString());
 				
 				
