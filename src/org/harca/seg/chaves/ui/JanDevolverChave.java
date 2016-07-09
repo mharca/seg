@@ -27,7 +27,8 @@ public class JanDevolverChave extends JPanel {
 		jp.add(lnumero);
 		jp.add(tnumero);
 		jp.add(bdevolver);
-		jtable = new JTable(new ModeloDevolverTabela());
+		String colunas[]={"Numero", "Nome","Localizacao","Andar", "Torre"};
+		jtable = new JTable(new ModeloDynDevolver(colunas));
 		jsp = new JScrollPane(jtable);
 		
 		add(jp,BorderLayout.NORTH);

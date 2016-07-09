@@ -272,8 +272,17 @@ public class JanEmprestarChave extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// 
-				Sql sql = new Sql();
-				sql.inserirEmprestimo(34, Integer.parseInt(tmat.getText()), tnome.getText());
+				Controle c= new Controle();
+			
+				//c.inserirEmprestimo(Integer.parseInt(modeloTabela.getValueAt(2, 0).toString()), Integer.parseInt(tmat.getText()), tnome.getText());
+			//	 numchaves = Integer.parseInt(tNumero.getText());
+				
+				int[] rows = jtable.getSelectedRows();
+
+				
+				for (int i:rows)
+					c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, 6).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
+				
 			}
 		});
 		jpNumero = new JPanel(new FlowLayout());
@@ -323,5 +332,13 @@ public class JanEmprestarChave extends JPanel{
 		jtable.repaint();
 		
 	}
+	private int[] convertStringToIntArray(String strArray[]) {
+	    int[] intArray = new int[strArray.length];
+	    for(int i = 0; i < strArray.length; i++) {
+	        intArray[i] = Integer.parseInt(strArray[i]);
+	    }
+	    return intArray;
+	}
+
 
 }

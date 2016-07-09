@@ -21,4 +21,8 @@ public class Controle {
 	public List<Key> selectByWord(String s){
 		return sql.selectByWord(s);
 	}
+	public void inserirEmprestimo(int key_id, int matricula,String nome){
+		Sql sql= new Sql();
+		sql.inserirEmprestimo(key_id, matricula, nome);
+	}
 }

@@ -56,7 +56,7 @@ public class ModeloTabela extends AbstractTableModel{
 	public Object getValueAt(int linha, int coluna) {
 		// TODO Auto-generated method stub
 		//listaChaves = c.selectAll();
-		 int count=0;
+		// int count=0;
 	
 			switch(coluna){
 				
