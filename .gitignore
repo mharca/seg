@@ -7,6 +7,7 @@ Clavicul*
 ./Claviculário de Chaves de Serviço/Relação de Chaves de Serviço - Torre B.xls
 ./Claviculário de Chaves de Serviço/Relação de Chaves de Serviço - Torre A.xls
 ./Tag.xls
+./bancodedados/*
 ./Arquivos/a.xls
 ./Arquivos/a.xlsx
 ./Arquivos/b.xlsx
@@ -77,3 +78,4 @@ Clavicul*
 ./.git/objects/e1/766711a461c494a90c184149550995abd84abb
 ./.git/objects/05/451bd6e64510c75292d18e4d8402c1bd7fcb2e
 ./.git/objects/3d/18616ac4797a3d05a0c7d5a7312d39a0ebd87f
+7za.exe

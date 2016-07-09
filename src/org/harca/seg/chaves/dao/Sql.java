@@ -33,6 +33,72 @@ import org.harca.seg.util.*;
 			    
 		}
 		
+		public void inserirEmprestimo(int key_id, int matricula, String nome){
+			query = "INSERT INTO pessoa(matricula, nome) VALUES(?,?);";
+			//query = "INSERT INTO chave (numero,setor,localizacao,cor,torre,andar) VALUES(?,?,?,?,?,?)";
+			//System.out.println("----------------"+key.getNumero()+" - "+key.getLocalizacao());
+			int id_pessoa=0;
+			
+			try{ // INSERE PESSOA SE NAO ESTIVER CADASTRADA
+				stmt = c.prepareStatement(query);
+				stmt.setInt(1, matricula);
+				stmt.setString(2, nome);
+
+				stmt.execute();
+				
+				
+
+			//	stmt.close();
+			//	c.commit();
+			//	c.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			try{
+				String query = "SELECT ID from pessoa WHERE matricula =\""+matricula+"\";";
+				stmt = c.prepareStatement(query);
+				ResultSet rs = stmt.executeQuery();
+				//listaChaves.add(arg0)
+				
+				while(rs.next()){
+					id_pessoa = rs.getInt(1);
+				
+				}
+				//stmt.close();
+				c.commit();
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			try{
+				
+				stmt = c.prepareStatement("INSERT INTO"+
+						" emprestimoKey (key_id, horaEmprestou, dataEmprestou,dataDevolveu,isi_matricula, pessoa_id)"+
+						"VALUES(?,?,?,?,?,?);");
+				//stmt = c.prepareStatement(query);
+				stmt.setInt(1, key_id);
+				
+				stmt.setString(2,"teste1");
+				stmt.setString(3, "testedata");
+				stmt.setString(4, null);
+				stmt.setString(5, "isi");
+				stmt.setInt(6, id_pessoa);
+				
+				stmt.execute();
+				
+				
+				//stmt.close();
+				c.commit();
+				
+				c.close();
+			}catch(SQLException e){ 
+				e.printStackTrace();
+				System.out.print("fudeu");
+				
+			}
+		}
+		///////////////////////////////////////////////////////////////////////////////////////////////
 		public void inserir(Key key){
 			query = "INSERT INTO chave (numero,setor,localizacao,cor,torre,andar) VALUES(?,?,?,?,?,?)";
 			System.out.println("----------------"+key.getNumero()+" - "+key.getLocalizacao());

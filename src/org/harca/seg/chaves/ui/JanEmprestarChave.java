@@ -47,6 +47,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import org.harca.seg.chaves.control.Controle;
+import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.HtmlParser;
 
 public class JanEmprestarChave extends JPanel{
@@ -269,7 +270,8 @@ public class JanEmprestarChave extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// 
-				
+				Sql sql = new Sql();
+				sql.inserirEmprestimo(34, Integer.parseInt(tmat.getText()), tnome.getText());
 			}
 		});
 		jpNumero = new JPanel(new FlowLayout());
