@@ -92,11 +92,12 @@ public class LerPlanilha {
 								break;
 							
 						}
-							if(true){
+							/*if(true){
 								
 								//key.setTorre(torre);
 								//key.setAndar(Integer.toString(i-2));
 							}
+							*/
 					
 							
 					}
