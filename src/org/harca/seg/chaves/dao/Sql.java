@@ -26,7 +26,7 @@ import org.harca.seg.util.*;
 			    try {
 			      Class.forName("org.sqlite.JDBC");
 			      c = DriverManager.getConnection("jdbc:sqlite:bancodedados/chaves.db");
-			      c.setAutoCommit(false);
+			      c.setAutoCommit(true);
 			    }catch(Exception e){
 			    	e.printStackTrace();
 			    }
@@ -48,49 +48,54 @@ import org.harca.seg.util.*;
 				
 				
 
-			//	stmt.close();
-			//	c.commit();
-			//	c.close();
-			}catch(SQLException e){
-				e.printStackTrace();
-			}
-			try{
-				String query = "SELECT ID from pessoa WHERE matricula =\""+matricula+"\";";
-				stmt = c.prepareStatement(query);
-				ResultSet rs = stmt.executeQuery();
-				//listaChaves.add(arg0)
-				
-				while(rs.next()){
-					id_pessoa = rs.getInt(1);
-				
-				}
 				//stmt.close();
-				c.commit();
-				
-			}catch(Exception e){
-				e.printStackTrace();
+				//c.commit();
+				//c.close();
+			}catch(SQLException e){
+			//	e.printStackTrace();
+				System.out.println("Ja existe cadastro");
+				try{
+					String query = "SELECT ID from pessoa WHERE matricula =\""+matricula+"\";";
+					stmt = c.prepareStatement(query);
+					ResultSet rs = stmt.executeQuery();
+					//listaChaves.add(arg0)
+					
+					while(rs.next()){
+						id_pessoa = rs.getInt(1);
+					
+					}
+					//stmt.close();
+					//c.commit();
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
 			}
-			
+		
+			}
 			try{
 				
 				stmt = c.prepareStatement("INSERT INTO"+
 						" emprestimoKey (key_id, horaEmprestou, dataEmprestou,dataDevolveu,isi_matricula, pessoa_id)"+
 						"VALUES(?,?,?,?,?,?);");
 				//stmt = c.prepareStatement(query);
-				stmt.setInt(1, key_id);
 				
-				stmt.setString(2,"teste1");
-				stmt.setString(3, "testedata");
+				DateFormat horaFormat = new SimpleDateFormat("HH:MM");
+				DateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+				Date date = new Date();
+				
+				stmt.setInt(1, key_id);
+				stmt.setString(2,horaFormat.format(date).toString());
+				stmt.setString(3, dataFormat.format(date).toString() );//date.toString());
 				stmt.setString(4, null);
-				stmt.setString(5, "isi");
+				stmt.setString(5, System.getProperty("user.name"));
 				stmt.setInt(6, id_pessoa);
 				
 				stmt.execute();
 				
 				
-				//stmt.close();
-				c.commit();
 				
+				//stmt.close();
+				//c.commit();
 				c.close();
 			}catch(SQLException e){ 
 				e.printStackTrace();

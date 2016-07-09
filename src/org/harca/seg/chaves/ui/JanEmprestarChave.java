@@ -157,6 +157,7 @@ public class JanEmprestarChave extends JPanel{
 		jpessoa.setBorder(BorderFactory.createTitledBorder("Pessoa"));
 		jpessoa.add(lmat);
 		tmat=new JTextField();
+		/*
 		tmat.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -184,6 +185,7 @@ public class JanEmprestarChave extends JPanel{
 				
 			}
 		});
+		*/
 		jpessoa.add(tmat);
 		jpessoa.add(lnome);
 		
