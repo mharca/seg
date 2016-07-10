@@ -4,8 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.ArrayBlockingQueue;
 
-	import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 
 	import org.harca.seg.achados.control.Control;
 import org.harca.seg.achados.model.*;
@@ -44,15 +45,10 @@ import org.harca.seg.util.*;
 				stmt.setInt(1, matricula);
 				stmt.setString(2, nome);
 
-				stmt.execute();
-				
-				
-
-				//stmt.close();
-				//c.commit();
-				//c.close();
-			}catch(SQLException e){
-			//	e.printStackTrace();
+				stmt.executeQuery();
+		
+			}catch(SQLException e){ // JA EXISTE NO CADASTRO
+			
 				System.out.println("Ja existe cadastro");
 				try{
 					String query = "SELECT ID from pessoa WHERE matricula =\""+matricula+"\";";
@@ -175,6 +171,46 @@ import org.harca.seg.util.*;
 			query = "SELECT * FROM chave WHERE localizacao LIKE '%"+palavra+"%'";
 			return select(query);
 			
+		}
+		
+		public List<List<String>> selectGenerico(String query){
+			List <List<String>> ls = new ArrayList<>();
+			List <String>lista = new ArrayList<>();
+			try{
+				stmt = c.prepareStatement(query);
+				ResultSet rs = stmt.executeQuery();
+				//listaChaves.add(arg0)
+				int aux;
+				while(rs.next()){
+					lista= new ArrayList<>();
+					
+					lista.add(rs.getString(1)); // nome
+					aux = rs.getInt(2);  // numero
+					lista.add(Integer.toString(aux));
+					lista.add(rs.getString(3)); //localizacao
+					lista.add(rs.getString(4)); // andar
+					lista.add(rs.getString(5));// torre
+					
+					aux = rs.getInt(6);  // matricula
+					lista.add(Integer.toString(aux));
+					
+					lista.add(rs.getString(7)); // hora emp
+					aux = rs.getInt(8);
+					lista.add(Integer.toString(aux)); // data emp
+					
+					
+					ls.add(lista);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return ls;
+		}
+		
+		public List<List<String>> selectEmprestados(){
+			
+			return selectGenerico("select pessoa.nome,chave.numero,chave.localizacao,chave.andar,chave.torre, pessoa.matricula, horaEmprestou,dataEmprestou"+
+			" FROM emprestimoKey JOIN chave,pessoa ON key_id=chave.id AND pessoa_id=pessoa.id;");
 		}
 		
 		

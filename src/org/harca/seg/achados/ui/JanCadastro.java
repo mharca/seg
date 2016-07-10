@@ -21,6 +21,7 @@ import java.awt.Desktop;
 import javax.swing.border.EtchedBorder;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -270,6 +271,15 @@ public class JanCadastro extends JPanel{
 		nomeLocalizou.setColumns(10);
 		nomeLocalizou.setEditable(false);
 		
+		final JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setBounds(337, 17, 274, 426);
+		add(panel_4);
+		panel_4.setLayout(null);
+		
+		final JPanel panel_3 = new JPanel(new GridLayout());
+		panel_3.setBounds(5, 16, 264, 405);
+		panel_4.add(panel_3);
 		
 		JButton btnVerificar = new JButton("Verificar");
 		btnVerificar.addActionListener(new ActionListener() {
@@ -284,8 +294,50 @@ public class JanCadastro extends JPanel{
 									nomeLocalizou.setBackground(Color.RED);
 									nomeLocalizou.setText("Procurando");
 									String nome = new Control().getNomeByChave(matriculaTexto.getText());
+									
 									nomeLocalizou.setText(nome);
 									nomeLocalizou.setBackground(Color.WHITE);
+									
+									
+									JLabel lblNewLabel;
+									lblNewLabel	 = new JLabel(new ImageIcon("semfoto.jpg"));
+									
+									try{
+										
+										Thread t = new Thread();
+										//URL fotoUrl = new URL("foto.jpg");
+										String fotoUrl = "foto.jpg";
+										String fotoErro = "semfoto.jpg";
+										//BufferedImage image = ImageIO.read(fotoUrl);
+										
+							
+										ImageIcon imageIcon = new ImageIcon("semfoto.jpg");
+											try{
+												String aux = new String(matriculaTexto.getText());
+												URL url = new URL(new Control().getFotoByMatriculaChave(aux));
+																			
+												imageIcon = new ImageIcon(ImageIO.read(url));
+											
+											}catch(Exception e){
+												imageIcon = new ImageIcon("semfoto.jpg");
+											}
+										
+										lblNewLabel	 = new JLabel(imageIcon);
+													
+										
+											panel_3.add(lblNewLabel);
+											System.out.println("foto resize");
+										//	panel_3.setBounds(5, 16, 264, 406);
+											
+
+											
+
+											
+									}catch(Exception e){
+										e.printStackTrace();
+									}
+									panel_4.add(panel_3);
+								//	panel_4.repaint();
 									
 								}catch(Exception e){
 									nomeLocalizou.setText("");
@@ -300,7 +352,7 @@ public class JanCadastro extends JPanel{
 						});
 						t.start();
 						
-			
+			repaint();
 					
 				}
 			
@@ -308,39 +360,8 @@ public class JanCadastro extends JPanel{
 		btnVerificar.setBounds(213, 21, 91, 23);
 		panel_1.add(btnVerificar);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_4.setBounds(337, 17, 274, 426);
-		add(panel_4);
-		panel_4.setLayout(null);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(5, 16, 264, 405);
-		panel_4.add(panel_3);
 		
-		try{
 			
-			Thread t = new Thread();
-			//URL fotoUrl = new URL("foto.jpg");
-			String fotoUrl = "foto.jpg";
-			String fotoErro = "semfoto.jpg";
-			//BufferedImage image = ImageIO.read(fotoUrl);
-			JLabel lblNewLabel;
-			lblNewLabel	 = new JLabel(new ImageIcon(fotoErro));
-
-			ImageIcon imageIcon = new ImageIcon("semfoto.jpg");
-			try{
-				imageIcon = new ImageIcon("foto.jpg");
-			}catch(Exception e){
-				imageIcon = new ImageIcon("semfoto.jpg");
-			}
-			
-			lblNewLabel	 = new JLabel(imageIcon);
-						
-			
-				panel_3.add(lblNewLabel);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 }

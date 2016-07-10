@@ -91,7 +91,16 @@ public  class Worker {
 	}
 	////////////////////////////////////////////////
 	public String getFoto(){
-		return "http://farm3.staticflickr.com/2227/2527718435_0333a14594_z.jpg";
+	//	return "http://farm3.staticflickr.com/2227/2527718435_0333a14594_z.jpg";
+		//String stringAux = new String();
+		String fotoUrl = new String();
+		//fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+stringAux+".jpg";
+							//fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+new Control().getMatriculaByChave(matriculaTexto.getText())+".jpg";
+			fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+this.getMatricula()+".jpg";
+					
+					
+		
+		return fotoUrl;
 	}
 	
 	

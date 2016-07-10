@@ -25,4 +25,9 @@ public class Controle {
 		Sql sql= new Sql();
 		sql.inserirEmprestimo(key_id, matricula, nome);
 	}
+	public List<List<String>> selectEmprestados(){
+		Sql sql = new Sql();
+		return sql.selectEmprestados();
+		
+	}
 }
