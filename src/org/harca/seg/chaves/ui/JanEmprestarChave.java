@@ -47,6 +47,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import org.harca.seg.chaves.control.Controle;
+import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.HtmlParser;
 
 public class JanEmprestarChave extends JPanel{
@@ -61,6 +62,7 @@ public class JanEmprestarChave extends JPanel{
 	HtmlParser parser;
 	ModeloTabela modeloTabela;
 	JButton btnEmprestar;
+	private static int ID = 6; // Magic number do id
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
 		lmat = new JLabel("Matricula:");
@@ -156,6 +158,7 @@ public class JanEmprestarChave extends JPanel{
 		jpessoa.setBorder(BorderFactory.createTitledBorder("Pessoa"));
 		jpessoa.add(lmat);
 		tmat=new JTextField();
+		/* */
 		tmat.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -183,6 +186,7 @@ public class JanEmprestarChave extends JPanel{
 				
 			}
 		});
+		/****** */
 		jpessoa.add(tmat);
 		jpessoa.add(lnome);
 		
@@ -269,6 +273,16 @@ public class JanEmprestarChave extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// 
+				Controle c= new Controle();
+			
+				//c.inserirEmprestimo(Integer.parseInt(modeloTabela.getValueAt(2, 0).toString()), Integer.parseInt(tmat.getText()), tnome.getText());
+			//	 numchaves = Integer.parseInt(tNumero.getText());
+				
+				int[] rows = jtable.getSelectedRows();
+
+				
+				for (int i:rows)
+					c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
 				
 			}
 		});
@@ -319,5 +333,13 @@ public class JanEmprestarChave extends JPanel{
 		jtable.repaint();
 		
 	}
+	private int[] convertStringToIntArray(String strArray[]) {
+	    int[] intArray = new int[strArray.length];
+	    for(int i = 0; i < strArray.length; i++) {
+	        intArray[i] = Integer.parseInt(strArray[i]);
+	    }
+	    return intArray;
+	}
+
 
 }
