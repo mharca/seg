@@ -99,6 +99,9 @@ public class Control {
 			return parser.getMatricula();
 		else return chave; // ja eh matricula
 	}
+	public String getFotoByMatriculaChave(String chave){
+		return "http://apl.ti.petrobras.com.br/fotos/0"+getMatriculaByChave(chave)+".jpg";
+	}
 	public void delete(String id){
 		Sql sql = new Sql();
 		sql.deletar(id);
