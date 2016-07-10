@@ -19,7 +19,9 @@ public class ModeloDevolverTabela extends AbstractTableModel{
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return list.size();
+	//	if(list.size()>0)
+			return list.size();
+		//else return 10;
 	}
 	public void  setLista(List<List<String>> lista){
 		this.list = lista;

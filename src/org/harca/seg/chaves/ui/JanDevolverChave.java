@@ -31,11 +31,12 @@ public class JanDevolverChave extends JPanel {
 		jp.add(tnumero);
 		jp.add(bdevolver);
 		String colunas[]={"Nome", "Numero","Localizacao","Andar", "Torre","Matricula", "Hora emprestimo", "Data emprestimo"};
-		ModeloDynDevolver modeloDyn = new ModeloDynDevolver(colunas);
+	
 		
 		
 		Controle c = new Controle();
-		modeloDyn.setLista(c.selectEmprestados());
+		ModeloDynDevolver modeloDyn = new ModeloDynDevolver(colunas,c.selectEmprestados());
+		//modeloDyn.setLista(c.selectEmprestados());
 		jtable = new JTable(modeloDyn);
 		jsp = new JScrollPane(jtable);
 		

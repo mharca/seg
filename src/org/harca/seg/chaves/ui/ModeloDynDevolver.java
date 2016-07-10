@@ -10,6 +10,13 @@ public class ModeloDynDevolver extends ModeloDevolverTabela{
 		this.setColunas(colunaNome);
 		super.setColunas(colunaNome);
 	}
+	public ModeloDynDevolver(String[] colunaNome, List<List<String>> lista){
+		this.setColunas(colunaNome);
+		//this.lista = new List<List<String>>();
+		setLista(lista);
+		this.lista = lista;
+		super.setColunas(colunaNome);
+	}
 	public void setColunas(String[]colunaNome){
 		this.colunas = colunaNome;
 	}
@@ -17,6 +24,11 @@ public class ModeloDynDevolver extends ModeloDevolverTabela{
 	public void addLista(List<List<String>> lista2){
 		this.lista = lista2;
 		
+	}
+	@Override
+	public int getRowCount(){
+		
+		return lista.size();
 	}
 	
 	@Override
