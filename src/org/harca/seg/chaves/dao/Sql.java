@@ -80,7 +80,7 @@ import org.harca.seg.util.*;
 				Date date = new Date();
 				
 				stmt.setInt(1, key_id);
-				stmt.setString(2,horaFormat.format(date).toString());
+				stmt.setString(2,horaFormat.format(date).toString() );
 				stmt.setString(3, dataFormat.format(date).toString() );//date.toString());
 				stmt.setString(4, null);
 				stmt.setString(5, System.getProperty("user.name"));
@@ -195,7 +195,10 @@ import org.harca.seg.util.*;
 					lista.add(Integer.toString(aux));
 					
 					lista.add(rs.getString(7)); // hora emp
+					
 					aux = rs.getInt(8);
+					
+					System.out.println("Data: "+aux);
 					lista.add(Integer.toString(aux)); // data emp
 					
 					

@@ -35,7 +35,7 @@ public class JanDevolverChave extends JPanel {
 		
 		
 		Controle c = new Controle();
-		ModeloDynDevolver modeloDyn = new ModeloDynDevolver(colunas,c.selectEmprestados());
+		ModeloDynDevolver modeloDyn = new ModeloDynDevolver(colunas, c.selectEmprestados());
 		//modeloDyn.setLista(c.selectEmprestados());
 		jtable = new JTable(modeloDyn);
 		jsp = new JScrollPane(jtable);

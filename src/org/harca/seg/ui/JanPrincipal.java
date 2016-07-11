@@ -7,6 +7,7 @@ import javax.swing.event.TreeSelectionListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -166,8 +167,9 @@ public class JanPrincipal extends JFrame{
 				splitPane.setRightComponent(jsp);
 			}
 		});
-		 splitPane = new JSplitPane();
-		//splitPane.setLayout(new GridBagLayout());
+		 splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		
+		
 		 
 		 jsp.add(splitPane);
 		 jsp.setViewportView(splitPane);
@@ -297,6 +299,7 @@ public class JanPrincipal extends JFrame{
 		jspDir.setViewportView(jp);
 		splitPane.setRightComponent( jspDir);
 		setVisible(true);
+		//splitPane.setAutoscrolls(false);
 	}
 	
 	private void buscar(){

@@ -302,6 +302,7 @@ public class JanEmprestarChave extends JPanel{
 		add(jp,BorderLayout.NORTH);
 		//add(jpNumero);
 		add(jsp,BorderLayout.CENTER);
+		//split
 	}
 	private void perdeFoco(){
 		
