@@ -27,13 +27,13 @@ import org.harca.seg.util.HtmlParser;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class JanPrincipal extends JFrame{
+public class JanMain extends JFrame{
 	JToolBar jtoolbar;
 	JTextField tbusca;
 	JButton bbuscar,btEscala,btTelUteis;
 	
 	final JSplitPane splitPane;
-	public JanPrincipal(){
+	public JanMain(){
 		setSize(800, 600);
 		setTitle("Controle de seguranca");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
