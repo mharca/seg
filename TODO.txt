@@ -1,0 +1,6 @@
+* TODO chaves
+** Resolver matricula 
+** criar o select para recuperar chaves emprestadas*
+
+* TODO add getFoto em empregado
+** tirar layout null
