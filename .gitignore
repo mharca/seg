@@ -1,4 +1,5 @@
 ./bin/
+.gitignore
 htmlunit-2.22/
 poi-3.13/
 .classpath
