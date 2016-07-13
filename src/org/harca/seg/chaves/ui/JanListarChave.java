@@ -35,15 +35,14 @@ public class JanListarChave extends JPanel {
 		panel.add(btnTodos);
 		add(panel, BorderLayout.NORTH);
 	
-		//String[] colunas = {"Nome","Matricula","Chave", "Localizacao", "Hora emprestimo", "Data emprestimo","Hora devolvido", "Data devolvido"};
 		String colunas[]={"Nome", "Numero","Localizacao","Andar", "Torre","Matricula", "Hora emprestimo", "Data emprestimo"};
 		List<List<String>> lista;
+	
 		Controle c = new Controle();
+			
 		lista = c.selectEmprestados();
 		ModeloDynDevolver modelo = new ModeloDynDevolver(colunas,lista);
 		
-	
-		//modelo.addLista(lista);
 		jtable = new JTable(modelo);
 		jsp = new JScrollPane(jtable);
 		

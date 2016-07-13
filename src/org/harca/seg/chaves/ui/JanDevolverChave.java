@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
@@ -11,6 +12,8 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.harca.seg.chaves.control.Controle;
 
@@ -35,9 +38,32 @@ public class JanDevolverChave extends JPanel {
 		
 		
 		Controle c = new Controle();
-		ModeloDynDevolver modeloDyn = new ModeloDynDevolver(colunas,c.selectEmprestados());
+		ModeloDynDevolver modeloDyn = new ModeloDynDevolver(colunas, c.selectEmprestados());
 		//modeloDyn.setLista(c.selectEmprestados());
 		jtable = new JTable(modeloDyn);
+		jtable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				ArrayList<String> aux = new ArrayList<String>();
+			//	aux.add(jtable.getValueAt(jtable.getSelectedRow(), 0).toString());
+				int[] rows = jtable.getSelectedRows();
+				
+			
+				for (int i = 0; i < rows.length; i++){
+					aux.add(jtable.getValueAt(rows[i], 1).toString());
+				/*	System.out.println(jtable.getValueAt(rows[i], 5).toString());
+					if(jtable.getValueAt(rows[i], 5).toString().equals("verde")){
+						System.out.println("ok");
+						
+					}
+					*/
+				}
+				tnumero.setText(aux.toString());
+				
+				
+			}
+		});
 		jsp = new JScrollPane(jtable);
 		
 		add(jp,BorderLayout.NORTH);
