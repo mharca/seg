@@ -34,6 +34,7 @@ import org.harca.seg.util.*;
 			    
 		}
 		
+		
 		public void inserirEmprestimo(int key_id, int matricula, String nome){
 			query = "INSERT INTO pessoa(matricula, nome) VALUES(?,?);";
 			
@@ -201,7 +202,8 @@ import org.harca.seg.util.*;
 					
 					//System.out.println("Data: "+ rs.getString(8));
 					lista.add(rs.getString(8)); // data emp
-					
+					lista.add(Integer.toString(rs.getInt(9)));
+					//lista.add("t");
 					
 					ls.add(lista);
 				}
@@ -213,10 +215,67 @@ import org.harca.seg.util.*;
 		
 		public List<List<String>> selectEmprestados(){
 			
-			return selectGenerico("select pessoa.nome, chave.numero, chave.localizacao, chave.andar, chave.torre, pessoa.matricula, horaEmprestou, dataEmprestou"+
-			" FROM emprestimoKey JOIN chave,pessoa ON key_id=chave.id AND pessoa_id=pessoa.id;");
+			return selectGenerico("select pessoa.nome, chave.numero, chave.localizacao, chave.andar, chave.torre, pessoa.matricula, horaEmprestou, dataEmprestou, emprestimokey.id FROM emprestimoKey JOIN chave,pessoa ON key_id=chave.id AND pessoa_id=pessoa.id;");
 		}
-		
-		
+	/***********************************************************************************************************/
+		public int getIdByNumero(String numero) {
+			String query = "select id from emprestimokey join chave on numero='"+numero+"'";
+			//Statement stmt = null;
+			//ResultSet rs=null;
+			int res=0;
+			try {
+				
+				//stmt = c.createStatement();
+				stmt = c.prepareStatement(query);
+				ResultSet rs=stmt.executeQuery();
+				 
+				// while(rs.next())
+					// System.out.println("--->"+rs.getString(0));
+			//	System.out.println("id: "+rs.getInt(1));
+				// res = rs.getInt(1);
+				// c.close();
+				// rs.close();
+				int aux = rs.getInt(1);
+				stmt.close();
+				System.out.println("id: "+aux);
+				 return aux;
+				 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return res;			
+		}
+public void devolver(int id){
+			
+			DateFormat horaFormat = new SimpleDateFormat("HH:MM");
+			DateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = new Date();
+			
+			String hora = horaFormat.format(date).toString();
+			String data = dataFormat.format(date).toString();
+			//query = "UPDATE emprestimokey SET horaDevolveu='"+hora+"', dataDevolveu='"+data+"' WHERE id='"+8+"';";
+			query = "UPDATE emprestimokey SET horaDevolveu=?, dataDevolveu=? WHERE id=?";
+			//query = "UPDATE emprestimokey SET horaDevolveu='666',dataDevolveu='9999' WHERE id="+id;
+			System.out.println(query);
+			//Statement st=null;
+			try{
+				PreparedStatement ps;
+				ps = c.prepareStatement(query);
+				ps.setString(1, hora);
+				ps.setString(2, data);
+				ps.setInt(3, id);
+				ps.executeUpdate();
+				ps.close();
+				/*
+				st = c.createStatement();
+				st.executeUpdate(query);
+				st.close();
+				*/
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		
 }

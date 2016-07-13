@@ -2,6 +2,7 @@ package org.harca.seg.chaves.control;
 
 //import java.awt.List;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.harca.seg.chaves.dao.Sql;
@@ -29,5 +30,15 @@ public class Controle {
 		Sql sql = new Sql();
 		return sql.selectEmprestados();
 		
+	}
+	public int getIdByNumero(String numero){
+		Sql sql = new Sql();
+		
+		return sql.getIdByNumero(numero);
+	}
+	public void devolver(int numero){
+		Sql sql = new Sql();
+		System.out.println("num"+numero);
+		 sql.devolver((numero));
 	}
 }

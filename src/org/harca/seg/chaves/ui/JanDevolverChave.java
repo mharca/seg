@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
@@ -24,21 +26,24 @@ public class JanDevolverChave extends JPanel {
 	JButton bdevolver;
 	JTable jtable;
 	JScrollPane jsp;
+	static private int ID=3;
+	ModeloDynDevolver modeloDyn;
 	public JanDevolverChave(){
 		setLayout(new BorderLayout());
 		JLabel lnumero = new JLabel("Numero: ");
 		tnumero = new JTextField();
 		JPanel jp = new JPanel(new GridLayout(1,2));
 		bdevolver = new JButton("Devolver");
+		bdevolver.addActionListener(new cadastrar());
 		jp.add(lnumero);
 		jp.add(tnumero);
 		jp.add(bdevolver);
-		String colunas[]={"Nome", "Numero","Localizacao","Andar", "Torre","Matricula", "Hora emprestimo", "Data emprestimo"};
+		String colunas[]={"Nome", "Numero","Localizacao","Andar", "Torre","Matricula", "Hora emprestimo", "Data emprestimo","id"};
 	
 		
 		
 		Controle c = new Controle();
-		ModeloDynDevolver modeloDyn = new ModeloDynDevolver(colunas, c.selectEmprestados());
+		modeloDyn = new ModeloDynDevolver(colunas, c.selectEmprestados());
 		//modeloDyn.setLista(c.selectEmprestados());
 		jtable = new JTable(modeloDyn);
 		jtable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -52,12 +57,13 @@ public class JanDevolverChave extends JPanel {
 			
 				for (int i = 0; i < rows.length; i++){
 					aux.add(jtable.getValueAt(rows[i], 1).toString());
-				/*	System.out.println(jtable.getValueAt(rows[i], 5).toString());
-					if(jtable.getValueAt(rows[i], 5).toString().equals("verde")){
-						System.out.println("ok");
+					
+					System.out.println("val"+jtable.getValueAt(rows[i], 1).toString());
+				//	if(jtable.getValueAt(rows[i], 5).toString().equals("verde")){
+					//	System.out.println("ok");
 						
-					}
-					*/
+					//}
+					// 
 				}
 				tnumero.setText(aux.toString());
 				
@@ -69,4 +75,35 @@ public class JanDevolverChave extends JPanel {
 		add(jp,BorderLayout.NORTH);
 		add(jsp,BorderLayout.CENTER);
 	}
+
+	
+	
+	class cadastrar implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Controle c= new Controle();
+			
+			//c.inserirEmprestimo(Integer.parseInt(modeloTabela.getValueAt(2, 0).toString()), Integer.parseInt(tmat.getText()), tnome.getText());
+		//	 numchaves = Integer.parseInt(tNumero.getText());
+			
+			int[] rows = jtable.getSelectedRows();
+			for(int i=0;i<6;i++)
+				System.out.println(modeloDyn.getColumnName(i));
+			
+			int aux =0;
+			for (int i:rows){
+					System.out.println("DFDF"+modeloDyn.getValueAt(i, 8).toString());
+					//c.devolver(( Integer.parseInt(modeloDyn.getValueAt(i, ID-2).toString())));
+					aux = Integer.parseInt((modeloDyn.getValueAt(i, 8).toString()));
+					c.devolver(( aux));
+				}
+			}
+							
+		}
+			
+		
+		
 }
+

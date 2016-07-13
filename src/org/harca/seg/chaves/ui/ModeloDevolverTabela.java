@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloDevolverTabela extends AbstractTableModel{
-	private String[] colunas = {"Nome", "Numero", "Local", "Data retirado", "Hora retirado", "Torre", "Andar"};
+	private String[] colunas = {"Nome", "Numero", "Local", "Data retirado", "Hora retirado", "Torre", "Andar","id"};
 	List<List<String>> list;
 	
 	@Override
@@ -40,6 +40,8 @@ public class ModeloDevolverTabela extends AbstractTableModel{
 				case 5: return list.get(linha).get(5);
 				case 6: return list.get(linha).get(6);
 				case 7: return list.get(linha).get(7);
+				case 8: return list.get(linha).get(8);
+
 		}
 			
 		return null;
