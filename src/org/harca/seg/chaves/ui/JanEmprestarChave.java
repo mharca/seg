@@ -282,7 +282,7 @@ public class JanEmprestarChave extends JPanel{
 
 				
 				for (int i:rows)
-					c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
+					c.inserirEmprestimo(( Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
 				
 			}
 		});

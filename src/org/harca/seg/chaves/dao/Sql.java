@@ -36,8 +36,7 @@ import org.harca.seg.util.*;
 		
 		public void inserirEmprestimo(int key_id, int matricula, String nome){
 			query = "INSERT INTO pessoa(matricula, nome) VALUES(?,?);";
-			//query = "INSERT INTO chave (numero,setor,localizacao,cor,torre,andar) VALUES(?,?,?,?,?,?)";
-			//System.out.println("----------------"+key.getNumero()+" - "+key.getLocalizacao());
+			
 			int id_pessoa=0;
 			
 			try{ // INSERE PESSOA SE NAO ESTIVER CADASTRADA
@@ -82,6 +81,9 @@ import org.harca.seg.util.*;
 				stmt.setInt(1, key_id);
 				stmt.setString(2,horaFormat.format(date).toString() );
 				stmt.setString(3, dataFormat.format(date).toString() );//date.toString());
+				
+				System.out.println(dataFormat.format(date).toString());
+				
 				stmt.setString(4, null);
 				stmt.setString(5, System.getProperty("user.name"));
 				stmt.setInt(6, id_pessoa);
@@ -130,12 +132,10 @@ import org.harca.seg.util.*;
 			List<Key> listaChaves = new ArrayList<Key>();
 			Key key = new Key();
 			
-		//	query = "SELECT * FROM chave;";
 			
 			try{
 				stmt = c.prepareStatement(query);
 				ResultSet rs = stmt.executeQuery();
-				//listaChaves.add(arg0)
 				while(rs.next()){
 					key = new Key();
 					//key.setAndar(Integer.toString(rs.getInt("andar")));
@@ -181,25 +181,26 @@ import org.harca.seg.util.*;
 				ResultSet rs = stmt.executeQuery();
 				//listaChaves.add(arg0)
 				int aux;
+				
 				while(rs.next()){
 					lista= new ArrayList<>();
 					
-					lista.add(rs.getString(1)); // nome
-					aux = rs.getInt(2);  // numero
+					lista.add(rs.getString(1)); 	// nome
+					aux = rs.getInt(2);  			// numero
 					lista.add(Integer.toString(aux));
-					lista.add(rs.getString(3)); //localizacao
-					lista.add(rs.getString(4)); // andar
-					lista.add(rs.getString(5));// torre
+					lista.add(rs.getString(3)); 	//localizacao
+					lista.add(rs.getString(4)); 	// andar
+					lista.add(rs.getString(5));		// torre
 					
-					aux = rs.getInt(6);  // matricula
+					aux = rs.getInt(6);  			// matricula ( resolver o problema de nao ler chave)
 					lista.add(Integer.toString(aux));
 					
-					lista.add(rs.getString(7)); // hora emp
+					lista.add(rs.getString(7)); 	// hora emp
 					
-					aux = rs.getInt(8);
+					//aux = rs.getInt(8);
 					
-					System.out.println("Data: "+aux);
-					lista.add(Integer.toString(aux)); // data emp
+					//System.out.println("Data: "+ rs.getString(8));
+					lista.add(rs.getString(8)); // data emp
 					
 					
 					ls.add(lista);
@@ -212,7 +213,7 @@ import org.harca.seg.util.*;
 		
 		public List<List<String>> selectEmprestados(){
 			
-			return selectGenerico("select pessoa.nome,chave.numero,chave.localizacao,chave.andar,chave.torre, pessoa.matricula, horaEmprestou,dataEmprestou"+
+			return selectGenerico("select pessoa.nome, chave.numero, chave.localizacao, chave.andar, chave.torre, pessoa.matricula, horaEmprestou, dataEmprestou"+
 			" FROM emprestimoKey JOIN chave,pessoa ON key_id=chave.id AND pessoa_id=pessoa.id;");
 		}
 		
