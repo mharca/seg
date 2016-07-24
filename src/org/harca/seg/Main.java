@@ -1,6 +1,5 @@
 package org.harca.seg;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 import org.harca.seg.ui.*;
 
@@ -20,8 +19,10 @@ public class Main {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				new JanPrincipal();
 				
+			//	JanPrincipal j = new JanPrincipal();
+				new JanMain();
+			//	j.set
 			}
 		});
 		
