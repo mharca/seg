@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -173,9 +174,10 @@ public class JanEmprestarChave extends JPanel{
 							perdeFoco();
 					}
 				});
-				if(tnome.getText().equals(""))
+				if(tnome.getText().equals("")){
+					
 					t.start();
-			
+				}
 				
 				
 			}
@@ -280,10 +282,12 @@ public class JanEmprestarChave extends JPanel{
 				
 				int[] rows = jtable.getSelectedRows();
 
-				
-				for (int i:rows)
-					c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
-				
+				if(tmat.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Erro, sem matricula");
+				else
+					for (int i:rows)
+						c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
+					
 			}
 		});
 		jpNumero = new JPanel(new FlowLayout());
