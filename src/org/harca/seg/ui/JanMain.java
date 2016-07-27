@@ -23,6 +23,8 @@ import javax.swing.tree.DefaultTreeModel;
 
 
 
+
+import org.harca.seg.leitor.JanLeitor;
 import org.harca.seg.util.HtmlParser;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -211,6 +213,8 @@ public class JanMain extends JFrame{
 						node_1.add(node_2);
 						node_1.add(new DefaultMutableTreeNode("Listar"));
 					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Cracha novo");
+					add(node_1);
 				}
 			}
 		));
@@ -278,6 +282,10 @@ public class JanMain extends JFrame{
 				if ( (node.getUserObject() == "Devolvidos") && (node.getParent().toString() =="Procurar") && (node.getParent().getParent().toString() == "Achados e perdidos")){
 					setTitle("Achados e perdidos");
 					splitPane.setRightComponent(new org.harca.seg.achados.ui.JanBuscarDevolvidos());
+				}
+				if((node.getUserObject() == "Cracha novo")){
+					setTitle("Cracha novo");
+					splitPane.setRightComponent(new JanLeitor());
 				}
 				
 			}
