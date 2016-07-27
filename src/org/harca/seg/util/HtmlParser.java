@@ -19,7 +19,7 @@ import com.gargoylesoftware.htmlunit.html.*;
 
 public class HtmlParser {
 		String site = "http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=home_a_petrobras";
-		Empregado empregado = new Empregado();
+		Worker empregado = new Empregado();
 
 		public HtmlParser(String matricula){
 			WebClient webclient = new WebClient(BrowserVersion.FIREFOX_45);

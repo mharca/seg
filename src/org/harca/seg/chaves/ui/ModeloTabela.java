@@ -37,6 +37,7 @@ public class ModeloTabela extends AbstractTableModel{
 		this.c = new Controle(); // alterar depois 
 		listaChaves = new ArrayList<Key>();
 		listaChaves = c.selectByWord(palavra);
+		
 	}
 	@Override
 	public int getColumnCount() {
@@ -55,7 +56,10 @@ public class ModeloTabela extends AbstractTableModel{
 	public Object getValueAt(int linha, int coluna) {
 		// TODO Auto-generated method stub
 		//listaChaves = c.selectAll();
+		// int count=0;
+	
 			switch(coluna){
+				
 				case 0: return listaChaves.get(linha).getNumero();
 				case 1: return listaChaves.get(linha).getLocalizacao();
 				case 2: return listaChaves.get(linha).getAndar();
@@ -63,6 +67,7 @@ public class ModeloTabela extends AbstractTableModel{
 				case 4: return listaChaves.get(linha).getTorre();
 				case 5: return listaChaves.get(linha).getCor();
 				case 6: return listaChaves.get(linha).getId();
+				
 			}
 		
 		return null;

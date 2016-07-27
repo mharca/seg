@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 import java.awt.List;
@@ -53,9 +54,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import org.harca.seg.Main;
 import org.harca.seg.chaves.control.Controle;
+import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.HtmlParser;
 
 import sun.awt.image.URLImageSource;
@@ -72,6 +75,7 @@ public class JanEmprestarChave extends JPanel{
 	HtmlParser parser;
 	ModeloTabela modeloTabela;
 	JButton btnEmprestar;
+	private static int ID = 6; // Magic number do id
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
 		lmat = new JLabel("Matricula:");
@@ -102,8 +106,20 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		modeloTabela = new ModeloTabela();
+<<<<<<< HEAD
 		jtable = new JTable(modeloTabela);
 		jtable.setAutoCreateRowSorter(true);
+=======
+		jtable = new JTable(modeloTabela){
+			public Component prepareRenderer(TableCellRenderer renderer, int row,int col){
+				Component c = super.prepareRenderer(renderer, 2, 2);
+				c.setForeground(Color.green);
+				
+				return c;
+			}
+		};
+		
+>>>>>>> afa61f276028386bb1065984d5d5525099edf88c
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
@@ -137,6 +153,7 @@ public class JanEmprestarChave extends JPanel{
 				}
 				modeloTabela.fireTableDataChanged();
 				jtable.setModel(modeloTabela);
+				
 
 			}
 		});
@@ -150,6 +167,7 @@ public class JanEmprestarChave extends JPanel{
 						modeloTabela = new ModeloTabela(c.selectByAndarEtorre(andar, ctorre.getSelectedItem().toString()));
 						modeloTabela.fireTableChanged(null);
 						jtable.setModel(modeloTabela);
+						//jtable.setFont(new Font());
 					}
 				});
 		
@@ -158,6 +176,7 @@ public class JanEmprestarChave extends JPanel{
 		jpessoa.setBorder(BorderFactory.createTitledBorder("Pessoa"));
 		jpessoa.add(lmat);
 		tmat=new JTextField();
+		/* */
 		tmat.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -185,6 +204,7 @@ public class JanEmprestarChave extends JPanel{
 				
 			}
 		});
+		/****** */
 		jpessoa.add(tmat);
 		jpessoa.add(lnome);
 		
@@ -248,6 +268,13 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		jtable = new JTable(modeloTabela);
+		
+		
+		
+	
+		//jtable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		jtable.getColumnModel().getColumn(2).setWidth(500);
+		
 		jtable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -257,9 +284,15 @@ public class JanEmprestarChave extends JPanel{
 				int[] rows = jtable.getSelectedRows();
 				
 			
-				for (int i = 0; i < rows.length; i++)
+				for (int i = 0; i < rows.length; i++){
 					aux.add(jtable.getValueAt(rows[i], 0).toString());
-					
+				/*	System.out.println(jtable.getValueAt(rows[i], 5).toString());
+					if(jtable.getValueAt(rows[i], 5).toString().equals("verde")){
+						System.out.println("ok");
+						
+					}
+					*/
+				}
 				tNumero.setText(aux.toString());
 				
 				
@@ -275,6 +308,16 @@ public class JanEmprestarChave extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// 
+				Controle c= new Controle();
+			
+				//c.inserirEmprestimo(Integer.parseInt(modeloTabela.getValueAt(2, 0).toString()), Integer.parseInt(tmat.getText()), tnome.getText());
+			//	 numchaves = Integer.parseInt(tNumero.getText());
+				
+				int[] rows = jtable.getSelectedRows();
+
+				
+				for (int i:rows)
+					c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
 				
 			}
 		});
@@ -325,5 +368,13 @@ public class JanEmprestarChave extends JPanel{
 		jtable.repaint();
 		
 	}
+	private int[] convertStringToIntArray(String strArray[]) {
+	    int[] intArray = new int[strArray.length];
+	    for(int i = 0; i < strArray.length; i++) {
+	        intArray[i] = Integer.parseInt(strArray[i]);
+	    }
+	    return intArray;
+	}
+
 
 }

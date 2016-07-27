@@ -82,10 +82,6 @@ public class JanDevolver extends JFrame{
 				t.start();
 				
 			}
-				
-			
-			
-				
 			
 		});
 		
@@ -190,6 +186,7 @@ public class JanDevolver extends JFrame{
 					fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+c.getMatriculaByChave(stringAux)+".jpg";
 					
 					}
+			
 			matriculaTexto.setBackground(Color.WHITE);
 			matriculaTexto.setText(stringAux);
 			
