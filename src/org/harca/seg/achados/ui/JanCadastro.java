@@ -187,7 +187,7 @@ public class JanCadastro extends JPanel{
 			MaskFormatter mf = new MaskFormatter("##:##");
 			mf.install(horaRecebido);
 			
-			DateFormat dateFormat = new SimpleDateFormat("HH:MM");
+			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 			Date data = new Date();
 			horaRecebido.setText(dateFormat.format(data).toString());
 		}catch(Exception e){
