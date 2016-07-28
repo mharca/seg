@@ -23,7 +23,7 @@ import javax.swing.table.TableModel;
 
 import org.harca.seg.util.Empregado;
 
-import com.sun.javafx.binding.StringFormatter;
+//import com.sun.javafx.binding.StringFormatter;
 
 import sun.net.www.protocol.mailto.MailToURLConnection;
 

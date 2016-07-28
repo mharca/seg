@@ -1,7 +1,4 @@
-./bin/
 .gitignore
-htmlunit-2.22/
-poi-3.13/
 .classpath
 Clavicul*
 ./Claviculário de Chaves de Serviço/Relação de Chaves - Mestradas e Subsolos.xls

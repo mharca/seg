@@ -106,10 +106,10 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		modeloTabela = new ModeloTabela();
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		jtable = new JTable(modeloTabela);
 		jtable.setAutoCreateRowSorter(true);
-=======
+//=======
 		jtable = new JTable(modeloTabela){
 			public Component prepareRenderer(TableCellRenderer renderer, int row,int col){
 				Component c = super.prepareRenderer(renderer, 2, 2);
@@ -119,7 +119,7 @@ public class JanEmprestarChave extends JPanel{
 			}
 		};
 		
->>>>>>> afa61f276028386bb1065984d5d5525099edf88c
+//>>>>>>> afa61f276028386bb1065984d5d5525099edf88c
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
