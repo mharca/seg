@@ -217,7 +217,7 @@ import org.harca.seg.util.*;
 		}
 		*/
 		public List<List<String>> selectEmprestados(){
-			String query = "select pessoa.nome,chave.numero,chave.localizacao,chave.andar,chave.torre, pessoa.matricula, horaEmprestou,dataEmprestou"+
+			String query = "select pessoa.nome,chave.numero,chave.localizacao,chave.andar,chave.torre, pessoa.matricula, horaEmprestou,dataEmprestou,emprestimoKey.id"+
 					" FROM emprestimoKey JOIN chave,pessoa ON key_id=chave.id AND pessoa_id=pessoa.id;";
 			List <List<String>> ls = new ArrayList<>();
 			List <String>lista = new ArrayList<>();
@@ -242,6 +242,8 @@ import org.harca.seg.util.*;
 					lista.add(rs.getString(7)); // hora emp
 					System.out.println(rs.getString(8));
 					lista.add(rs.getString(8));
+					lista.add(Integer.toString(rs.getInt(9)));
+					//System.out.println("ID -->"+Integer.toString(rs.getInt(9)));
 					
 					ls.add(lista);
 				}
@@ -249,6 +251,31 @@ import org.harca.seg.util.*;
 				e.printStackTrace();
 			}
 			return ls;
+		}
+		public void devolverChave(int id){
+			
+			DateFormat horaFormat = new SimpleDateFormat("HH:mm");
+			DateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = new Date();
+			
+			
+			String horaDevolveu = horaFormat.format(date).toString();
+			String dataDevolveu = dataFormat.format(date).toString();
+			
+			// PEGAR ID
+			String query = "UPDATE emprestimoKey SET horaDevolveu="+horaDevolveu+",dataDevolveu="+dataDevolveu+" WHERE id="+id+";";
+			try{
+					stmt = c.prepareStatement(query);
+					stmt.execute();
+					
+					//stmt.close();
+					//c.commit();
+					//c.close();
+					
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
 		}
 		
 }
