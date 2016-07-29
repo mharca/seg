@@ -71,34 +71,34 @@ public class HtmlParser {
 				
 				
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(2);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(2); // Genero
 				empregado.setGenero(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3); // Email
 				empregado.setEmail(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(4);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(4); // Empresa
 				empregado.setEmpresa(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(5);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(5); // Pais
 				empregado.setPais(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(6);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(6); // Matricula
 				empregado.setMatricula(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(7);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(7); // Cargo
 				empregado.setCargo(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(8);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(8); // Imovel
 				empregado.setImovel(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span4']").get(1);
+				element = (DomElement) p2.getByXPath("//div[@class='span4']").get(1); // Ramal
 				empregado.setRamal(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(10);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(10); // Endereco
 				empregado.setEndereco(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(11);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(11); // Lotacao
 				empregado.setLotacao(element.asText());
 				
 				/*

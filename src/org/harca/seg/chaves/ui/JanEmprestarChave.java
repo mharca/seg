@@ -27,18 +27,28 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Vector;
 
+
+
+
+
+
+/*
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-
+*/
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -47,9 +57,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import org.harca.seg.Main;
 import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.HtmlParser;
+
+//import sun.awt.image.URLImageSource;
 
 public class JanEmprestarChave extends JPanel{
 	JLabel lmat, lnome,lempresa,llocal, ltorre, landar, lNumero;
@@ -94,6 +107,10 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		modeloTabela = new ModeloTabela();
+//<<<<<<< HEAD
+		jtable = new JTable(modeloTabela);
+		jtable.setAutoCreateRowSorter(true);
+//=======
 		jtable = new JTable(modeloTabela){
 			public Component prepareRenderer(TableCellRenderer renderer, int row,int col){
 				Component c = super.prepareRenderer(renderer, 2, 2);
@@ -103,6 +120,7 @@ public class JanEmprestarChave extends JPanel{
 			}
 		};
 		
+//>>>>>>> afa61f276028386bb1065984d5d5525099edf88c
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
@@ -210,6 +228,23 @@ public class JanEmprestarChave extends JPanel{
 		jpchave.add(candar);
 		jpchave.add(llocal);
 		tlocal = new JTextField();
+	
+		/*
+		 * JLabel jl = new JLabel("bob");
+		 
+		jl.setToolTipText("Label with image in Tooltip!");
+		URL urlImage=null;
+		try {
+			 urlImage = new URL("http://www.lsv.ens-cachan.fr/~sankur/java/first_files/tooltip.png");
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    jl.setToolTipText("<html><img src=\"" + new ImageIcon(urlImage)
+	            + "\"> \nTooltip ");
+		jpchave.add(jl);
+		
+		*/
 		tlocal.addKeyListener(new KeyListener() {
 			
 			@Override
