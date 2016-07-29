@@ -25,7 +25,7 @@ import org.harca.seg.util.Empregado;
 
 //import com.sun.javafx.binding.StringFormatter;
 
-import sun.net.www.protocol.mailto.MailToURLConnection;
+//import sun.net.www.protocol.mailto.MailToURLConnection;
 
 public class JanLeitor extends JPanel{
 	JTextField tNome, tMatricula, tChave;

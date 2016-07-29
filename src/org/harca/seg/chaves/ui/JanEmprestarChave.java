@@ -61,7 +61,7 @@ import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.HtmlParser;
 
-import sun.awt.image.URLImageSource;
+//import sun.awt.image.URLImageSource;
 
 public class JanEmprestarChave extends JPanel{
 	JLabel lmat, lnome,lempresa,llocal, ltorre, landar, lNumero;

@@ -262,13 +262,14 @@ import org.harca.seg.util.*;
 			String horaDevolveu = horaFormat.format(date).toString();
 			String dataDevolveu = dataFormat.format(date).toString();
 			
+			System.out.println(horaDevolveu);
 			// PEGAR ID
-			String query = "UPDATE emprestimoKey SET horaDevolveu="+horaDevolveu+",dataDevolveu="+dataDevolveu+" WHERE id="+id+";";
+			String query = "UPDATE emprestimoKey SET horaDevolveu='"+horaDevolveu+"',dataDevolveu='"+dataDevolveu+"' WHERE id="+id+";";
 			try{
 					stmt = c.prepareStatement(query);
 					stmt.execute();
 					
-					//stmt.close();
+					stmt.close();
 					//c.commit();
 					//c.close();
 					
