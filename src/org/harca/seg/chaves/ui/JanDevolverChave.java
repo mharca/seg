@@ -81,7 +81,7 @@ public class JanDevolverChave extends JPanel {
 				
 				for(int i:rows){
 					c.devolverChave(Integer.parseInt( jtable.getModel().getValueAt(i, 8).toString() ) ); // manda ID
-					System.out.print(jtable.getModel().getValueAt(i, 8).toString());
+					//System.out.print(jtable.getModel().getValueAt(i, 8).toString());
 				}
 				
 			}

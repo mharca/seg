@@ -57,10 +57,14 @@ public class HtmlParser {
 				
 			//	DomElement element = (DomElement) p2.getByXPath("//div[@class='span9']").get(0);
 			//	empregado.setNome(element.asText());
+				DomElement element;
 				
-				DomElement element = (DomElement) p2.getByXPath("//div[@class='span9']").get(1);
-				empregado.setChave(element.asText());
-				
+				try{
+					element = (DomElement) p2.getByXPath("//div[@class='span9']").get(1);
+					empregado.setChave(element.asText());
+				}catch(Exception e){
+					empregado.setChave("Sem chave.");
+				}
 				element = (DomElement) p2.getByXPath("//div[@class='row-fluid']").get(4);
 				empregado.setNome(element.asText());
 				
@@ -95,11 +99,11 @@ public class HtmlParser {
 				element = (DomElement) p2.getByXPath("//div[@class='span4']").get(1); // Ramal
 				empregado.setRamal(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(10); // Endereco
-				empregado.setEndereco(element.asText());
+		//		element = (DomElement) p2.getByXPath("//div[@class='span9']").get(10); // Endereco
+		//		empregado.setEndereco(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(11); // Lotacao
-				empregado.setLotacao(element.asText());
+		//		element = (DomElement) p2.getByXPath("//div[@class='span9']").get(11); // Lotacao
+		//		empregado.setLotacao(element.asText());
 				
 				/*
 				for(int i=0;i< 9;i++){
