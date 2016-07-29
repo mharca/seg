@@ -45,6 +45,7 @@ public class ModeloDynDevolver extends ModeloDevolverTabela{
 		case 5: return list.get(linha).get(5);
 		case 6: return list.get(linha).get(6);
 		case 7: return list.get(linha).get(7);
+		case 8: return list.get(linha).get(8);
 }
 		
 		return null;

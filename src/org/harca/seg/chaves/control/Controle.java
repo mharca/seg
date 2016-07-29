@@ -30,4 +30,9 @@ public class Controle {
 		return sql.selectEmprestados();
 		
 	}
+	public void devolverChave(int num){
+		Sql sql = new Sql();
+		sql.devolverChave(num);
+		
+	}
 }
