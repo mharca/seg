@@ -107,10 +107,8 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		modeloTabela = new ModeloTabela();
-//<<<<<<< HEAD
 		jtable = new JTable(modeloTabela);
 		jtable.setAutoCreateRowSorter(true);
-//=======
 		jtable = new JTable(modeloTabela){
 			public Component prepareRenderer(TableCellRenderer renderer, int row,int col){
 				Component c = super.prepareRenderer(renderer, 2, 2);
@@ -120,7 +118,6 @@ public class JanEmprestarChave extends JPanel{
 			}
 		};
 		
-//>>>>>>> afa61f276028386bb1065984d5d5525099edf88c
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
@@ -271,9 +268,16 @@ public class JanEmprestarChave extends JPanel{
 		
 		jtable = new JTable(modeloTabela);
 		
+		/*************************************************************/
+		// PINTA A LETRA DAS CELULAS								//
+		/**************************************************************/
+			
+			TableCellRenderer rend = jtable.getCellRenderer(1, 2);
+			Component c = jtable.prepareRenderer(rend, 3, 3);
+			c.setForeground(Color.RED);
+			
+		/******************************************************************/
 		
-		
-	
 		//jtable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		jtable.getColumnModel().getColumn(2).setWidth(500);
 		
