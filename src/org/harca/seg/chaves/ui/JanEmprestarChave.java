@@ -75,7 +75,7 @@ public class JanEmprestarChave extends JPanel{
 	JTable jtable;
 	HtmlParser parser;
 	ModeloTabela modeloTabela;
-	JButton btnEmprestar;
+	JButton btnEmprestar, btnNovoEmprestimo;
 	private static int ID = 6; // Magic number do id
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
@@ -266,15 +266,31 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		
-		jtable = new JTable(modeloTabela);
+		jtable = new JTable(modeloTabela){
+			// PINTAR LINHAS
+			@Override	
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int col){
+					Component c = super.prepareRenderer(renderer, row, col);
+				
+					if(getValueAt(row, 5).toString() == "verde"){
+						c.setBackground(Color.GREEN);
+					}
+				
+					if(row % 2 == 0 && !isCellSelected(row, col)){
+						c.setBackground(Color.CYAN);
+					}
+						return c;
+				}
+
+		};
 		
-		/*************************************************************/
-		// PINTA A LETRA DAS CELULAS								//
-		/**************************************************************/
+		/************************************************************ */
+		// PINTA A LETRA DAS CELULAS								 //
+		/************************************************************ */
 			
-			TableCellRenderer rend = jtable.getCellRenderer(1, 2);
-			Component c = jtable.prepareRenderer(rend, 3, 3);
-			c.setForeground(Color.RED);
+//			TableCellRenderer rend = jtable.getCellRenderer(1, 2);
+//			Component c = jtable.prepareRenderer(rend, 3, 3);
+//			c.setForeground(Color.RED);
 			
 		/******************************************************************/
 		
@@ -329,13 +345,26 @@ public class JanEmprestarChave extends JPanel{
 					
 			}
 		});
+		
+		btnNovoEmprestimo = new JButton("Novo emprestimo");
+		btnNovoEmprestimo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				tnome.setText("");
+				tmat.setText("");
+				tNumero.setText("");
+				tEmpresa.setText("");
+			}
+		});
+		
 		jpNumero = new JPanel(new FlowLayout());
 		
 		jpNumero.add(lNumero);
 		jpNumero.add(tNumero);
 		jpNumero.add(btnEmprestar);
-		
-		
+		jpNumero.add(btnNovoEmprestimo);
 		
 		
 		jp.add(jpessoa);
@@ -357,12 +386,16 @@ public class JanEmprestarChave extends JPanel{
 				
 				if(tmat.getText().length()!=0){
 					parser = new HtmlParser(tmat.getText());
-								
-					s = parser.getNome();
-						tnome.setText(s);
 					
-					//s = parser.getEmpresa();
-					//	tEmpresa.setText(s);
+					
+								 s = parser.getNome();
+								 tnome.setText(s);
+																	
+								s = parser.getEmpresa();
+								tEmpresa.setText(s);
+							
+					
+					
 					
 					tnome.setBackground(Color.WHITE);
 				}

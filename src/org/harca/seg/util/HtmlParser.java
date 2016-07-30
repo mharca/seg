@@ -18,8 +18,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
 
 public class HtmlParser {
-		String site = "http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=home_a_petrobras";
-		Worker empregado = new Empregado();
+		//String site = "http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=home_a_petrobras";
+		
+	String site;
+	Worker empregado = new Empregado();
 
 		public HtmlParser(String matricula){
 			WebClient webclient = new WebClient(BrowserVersion.FIREFOX_45);
@@ -32,12 +34,13 @@ public class HtmlParser {
 			webclient.getOptions().setRedirectEnabled(true);
 	*/		
 			try {
+				site="http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=dctm_landing_page_localizador_de_pessoas_a_petrobras&origem=buscalope&unico="+matricula+"&locale=pt";
 				final HtmlPage startPage = webclient.getPage(site);
 							
 				//List<HtmlForm> listaForm = startPage.getForms();
 			//	HtmlForm form = listaForm.get(0);
 				
-						
+	/*					
 				startPage.getElementByName("buscar").click();
 				HtmlTextInput input = (HtmlTextInput) startPage.getElementById("txt-buscar");
 				input.setValueAttribute(matricula);
@@ -49,8 +52,8 @@ public class HtmlParser {
 				HtmlSubmitInput submit = (HtmlSubmitInput) startPage.getElementByName("botao");
 				
 				HtmlPage site2 = submit.click();
-
-				final List<FrameWindow> lfw = site2.getFrames();
+*/
+				final List<FrameWindow> lfw = startPage.getFrames();
 				final HtmlPage p2 = (HtmlPage) lfw.get(1).getEnclosedPage();
 				
 				
@@ -81,8 +84,22 @@ public class HtmlParser {
 				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3); // Email
 				empregado.setEmail(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(4); // Empresa
-				empregado.setEmpresa(element.asText());
+				try{
+					element = (DomElement) p2.getElementById("empresaContratada");
+					element = (DomElement) element.getLastElementChild();
+					empregado.setEmpresa(element.asText());
+					System.out.println(element.asText());
+					
+				}catch(Exception e){
+					element = (DomElement) p2.getElementById("empresa");
+					element = (DomElement) element.getLastElementChild();
+					empregado.setEmpresa(element.asText());
+					System.out.println(element.asText());
+
+				}
+				
+			//	element = (DomElement) p2.getByXPath("//div[@class='span9']").get(4); // Empresa
+			//	empregado.setEmpresa(element.asText());
 				
 				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(5); // Pais
 				empregado.setPais(element.asText());
