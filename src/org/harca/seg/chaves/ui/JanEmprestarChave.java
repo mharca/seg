@@ -271,14 +271,15 @@ public class JanEmprestarChave extends JPanel{
 			@Override	
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int col){
 					Component c = super.prepareRenderer(renderer, row, col);
-				
+				//System.out.println(getValueAt(row, 5));
 					if(getValueAt(row, 5).toString() == "verde"){
 						c.setBackground(Color.GREEN);
 					}
-				
+				/*
 					if(row % 2 == 0 && !isCellSelected(row, col)){
 						c.setBackground(Color.CYAN);
 					}
+					*/
 						return c;
 				}
 
