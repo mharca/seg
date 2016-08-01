@@ -2,6 +2,7 @@ package org.harca.seg.chaves.ui;
 import java.util.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -51,13 +52,9 @@ public class JanHistoricoPessoa extends JFrame{
 					
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
-						//HtmlParser parser;
-					//	parser = new HtmlParser(matAux);
-						
-						//buscando = parser.getEmpresa();
-					//	tEmpr.setText(parser.getEmpresa());
-						tEmpr.setText(getEmpresa(matAux));
+					
+					//	tEmpr.setText(getEmpresa(matAux));
+						tEmpr.setText("TESTE");
 					}
 				});
 				t.run();
@@ -69,8 +66,8 @@ public class JanHistoricoPessoa extends JFrame{
 		
 		JPanel pFoto = new JPanel();
 			lFoto = new JLabel();
-			//String matricula="9764342";
-			String fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+mat+".jpg";
+			String fotoUrl="http://static.batanga.com.br/sites/default/files/bozo_cc_div.jpg";
+			//String fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+mat+".jpg";
 			try{
 				URL url = new URL(fotoUrl);
 				BufferedImage image = ImageIO.read(url);
@@ -114,6 +111,7 @@ public class JanHistoricoPessoa extends JFrame{
 			tabela = new JTable(modelo);
 		
 			JScrollPane jsp = new JScrollPane(tabela);
+			pTabela.setLayout(new BorderLayout());
 			pTabela.add(jsp);
 		
 		add(pcima, BorderLayout.NORTH);

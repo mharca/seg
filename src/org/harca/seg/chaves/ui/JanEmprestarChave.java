@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 import java.awt.List;
@@ -33,6 +34,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Vector;
+
 
 
 
@@ -65,7 +67,7 @@ import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.HtmlParser;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
-import com.sun.corba.se.spi.orbutil.fsm.Action;
+//import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 //import sun.awt.image.URLImageSource;
 
@@ -253,12 +255,43 @@ public class JanEmprestarChave extends JPanel{
 		
 		jtable = new JTable(modeloTabela){
 			// PINTAR LINHAS
+			
 			@Override	
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int col){
 					Component c = super.prepareRenderer(renderer, row, col);
-				//System.out.println(getValueAt(row, 5));
-					if(getValueAt(row, 5).toString() == "verde"){
+					//TableCellRenderer c = super.getCellRenderer(row, col);
+					Color verde = new Color(0,170,0);
+					Font f2 = c.getFont();
+					
+					Font f = new Font(getName(), f2.BOLD, 12);
+					//System.out.println(getValueAt(row, 5));
+					if( !isCellSelected(row, col)){
+							switch(getValueAt(row, 1).toString()){
+								case "Localização":
+									System.out.println("LLL");
+									c.setBackground(Color.GRAY);
+									break;
+								default:
+									c.setBackground(Color.WHITE);
+									break;
+							}
+							switch(getValueAt(row, 5).toString()){
+							case "verde":
+								c.setForeground(verde);
+								c.setFont(f);
+								break;
+							default:
+								c.setForeground(Color.BLACK);
+								break;
+							}
+					}
+				/*
+					if(getValueAt(row, 1).toString() == "Localização"){
 						c.setBackground(Color.GREEN);
+						//getCellRenderer(row, col);
+						
+						System.out.println("---"+getValueAt(row, 5));
+
 					}
 /*				
 					if(row % 2 == 0){ 					// && isCellSelected(row, col)){
