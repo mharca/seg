@@ -30,9 +30,19 @@ public class Controle {
 		return sql.selectEmprestados();
 		
 	}
+	public List<List<String>> selectEmprestadosNaoDevolvidos(){
+		Sql sql = new Sql();
+		return sql.selectEmprestadosNaoDevolvidos();
+		
+	}
 	public void devolverChave(int num){
 		Sql sql = new Sql();
 		sql.devolverChave(num);
 		
 	}
+	public List<List<String> > pegaHistoricoChaves(String matricula){
+		Sql sql = new Sql();
+		return sql.pegaHistoricoChaves(matricula);
+	}
+	
 }

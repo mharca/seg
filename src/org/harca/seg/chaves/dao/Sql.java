@@ -252,6 +252,45 @@ import org.harca.seg.util.*;
 			}
 			return ls;
 		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		public List<List<String>> selectEmprestadosNaoDevolvidos(){
+			String query = "select pessoa.nome,chave.numero,chave.localizacao,chave.andar,chave.torre, pessoa.matricula, horaEmprestou,dataEmprestou,emprestimoKey.id"+
+					" FROM emprestimoKey JOIN chave,pessoa ON key_id=chave.id AND pessoa_id=pessoa.id AND dataDevolveu is NULL;";
+			List <List<String>> ls = new ArrayList<>();
+			List <String>lista = new ArrayList<>();
+			try{
+				stmt = c.prepareStatement(query);
+				ResultSet rs = stmt.executeQuery();
+				//listaChaves.add(arg0)
+				int aux;
+				while(rs.next()){
+					lista= new ArrayList<>();
+					
+					lista.add(rs.getString(1)); // nome
+					aux = rs.getInt(2);  // numero
+					lista.add(Integer.toString(aux));
+					lista.add(rs.getString(3)); //localizacao
+					lista.add(rs.getString(4)); // andar
+					lista.add(rs.getString(5));// torre
+					
+					aux = rs.getInt(6);  // matricula
+					lista.add(Integer.toString(aux));
+				
+					lista.add(rs.getString(7)); // hora emp
+					System.out.println(rs.getString(8));
+					lista.add(rs.getString(8));
+					lista.add(Integer.toString(rs.getInt(9)));
+					//System.out.println("ID -->"+Integer.toString(rs.getInt(9)));
+					
+					ls.add(lista);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return ls;
+		}
+		///////////////////////////////////////////////////////////////////////////////
 		public void devolverChave(int id){
 			
 			DateFormat horaFormat = new SimpleDateFormat("HH:mm");
@@ -277,6 +316,31 @@ import org.harca.seg.util.*;
 				e.printStackTrace();
 			}
 			
+		}
+		public List<List<String>> pegaHistoricoChaves(String matricula){
+			String query = "select chave.numero ,chave.localizacao,dataEmprestou, horaEmprestou,dataDevolveu,horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where pessoa.matricula='"+matricula+"'";
+			List<List<String>> l2 = new ArrayList<>();
+			try{
+				List<String> lista; //= new ArrayList();
+				
+				stmt = c.prepareStatement(query);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					lista = new ArrayList<>();
+					lista.add(Integer.toString(rs.getInt(1)));
+					for(int i=2;i<=6;i++ ){
+						lista.add(rs.getString(i));
+					}	
+					l2.add(lista);
+				}
+								
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			
+			
+			return l2;
 		}
 		
 }

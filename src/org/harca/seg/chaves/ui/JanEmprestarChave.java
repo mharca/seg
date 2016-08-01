@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.List;
 
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ListSelectionEvent;
@@ -56,11 +57,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.text.TableView.TableRow;
 
 import org.harca.seg.Main;
 import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.HtmlParser;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
+import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 //import sun.awt.image.URLImageSource;
 
@@ -70,13 +75,14 @@ public class JanEmprestarChave extends JPanel{
 	JTextField tlocal,tnome,tNumero, tEmpresa;
 	JTextField tmat;
 	List andarA,AndarB;
-	JPanel jp,jpessoa,jpchave,jpNumero;
+	JPanel jp,jpessoa,jpchave,jpNumero,jpAtalhos;
 	Vector<Integer> andaresa,andaresb;
 	JTable jtable;
 	HtmlParser parser;
 	ModeloTabela modeloTabela;
 	JButton btnEmprestar, btnNovoEmprestimo;
 	private static int ID = 6; // Magic number do id
+	private static int NUMERO = 0;
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
 		lmat = new JLabel("Matricula:");
@@ -129,25 +135,11 @@ public class JanEmprestarChave extends JPanel{
 				if(ctorre.getSelectedItem().equals("A")){
 					candar.setModel(new DefaultComboBoxModel(andaresa));
 					tlocal.setText("");
-					//andar = candar.getSelectedIndex();
-					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
-
-					modeloTabela = new ModeloTabela(c.selectByAndarEtorre(2, "A"));
-					modeloTabela.limpar();
-					modeloTabela.fireTableDataChanged();
-					jtable.setModel(modeloTabela);
-					*/
+				
 				}else if (ctorre.getSelectedItem().equals("B")){
 					candar.setModel(new DefaultComboBoxModel(andaresb));
 					tlocal.setText("");
-					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
-					modeloTabela = new ModeloTabela(c.selectByAndarEtorre(6, "B"));
-					modeloTabela.limpar();
-
-					modeloTabela.fireTableDataChanged();
-					jtable.setModel(modeloTabela);
-
-*/
+					
 				}
 				modeloTabela.fireTableDataChanged();
 				jtable.setModel(modeloTabela);
@@ -226,22 +218,6 @@ public class JanEmprestarChave extends JPanel{
 		jpchave.add(llocal);
 		tlocal = new JTextField();
 	
-		/*
-		 * JLabel jl = new JLabel("bob");
-		 
-		jl.setToolTipText("Label with image in Tooltip!");
-		URL urlImage=null;
-		try {
-			 urlImage = new URL("http://www.lsv.ens-cachan.fr/~sankur/java/first_files/tooltip.png");
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	    jl.setToolTipText("<html><img src=\"" + new ImageIcon(urlImage)
-	            + "\"> \nTooltip ");
-		jpchave.add(jl);
-		
-		*/
 		tlocal.addKeyListener(new KeyListener() {
 			
 			@Override
@@ -264,7 +240,16 @@ public class JanEmprestarChave extends JPanel{
 		});
 		jpchave.add(tlocal);
 		
+		jpAtalhos = new JPanel();
+		jpAtalhos.setBorder(BorderFactory.createTitledBorder("Atalhos"));
+		JButton btnPoolB = new JButton("Pool T. B terreo");
+		btnPoolB.addActionListener(new btnPoolBclicked());
+		JButton btnTA1sub = new JButton("T.A 1SS");
+		JButton btnTB1sub = new JButton("T.B 1SS");
 		
+		jpAtalhos.add(btnPoolB);
+		jpAtalhos.add(btnTA1sub);
+		jpAtalhos.add(btnTB1sub);
 		
 		jtable = new JTable(modeloTabela){
 			// PINTAR LINHAS
@@ -275,11 +260,11 @@ public class JanEmprestarChave extends JPanel{
 					if(getValueAt(row, 5).toString() == "verde"){
 						c.setBackground(Color.GREEN);
 					}
-				/*
-					if(row % 2 == 0 && !isCellSelected(row, col)){
+/*				
+					if(row % 2 == 0){ 					// && isCellSelected(row, col)){
 						c.setBackground(Color.CYAN);
 					}
-					*/
+	*/				
 						return c;
 				}
 
@@ -371,6 +356,7 @@ public class JanEmprestarChave extends JPanel{
 		jp.add(jpessoa);
 		jp.add(jpchave);
 		jp.add(jpNumero);
+		jp.add(jpAtalhos);
 
 		add(jp,BorderLayout.NORTH);
 		//add(jpNumero);
@@ -404,7 +390,7 @@ public class JanEmprestarChave extends JPanel{
 		
 	}
 	private void procurar(){
-		Controle c = new Controle();
+		//Controle c = new Controle();
 		modeloTabela = new ModeloTabela(tlocal.getText());
 		jtable.setModel(modeloTabela);
 		jtable.repaint();
@@ -417,6 +403,50 @@ public class JanEmprestarChave extends JPanel{
 	    }
 	    return intArray;
 	}
+	private class btnPoolBclicked implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			java.util.List<Integer> lnumeros = new ArrayList<>();
+			for(int i=401; i<=408;i++)
+				lnumeros.add(i);
+			for(int i=842; i<=848;i++)
+				lnumeros.add(i);
+			lnumeros.add(419);
+			Controle c = new Controle();
+			ctorre.setSelectedIndex(1); // Torre B
+			candar.setSelectedIndex(15); // Terreo
+			modeloTabela = new ModeloTabela(c.selectByAndarEtorre(0, "B"));
+			modeloTabela.fireTableChanged(null);
+			jtable.setModel(modeloTabela);
+		//	jtable.setRowSelectionInterval(5, 10);
+			jtable.setRowSelectionAllowed(true);
+			jtable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			//int i = jtable.getRowCount();
+			int contador=16;
+			
+			for(int i=0; i < jtable.getRowCount();i++){
+				int aux = (int)jtable.getValueAt(i, NUMERO );
+				System.out.println(aux);
+				
+				for(int j=0; j < lnumeros.size();j++){
+					if(contador != 0 && lnumeros.get(j) == aux){
+						jtable.getSelectionModel().addSelectionInterval(i, i);
+						contador--;
+					}
+				}
+			}
+			
+			
+		//	TableRow row =  jtable.getrow
+			
+			tNumero.setText(lnumeros.toString());
+			/*while(lnumeros.iterator().hasNext()){
+				tNumero
+			}
+			*/
+		}
+		
+	}
 
 }

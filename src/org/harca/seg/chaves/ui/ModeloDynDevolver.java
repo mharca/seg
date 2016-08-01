@@ -27,8 +27,9 @@ public class ModeloDynDevolver extends ModeloDevolverTabela{
 	}
 	@Override
 	public int getRowCount(){
-		
-		return lista.size();
+	//	if(lista.size() > 0)
+			return lista.size();
+		//return 10;
 	}
 	
 	@Override

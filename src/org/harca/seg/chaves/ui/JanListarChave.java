@@ -57,6 +57,7 @@ public class JanListarChave extends JPanel {
 		
 		JPopupMenu popmenu = new JPopupMenu();
 		JMenuItem menuHistoricoPessoa = new JMenuItem("Historico da pessoa");
+		
 		menuHistoricoPessoa.addActionListener(new ActionListener() {
 			
 			@Override
@@ -83,7 +84,11 @@ public class JanListarChave extends JPanel {
 		jtable = new JTable(modelo);
 		
 		jtable.setComponentPopupMenu(popmenu);
-		
+		jtable.getColumnModel().getColumn(0).setMinWidth(300);
+		jtable.getColumnModel().getColumn(1).setMaxWidth(40);
+		jtable.getColumnModel().getColumn(2).setMinWidth(300);
+		jtable.getColumnModel().getColumn(3).setMaxWidth(40);
+		jtable.getColumnModel().getColumn(4).setMaxWidth(40);
 		jsp = new JScrollPane(jtable);
 		
 		add(jsp,BorderLayout.CENTER);
