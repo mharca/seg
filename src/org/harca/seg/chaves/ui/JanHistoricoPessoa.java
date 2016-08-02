@@ -25,8 +25,9 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.poi.ss.formula.functions.Code;
-import org.apache.xmlbeans.impl.jam.annotation.DefaultAnnotationProxy;
+//import org.apache.xmlbeans.impl.jam.annotation.DefaultAnnotationProxy;
 import org.harca.seg.chaves.control.Controle;
+import org.harca.seg.util.Foto;
 import org.harca.seg.util.HtmlParser;
 
 public class JanHistoricoPessoa extends JFrame{
@@ -53,8 +54,8 @@ public class JanHistoricoPessoa extends JFrame{
 					@Override
 					public void run() {
 					
-					//	tEmpr.setText(getEmpresa(matAux));
-						tEmpr.setText("TESTE");
+						tEmpr.setText(getEmpresa(matAux));
+						//tEmpr.setText("TESTE");
 					}
 				});
 				t.run();
@@ -65,38 +66,10 @@ public class JanHistoricoPessoa extends JFrame{
 		pdados.add(lEmpr); pdados.add(tEmpr);
 		
 		JPanel pFoto = new JPanel();
-			lFoto = new JLabel();
-			String fotoUrl="http://static.batanga.com.br/sites/default/files/bozo_cc_div.jpg";
-			//String fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+mat+".jpg";
-			try{
-				URL url = new URL(fotoUrl);
-				BufferedImage image = ImageIO.read(url);
-				ImageIcon iicon = new ImageIcon(image);
-				Image bimage = iicon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
-				
-				lFoto.setIcon(new ImageIcon(bimage));
-			}catch(Exception e){
-				try{
-					String fotoUrl2 = "http://spme.petrobras.com.br/fotos/"+mat+".jpg";
-					URL url2 = new URL(fotoUrl2);
-					BufferedImage image2 = ImageIO.read(url2);
-					ImageIcon iicon2 = new ImageIcon(image2);
-					Image bimage2 = iicon2.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
-					lFoto.setIcon(new ImageIcon(bimage2));
-				}catch(Exception e2){
-					System.out.println("Sem foto");
-					try{
-						ImageIcon iicon3 = new ImageIcon("sem-foto.jpg");
-						Image bimage3 = iicon3.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
-						lFoto.setIcon(new ImageIcon(bimage3));
-					}catch(Exception e3){
-						System.out.println("Erro bizarro");
-					}
-				}
-			
-			}
-			pFoto.add(lFoto);
-			pFoto.setBorder(BorderFactory.createTitledBorder("Foto"));
+			Foto foto = new Foto(mat);
+			pFoto.add(foto);
+			//pFoto.add(lFoto);
+			//pFoto.setBorder(BorderFactory.createTitledBorder("Foto"));
 		
 		JPanel pcima = new JPanel(new GridLayout(1,2));
 		pcima.add(pFoto);
