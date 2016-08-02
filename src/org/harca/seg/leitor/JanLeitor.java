@@ -90,7 +90,7 @@ public class JanLeitor extends JPanel{
 					case 1: return "scdc";
 					case 2: return "Nome";
 				}
-				
+				fireTableDataChanged();
 				return null;
 			}
 			@Override
