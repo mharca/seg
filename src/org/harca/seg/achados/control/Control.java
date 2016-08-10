@@ -111,6 +111,10 @@ public class Control {
 		
 		return  sql.getCountDoMes(Calendar.getInstance().get(Calendar.MONTH)) ;
 	}
+	public int getNextId(){
+		Sql sql = new Sql();
+		return sql.getNextId();
+	}
 	
 //	public String getFotoByMatriculaChave(String mat){
 //		return "http://apl.ti.petrobras.com.br/fotos/0"+mat+".jpg";

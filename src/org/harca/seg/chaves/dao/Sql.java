@@ -34,8 +34,8 @@ import org.harca.seg.util.*;
 			    
 		}
 		
-		public void inserirEmprestimo(int key_id, int matricula, String nome){
-			query = "INSERT INTO pessoa(matricula, nome) VALUES(?,?);";
+		public void inserirEmprestimo(int key_id, int matricula, String nome, String empresa){
+			query = "INSERT INTO pessoa(matricula, nome, empresa) VALUES(?,?,?);";
 			//query = "INSERT INTO chave (numero,setor,localizacao,cor,torre,andar) VALUES(?,?,?,?,?,?)";
 			//System.out.println("----------------"+key.getNumero()+" - "+key.getLocalizacao());
 			int id_pessoa=0;
@@ -44,7 +44,8 @@ import org.harca.seg.util.*;
 				stmt = c.prepareStatement(query);
 				stmt.setInt(1, matricula);
 				stmt.setString(2, nome);
-
+				stmt.setString(3, empresa);
+				
 				stmt.execute();
 				stmt.close();
 			}catch(SQLException e){ // JA EXISTE NO CADASTRO
@@ -62,7 +63,7 @@ import org.harca.seg.util.*;
 						id_pessoa = rs.getInt(1);
 					
 					}
-					//stmt.close();
+					stmt.close();
 					//c.commit();
 					
 				}catch(Exception ex){
@@ -92,9 +93,9 @@ import org.harca.seg.util.*;
 				
 				
 				
-				//stmt.close();
+				stmt.close();
 				//c.commit();
-				c.close();
+				//c.close();
 			}catch(SQLException e){ 
 				e.printStackTrace();
 				System.out.print("fudeu");
@@ -127,6 +128,28 @@ import org.harca.seg.util.*;
 				
 			}
 		}
+		
+		
+		public String getEmpresa(String mat){
+			try{
+				stmt = c.prepareStatement("SELECT empresa FROM pessoa WHERE matricula='"+mat+"';");
+				ResultSet rs = stmt.executeQuery();
+				
+				//ResultSet rsAux = rs;
+				//rs.close();
+				//stmt.close();
+				String aux = rs.getString("empresa");
+				stmt.close();
+				return aux;
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				
+			}
+			
+			return "Empresa nao encontrada";
+		}
+		
 		
 		public List<Key> select(String query){
 			List<Key> listaChaves = new ArrayList<Key>();
@@ -170,7 +193,7 @@ import org.harca.seg.util.*;
 			
 		}
 		public List<Key> selectByWord(String palavra){
-			query = "SELECT * FROM chave WHERE localizacao LIKE '%"+palavra+"%'";
+			query = "SELECT * FROM chave WHERE localizacao LIKE '%"+palavra+"%' OR numero LIKE '%"+palavra+"%'";
 			return select(query);
 			
 		}
@@ -204,6 +227,7 @@ import org.harca.seg.util.*;
 					
 					ls.add(lista);
 				}
+				stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -246,7 +270,9 @@ import org.harca.seg.util.*;
 					//System.out.println("ID -->"+Integer.toString(rs.getInt(9)));
 					
 					ls.add(lista);
+					//stmt.close();
 				}
+				stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -284,7 +310,9 @@ import org.harca.seg.util.*;
 					//System.out.println("ID -->"+Integer.toString(rs.getInt(9)));
 					
 					ls.add(lista);
+					
 				}
+				stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -305,15 +333,31 @@ import org.harca.seg.util.*;
 			// PEGAR ID
 			String query = "UPDATE emprestimoKey SET horaDevolveu='"+horaDevolveu+"',dataDevolveu='"+dataDevolveu+"' WHERE id="+id+";";
 			try{
+					//stmt.close();
 					stmt = c.prepareStatement(query);
-					stmt.execute();
+					try{
+						
+					//	if(!stmt.isClosed())
+						//	stmt.close();
+						stmt.execute();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 					
-					stmt.close();
+				
 					//c.commit();
 					//c.close();
 					
 			}catch(Exception e){
 				e.printStackTrace();
+				
+			}finally{
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		}

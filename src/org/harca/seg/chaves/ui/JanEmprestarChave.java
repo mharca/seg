@@ -252,7 +252,7 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		
-		jpAtalhos = new JPanel(new GridLayout(4,6));
+		jpAtalhos = new JPanel(new GridLayout(2,2));
 		jpAtalhos.setBorder(BorderFactory.createTitledBorder("Atalhos"));
 		JButton btnPoolB = new JButton("Pool Torre B terreo");
 		btnPoolB.addActionListener(new btnPoolBclicked());
@@ -342,11 +342,11 @@ public class JanEmprestarChave extends JPanel{
 				
 				int[] rows = jtable.getSelectedRows();
 
-				if(tmat.getText().isEmpty())
-					JOptionPane.showMessageDialog(null, "Erro, sem matricula");
+				if(tmat.getText().isEmpty() || tnome.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Erro, sem matricula ou nome");
 				else
 					for (int i:rows)
-						c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
+						c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText(),tEmpresa.getText());
 					
 			}
 		});
@@ -375,7 +375,7 @@ public class JanEmprestarChave extends JPanel{
 		JPanel jpPessoaEfoto = new JPanel();
 		jpPessoaEfoto.add(jpessoa);
 		
-		jpPessoaEfoto.add(fotoTemp);
+		//jpPessoaEfoto.add(fotoTemp);
 		jpPessoaEfoto.setLayout(new GridLayout(1,2));
 		//jpPessoaEfoto.setBorder(BorderFactory.createTitledBorder("Pessoa e foto"));
 		jpPessoaEfoto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -401,8 +401,12 @@ public class JanEmprestarChave extends JPanel{
 				tnome.setBackground(Color.RED);
 				tnome.setText("Buscando nome");
 				
+				tEmpresa.setBackground(Color.RED);
+				tEmpresa.setText("Buscando empresa");
+				
 				
 				if(tmat.getText().length()!=0){
+					try{
 					parser = new HtmlParser(tmat.getText());
 					
 					
@@ -411,10 +415,26 @@ public class JanEmprestarChave extends JPanel{
 																	
 								s = parser.getEmpresa();
 								tEmpresa.setText(s);
+								
+					}catch(Exception e){
+						tnome.setText("MATRICULA NAO ENCONTRADA, MODO MANUAL");
+						for(int i=0; i < 200; i++){
 							
+							tnome.setBackground(Color.WHITE);
+							tnome.setBackground(Color.YELLOW);
+							
+						}
+					//	tnome.setText("");
+						tnome.setEditable(true);
+						tnome.selectAll();
+						
+						tnome.setBackground(Color.YELLOW);
+						tEmpresa.setEditable(true);
+						tEmpresa.setText("");
+					}
 					
-					
-					
+					//tEmpresa.setText("");
+					tEmpresa.setBackground(Color.WHITE);
 					tnome.setBackground(Color.WHITE);
 				}
 		

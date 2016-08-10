@@ -75,7 +75,7 @@ public class CriaWord {
 				range.replaceText("%dataRet%", dateFormat.format(data));
 				
 				
-		        FileOutputStream fos = new FileOutputStream("document2.doc");
+		        FileOutputStream fos = new FileOutputStream("Arquivos/document2.doc");
 		        doc.write(fos);
 
 		        File arquivo = new File("Arquivos/document2.doc");

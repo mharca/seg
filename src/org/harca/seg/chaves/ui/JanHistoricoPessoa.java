@@ -96,7 +96,12 @@ public class JanHistoricoPessoa extends JFrame{
 	}
 	private String getEmpresa(String mat){
 		final String matAux = mat;
+		/*
 		parser = new HtmlParser(matAux);
 		return parser.getEmpresa();
+		
+		*/
+		Controle c = new Controle();
+		return c.getEmpresa(mat);
 	}
 }

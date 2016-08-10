@@ -1,5 +1,6 @@
 package org.harca.seg.achados.ui;
 import org.harca.seg.achados.control.*;
+import org.harca.seg.util.Foto;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,6 +18,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.FlowLayout;
 
 import javax.swing.border.EtchedBorder;
 
@@ -39,6 +41,7 @@ import java.awt.image.BufferedImage;
 public class JanCadastro extends JPanel{
 	private JTextField tipoObjeto;
 	private JTextField local;
+	private JFormattedTextField letraEscaninho;
 	private JTextField matriculaTexto;
 	private JTextField nomeLocalizou;
 	private JTextField isiChave;
@@ -197,8 +200,9 @@ public class JanCadastro extends JPanel{
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
-			
+			String aux;
 			public void actionPerformed(ActionEvent arg0) {
+				
 				List<String> lista = new ArrayList<>();
 				
 				lista.add(tipoObjeto.getText());
@@ -215,7 +219,11 @@ public class JanCadastro extends JPanel{
 				lista.add(dataRecebido.getText());
 				lista.add(horaRecebido.getText());
 				
-				lista.add(escaninho.getText());
+				
+				aux = escaninho.getText()+letraEscaninho.getText();
+				
+//				lista.add(escaninho.getText());
+				lista.add(aux);
 				
 				int aux = 0;
 				for (String s : lista){
@@ -223,14 +231,20 @@ public class JanCadastro extends JPanel{
 						aux = 1;
 						break;
 					}else{
-						limpar();
+						//limpar();
 					}
 				}
+				
 					if(aux == 1){ // campo vazio ok
 						JOptionPane.showMessageDialog(null, "Erro. Campo(s) vazios");
-					}else{							
+					}else{			
+						if(letraEscaninho.getText().isEmpty())
+							JOptionPane.showMessageDialog(null, "Informe a letra do escaninho");
+						else{
 							Control control = new Control();
 							control.cadastrar(lista);
+							limpar();
+						}
 					}
 				
 			}
@@ -243,8 +257,26 @@ public class JanCadastro extends JPanel{
 		add(lblEswcaninho);
 		
 		escaninho = new JTextField();
+		escaninho.setEditable(false);
 		escaninho.setBounds(93, 422, 65, 20);
+		
+		letraEscaninho = new JFormattedTextField();
+		
+	/*	try{
+			MaskFormatter mf4 = new MaskFormatter("U");
+			mf4.install(letraEscaninho);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		*/
+		letraEscaninho.setText(letraEscaninho.getText().toUpperCase());
+		letraEscaninho.setBounds(224,422,50,20);
+		Control control = new Control();
+		escaninho.setText(Integer.toString(control.getNextId()));
+		
 		add(escaninho);
+		add(letraEscaninho);
+		
 		escaninho.setColumns(10);
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 12, 314, 89);
@@ -272,9 +304,9 @@ public class JanCadastro extends JPanel{
 		nomeLocalizou.setEditable(false);
 		
 		final JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	//	panel_4.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBounds(337, 17, 274, 426);
-		add(panel_4);
+		
 		panel_4.setLayout(null);
 		
 		final JPanel panel_3 = new JPanel(new GridLayout());
@@ -310,7 +342,7 @@ public class JanCadastro extends JPanel{
 										String fotoErro = "semfoto.jpg";
 										//BufferedImage image = ImageIO.read(fotoUrl);
 										
-							
+							/*
 										ImageIcon imageIcon = new ImageIcon("semfoto.jpg");
 											try{
 												String aux = new String(matriculaTexto.getText());
@@ -327,21 +359,25 @@ public class JanCadastro extends JPanel{
 										
 											panel_3.add(lblNewLabel);
 											System.out.println("foto resize");
-										//	panel_3.setBounds(5, 16, 264, 406);
-											
-
-											
-
-											
+											panel_3.setBounds(5, 16, 264, 406);
+										
+											*/
+										Foto foto = new Foto(matriculaTexto.getText());
+										panel_3.add(foto);
 									}catch(Exception e){
 										e.printStackTrace();
 									}
+									panel_3.setLayout(new FlowLayout());
+									panel_3.revalidate();
 									panel_4.add(panel_3);
-								//	panel_4.repaint();
 									
+								//	panel_4.repaint();
+								//	panel_3.repaint();
+									//panel_4.add(foto);
+									add(panel_4);
 								}catch(Exception e){
 									nomeLocalizou.setText("");
-									JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel buscar o nome\nEdite o nome manualmente.");
+									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome\nEdite o nome manualmente.");
 									nomeLocalizou.setEditable(true);
 									nomeLocalizou.setBackground(Color.WHITE);
 									nomeLocalizou.selectAll();
@@ -352,6 +388,7 @@ public class JanCadastro extends JPanel{
 						});
 						t.start();
 						
+						
 			repaint();
 					
 				}
@@ -359,6 +396,10 @@ public class JanCadastro extends JPanel{
 		});
 		btnVerificar.setBounds(213, 21, 91, 23);
 		panel_1.add(btnVerificar);
+		
+		JLabel lblLetra = new JLabel("Letra:");
+		lblLetra.setBounds(181, 424, 46, 14);
+		add(lblLetra);
 		
 		
 		
