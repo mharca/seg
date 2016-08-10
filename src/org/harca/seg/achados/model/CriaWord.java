@@ -11,9 +11,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.model.io.HWPFFileSystem;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.harca.seg.util.*;
 
 import org.harca.seg.achados.control.Control;
@@ -73,8 +75,9 @@ public class CriaWord {
 				dateFormat.format(data);
 				
 				range.replaceText("%dataRet%", dateFormat.format(data));
-				
-				
+			//	   XWPFParagraph paragraph = doc.createParagraph();
+			//	XWPFRun paragrafo = doc.
+				//range.getParagraph(10).getFontAlignment();
 		        FileOutputStream fos = new FileOutputStream("Arquivos/document2.doc");
 		        doc.write(fos);
 

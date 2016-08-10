@@ -88,6 +88,7 @@ public class JanEmprestarChave extends JPanel{
 	private static int NUMERO = 0;
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
+	//	setLayout(new FlowLayout());
 		lmat = new JLabel("Matricula:");
 		lnome = new JLabel("Nome:");
 		lempresa = new JLabel("Empresa:");

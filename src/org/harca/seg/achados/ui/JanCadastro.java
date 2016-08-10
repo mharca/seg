@@ -81,7 +81,7 @@ public class JanCadastro extends JPanel{
 		panel.add(tipoObjeto);
 		tipoObjeto.setColumns(10);
 		
-		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o:");
+		JLabel lblDescrio = new JLabel("Descrição:");
 		lblDescrio.setBounds(10, 53, 86, 14);
 		panel.add(lblDescrio);
 		
@@ -362,7 +362,7 @@ public class JanCadastro extends JPanel{
 											panel_3.setBounds(5, 16, 264, 406);
 										
 											*/
-										Foto foto = new Foto(matriculaTexto.getText());
+										Foto foto = new Foto(matriculaTexto.getText(),250,300);
 										panel_3.add(foto);
 									}catch(Exception e){
 										e.printStackTrace();

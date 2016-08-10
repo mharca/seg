@@ -225,8 +225,10 @@ public class JanMain extends JFrame{
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 				if( node.getParent().toString() == "Chaves"){ 
 						setTitle("Chaves");
-						if (node.getUserObject() == "Emprestar")
+						if (node.getUserObject() == "Emprestar"){
+						//	splitPane.setEnabled(false);
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanEmprestarChave());
+						}
 						else if (node.getUserObject() == "Devolver")
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanDevolverChave());
 						else if (node.getUserObject() == "Listar")
@@ -304,6 +306,8 @@ public class JanMain extends JFrame{
 		jspDir.add(jp);
 		jspDir.setViewportView(jp);
 		splitPane.setRightComponent( jspDir);
+		
+		//splitPane.setEnabled(false);
 		setVisible(true);
 	}
 	

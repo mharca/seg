@@ -7,6 +7,7 @@ import javax.swing.border.TitledBorder;
 //import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
 import org.harca.seg.achados.control.Control;
+import org.harca.seg.util.Foto;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,7 +36,7 @@ public class JanDevolver extends JFrame{
 	Control c;
 	
 	public JanDevolver(final List<String>lista) {
-		setTitle("Devolu\u00E7\u00E3o");
+		setTitle("Devolução");
 		this.setSize(410, 680);
 		 setLocationRelativeTo(null);
 
@@ -44,12 +45,12 @@ public class JanDevolver extends JFrame{
 		
 		c = new Control();
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Registrar devoluï¿½ï¿½o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(null, "Registrar devolução", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 11, 370, 67);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblMatrcula = new JLabel("Matr\u00EDcula ou chave:");
+		JLabel lblMatrcula = new JLabel("Matrícula:");
 		lblMatrcula.setBounds(10, 30, 134, 14);
 		panel_1.add(lblMatrcula);
 		
@@ -59,7 +60,7 @@ public class JanDevolver extends JFrame{
 		matriculaTexto.setColumns(10);
 		
 		panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		
 		
@@ -88,7 +89,7 @@ public class JanDevolver extends JFrame{
 		
 		getContentPane().add(panel_2);
 		
-		panel_2.setLayout(null);
+	//	panel_2.setLayout(null);
 		
 		
 		verificarBotao.setBounds(272, 26, 88, 23);
@@ -96,7 +97,7 @@ public class JanDevolver extends JFrame{
 		
 		
 		
-		JButton confirmarDevolucaoBotao = new JButton("Confirmar devolu\u00E7\u00E3o");
+		JButton confirmarDevolucaoBotao = new JButton("Confirmar devolução");
 		confirmarDevolucaoBotao.setBounds(129, 605, 185, 23);
 		getContentPane().add(confirmarDevolucaoBotao);
 		confirmarDevolucaoBotao.addActionListener(new ActionListener(){
@@ -155,7 +156,7 @@ public class JanDevolver extends JFrame{
 		textField.setColumns(10);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(null, "Descriï¿½ï¿½o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setBorder(new TitledBorder(null, "Descrição", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBounds(4, 34, 340, 122);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
@@ -174,9 +175,9 @@ public class JanDevolver extends JFrame{
 			
 			matriculaTexto.setBackground(Color.RED);
 			matriculaTexto.setText("Buscando na petronet...");
-			
+		/*	
 			if(stringAux.length() == 0){
-				JOptionPane.showMessageDialog(null, "Campo matrï¿½cula ou chave estï¿½ vazio.");
+				JOptionPane.showMessageDialog(null, "Campo matrícula ou chave está vazio.");
 			}
 			else if(stringAux.length() > 5){ // matricula, maior que 5 chars.
 				fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+stringAux+".jpg";
@@ -186,24 +187,30 @@ public class JanDevolver extends JFrame{
 					fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+c.getMatriculaByChave(stringAux)+".jpg";
 					
 					}
-			
+			*/
 			matriculaTexto.setBackground(Color.WHITE);
 			matriculaTexto.setText(stringAux);
 			
 			
-			System.out.println(fotoUrl); // debug
+			System.out.println(stringAux); // debug
 			try{
 													
-				URL url = new URL(fotoUrl);
-				BufferedImage image = ImageIO.read(url);
+				//URL url = new URL(fotoUrl);
+				//BufferedImage image = ImageIO.read(url);
 				
-				labelImagem = new JLabel(new ImageIcon(image));
-				labelImagem.setBounds(10, 21, 350, 283);
+			//	labelImagem = new JLabel(new ImageIcon(image));
+				Foto foto = new Foto(stringAux,300,300);
+				
+			//	labelImagem.setBounds(10, 21, 350, 283);
 				panel_2.setBounds(10, 279, 370, 315);
-				panel_2.add(labelImagem);
+				//panel_2.add(labelImagem);
+				foto.revalidate();
+				panel_2.add(foto);
+				panel_2.revalidate();
 				getContentPane().add(panel_2);
-				
+			
 				System.out.println("OK");
+				
 			}catch(Exception e ){
 				labelImagem = new JLabel("Sem foto");
 				labelImagem.setBounds(10, 21, 350, 283);
@@ -215,11 +222,11 @@ public class JanDevolver extends JFrame{
 				
 				e.printStackTrace();
 			}
-	
-			//getContentPane().add(panel_2);
+			panel_2.revalidate();
+			getContentPane().add(panel_2);
 			
-			panel_2.setBounds(10, 279, 370, 315);
-			panel_2.add(labelImagem);
+		//	panel_2.setBounds(10, 279, 370, 315);
+		//	panel_2.add(labelImagem);
 			
 					
 				

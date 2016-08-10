@@ -10,9 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.apache.log4j.lf5.LF5Appender;
+//import org.apache.log4j.lf5.LF5Appender;
 
 public class Foto extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JLabel lFoto;
 	public Foto(String mat){
 		lFoto = new JLabel();
@@ -50,6 +54,7 @@ public class Foto extends JPanel {
 	}
 	public Foto(String mat,int x, int y){
 		lFoto = new JLabel();
+		this.setBorder(BorderFactory.createTitledBorder("Foto"));
 	//	this.setBorder(BorderFactory.createTitledBorder("Foto"));
 		//String fotoUrl="http://static.batanga.com.br/sites/default/files/bozo_cc_div.jpg";
 		String fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+mat+".jpg";
