@@ -69,6 +69,7 @@ public class CriaWord {
 		        
 		        range.replaceText("%e%", lista.get(0).get(10));
 		        
+		        range.replaceText("%doar%", "______");
 		        
 		        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				Date data = new Date();
