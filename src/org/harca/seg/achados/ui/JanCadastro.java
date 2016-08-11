@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.border.LineBorder;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
@@ -307,11 +308,11 @@ public class JanCadastro extends JPanel{
 	//	panel_4.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBounds(337, 17, 274, 426);
 		
-		panel_4.setLayout(null);
+	panel_4.setLayout(null);
 		
-		final JPanel panel_3 = new JPanel(new GridLayout());
-		panel_3.setBounds(5, 16, 264, 405);
-		panel_4.add(panel_3);
+	//	final JPanel panel_3 = new JPanel(new GridLayout());
+	//	panel_3.setBounds(5, 16, 264, 405);
+	//	panel_4.add(panel_3);
 		
 		JButton btnVerificar = new JButton("Verificar");
 		btnVerificar.addActionListener(new ActionListener() {
@@ -329,52 +330,29 @@ public class JanCadastro extends JPanel{
 									
 									nomeLocalizou.setText(nome);
 									nomeLocalizou.setBackground(Color.WHITE);
-									
-									
+		
+								
 									JLabel lblNewLabel;
 									lblNewLabel	 = new JLabel(new ImageIcon("semfoto.jpg"));
-									
 									try{
 										
 										Thread t = new Thread();
-										//URL fotoUrl = new URL("foto.jpg");
 										String fotoUrl = "foto.jpg";
 										String fotoErro = "semfoto.jpg";
-										//BufferedImage image = ImageIO.read(fotoUrl);
-										
-							/*
-										ImageIcon imageIcon = new ImageIcon("semfoto.jpg");
-											try{
-												String aux = new String(matriculaTexto.getText());
-												URL url = new URL(new Control().getFotoByMatriculaChave(aux));
-																			
-												imageIcon = new ImageIcon(ImageIO.read(url));
-											
-											}catch(Exception e){
-												imageIcon = new ImageIcon("semfoto.jpg");
-											}
-										
-										lblNewLabel	 = new JLabel(imageIcon);
-													
-										
-											panel_3.add(lblNewLabel);
-											System.out.println("foto resize");
-											panel_3.setBounds(5, 16, 264, 406);
-										
-											*/
+										JPanel panel_3 = new JPanel(new GridLayout());
+										panel_3.setBounds(5, 16, 264, 405);
 										Foto foto = new Foto(matriculaTexto.getText(),250,300);
-										panel_3.add(foto);
+										panel_3.add(foto,BorderLayout.CENTER);
+										
+										panel_4.add(panel_3,BorderLayout.CENTER);
+										panel_4.revalidate();
+										
+										panel_3.revalidate();
 									}catch(Exception e){
 										e.printStackTrace();
 									}
-									panel_3.setLayout(new FlowLayout());
-									panel_3.revalidate();
-									panel_4.add(panel_3);
-									
-								//	panel_4.repaint();
-								//	panel_3.repaint();
-									//panel_4.add(foto);
 									add(panel_4);
+									
 								}catch(Exception e){
 									nomeLocalizou.setText("");
 									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome\nEdite o nome manualmente.");
@@ -386,10 +364,9 @@ public class JanCadastro extends JPanel{
 								
 							}
 						});
+										
 						t.start();
-						
-						
-			repaint();
+						repaint();
 					
 				}
 			
