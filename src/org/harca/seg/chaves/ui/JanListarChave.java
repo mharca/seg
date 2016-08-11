@@ -2,13 +2,17 @@ package org.harca.seg.chaves.ui;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 
 import org.harca.seg.chaves.control.Controle;
 
@@ -28,9 +32,18 @@ public class JanListarChave extends JPanel {
 		JPanel panel = new JPanel();
 		
 		
+		
 		JButton btnHoje = new JButton("Hoje");
 		panel.add(btnHoje);
 		
+		btnHoje.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//new JanHistoricoPessoa();
+				
+			}
+		});
 		JButton btnTodos = new JButton("Todos");
 		panel.add(btnTodos);
 		add(panel, BorderLayout.NORTH);
@@ -42,9 +55,40 @@ public class JanListarChave extends JPanel {
 		lista = c.selectEmprestados();
 		ModeloDynDevolver modelo = new ModeloDynDevolver(colunas,lista);
 		
-	
+		JPopupMenu popmenu = new JPopupMenu();
+		JMenuItem menuHistoricoPessoa = new JMenuItem("Historico da pessoa");
+		
+		menuHistoricoPessoa.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String nome = jtable.getValueAt(jtable.getSelectedRow(), 0).toString();
+				String matricula = jtable.getValueAt(jtable.getSelectedRow(), 5).toString();
+				final String n = nome;
+				final String m = matricula;
+				Thread t = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						new JanHistoricoPessoa(n,m);		
+					}
+				});
+				t.run();
+				
+			}
+		});
+		popmenu.add(menuHistoricoPessoa);
+		
 		//modelo.addLista(lista);
 		jtable = new JTable(modelo);
+		
+		jtable.setComponentPopupMenu(popmenu);
+		jtable.getColumnModel().getColumn(0).setMinWidth(300);
+		jtable.getColumnModel().getColumn(1).setMaxWidth(40);
+		jtable.getColumnModel().getColumn(2).setMinWidth(300);
+		jtable.getColumnModel().getColumn(3).setMaxWidth(40);
+		jtable.getColumnModel().getColumn(4).setMaxWidth(40);
 		jsp = new JScrollPane(jtable);
 		
 		add(jsp,BorderLayout.CENTER);

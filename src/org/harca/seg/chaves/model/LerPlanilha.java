@@ -73,7 +73,7 @@ public class LerPlanilha {
 											aux="amarelo";
 										
 										key.setCor(aux);
-										key.setAndar(Integer.toString(i));
+										key.setAndar(Integer.toString(i-1));
 										key.setTorre(torre);
 										System.out.println("KKKKKKKK"+key.getNumero()+"/"+key.getLocalizacao()+"/"+key.getTorre());
 										sql.inserir(key);

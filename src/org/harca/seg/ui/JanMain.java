@@ -114,7 +114,7 @@ public class JanMain extends JFrame{
 		mnTemas.add(mntmMotif);
 		
 		 jtoolbar = new JToolBar();
-		 jtoolbar.add(new JLabel("Buscar chave/matricula: "));
+		 jtoolbar.add(new JLabel("Buscar nome/chave/matricula: "));
 
 		 	tbusca = new JTextField();
 		 	tbusca.addActionListener(new ActionListener() {
@@ -225,8 +225,10 @@ public class JanMain extends JFrame{
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 				if( node.getParent().toString() == "Chaves"){ 
 						setTitle("Chaves");
-						if (node.getUserObject() == "Emprestar")
+						if (node.getUserObject() == "Emprestar"){
+						//	splitPane.setEnabled(false);
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanEmprestarChave());
+						}
 						else if (node.getUserObject() == "Devolver")
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanDevolverChave());
 						else if (node.getUserObject() == "Listar")
@@ -304,6 +306,8 @@ public class JanMain extends JFrame{
 		jspDir.add(jp);
 		jspDir.setViewportView(jp);
 		splitPane.setRightComponent( jspDir);
+		
+		//splitPane.setEnabled(false);
 		setVisible(true);
 	}
 	
@@ -313,7 +317,8 @@ public class JanMain extends JFrame{
 				if(Desktop.isDesktopSupported())
 				{
 				  try {
-					Desktop.getDesktop().browse(new URI("http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=dctm_landing_page_localizador_de_pessoas_a_petrobras&origem=buscalope&unico="+tbusca.getText()+"&locale=pt"));
+					  String busca = tbusca.getText().replace(" ", "%20");
+					Desktop.getDesktop().browse(new URI("http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=dctm_landing_page_localizador_de_pessoas_a_petrobras&origem=buscalope&unico="+busca+"&locale=pt"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

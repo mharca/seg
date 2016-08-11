@@ -34,8 +34,8 @@ import org.harca.seg.util.*;
 			    
 		}
 		
-		public void inserirEmprestimo(int key_id, int matricula, String nome){
-			query = "INSERT INTO pessoa(matricula, nome) VALUES(?,?);";
+		public void inserirEmprestimo(int key_id, int matricula, String nome, String empresa){
+			query = "INSERT INTO pessoa(matricula, nome, empresa) VALUES(?,?,?);";
 			//query = "INSERT INTO chave (numero,setor,localizacao,cor,torre,andar) VALUES(?,?,?,?,?,?)";
 			//System.out.println("----------------"+key.getNumero()+" - "+key.getLocalizacao());
 			int id_pessoa=0;
@@ -44,7 +44,8 @@ import org.harca.seg.util.*;
 				stmt = c.prepareStatement(query);
 				stmt.setInt(1, matricula);
 				stmt.setString(2, nome);
-
+				stmt.setString(3, empresa);
+				
 				stmt.execute();
 				stmt.close();
 			}catch(SQLException e){ // JA EXISTE NO CADASTRO
@@ -62,7 +63,7 @@ import org.harca.seg.util.*;
 						id_pessoa = rs.getInt(1);
 					
 					}
-					//stmt.close();
+					stmt.close();
 					//c.commit();
 					
 				}catch(Exception ex){
@@ -92,9 +93,9 @@ import org.harca.seg.util.*;
 				
 				
 				
-				//stmt.close();
+				stmt.close();
 				//c.commit();
-				c.close();
+				//c.close();
 			}catch(SQLException e){ 
 				e.printStackTrace();
 				System.out.print("fudeu");
@@ -127,6 +128,28 @@ import org.harca.seg.util.*;
 				
 			}
 		}
+		
+		
+		public String getEmpresa(String mat){
+			try{
+				stmt = c.prepareStatement("SELECT empresa FROM pessoa WHERE matricula='"+mat+"';");
+				ResultSet rs = stmt.executeQuery();
+				
+				//ResultSet rsAux = rs;
+				//rs.close();
+				//stmt.close();
+				String aux = rs.getString("empresa");
+				stmt.close();
+				return aux;
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				
+			}
+			
+			return "Empresa nao encontrada";
+		}
+		
 		
 		public List<Key> select(String query){
 			List<Key> listaChaves = new ArrayList<Key>();
@@ -170,7 +193,7 @@ import org.harca.seg.util.*;
 			
 		}
 		public List<Key> selectByWord(String palavra){
-			query = "SELECT * FROM chave WHERE localizacao LIKE '%"+palavra+"%'";
+			query = "SELECT * FROM chave WHERE localizacao LIKE '%"+palavra+"%' OR numero LIKE '%"+palavra+"%'";
 			return select(query);
 			
 		}
@@ -204,6 +227,7 @@ import org.harca.seg.util.*;
 					
 					ls.add(lista);
 				}
+				stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -246,12 +270,55 @@ import org.harca.seg.util.*;
 					//System.out.println("ID -->"+Integer.toString(rs.getInt(9)));
 					
 					ls.add(lista);
+					//stmt.close();
 				}
+				stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 			return ls;
 		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		public List<List<String>> selectEmprestadosNaoDevolvidos(){
+			String query = "select pessoa.nome,chave.numero,chave.localizacao,chave.andar,chave.torre, pessoa.matricula, horaEmprestou,dataEmprestou,emprestimoKey.id"+
+					" FROM emprestimoKey JOIN chave,pessoa ON key_id=chave.id AND pessoa_id=pessoa.id AND dataDevolveu is NULL;";
+			List <List<String>> ls = new ArrayList<>();
+			List <String>lista = new ArrayList<>();
+			try{
+				stmt = c.prepareStatement(query);
+				ResultSet rs = stmt.executeQuery();
+				//listaChaves.add(arg0)
+				int aux;
+				while(rs.next()){
+					lista= new ArrayList<>();
+					
+					lista.add(rs.getString(1)); // nome
+					aux = rs.getInt(2);  // numero
+					lista.add(Integer.toString(aux));
+					lista.add(rs.getString(3)); //localizacao
+					lista.add(rs.getString(4)); // andar
+					lista.add(rs.getString(5));// torre
+					
+					aux = rs.getInt(6);  // matricula
+					lista.add(Integer.toString(aux));
+				
+					lista.add(rs.getString(7)); // hora emp
+					System.out.println(rs.getString(8));
+					lista.add(rs.getString(8));
+					lista.add(Integer.toString(rs.getInt(9)));
+					//System.out.println("ID -->"+Integer.toString(rs.getInt(9)));
+					
+					ls.add(lista);
+					
+				}
+				stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return ls;
+		}
+		///////////////////////////////////////////////////////////////////////////////
 		public void devolverChave(int id){
 			
 			DateFormat horaFormat = new SimpleDateFormat("HH:mm");
@@ -266,17 +333,58 @@ import org.harca.seg.util.*;
 			// PEGAR ID
 			String query = "UPDATE emprestimoKey SET horaDevolveu='"+horaDevolveu+"',dataDevolveu='"+dataDevolveu+"' WHERE id="+id+";";
 			try{
+					//stmt.close();
 					stmt = c.prepareStatement(query);
-					stmt.execute();
+					try{
+						
+					//	if(!stmt.isClosed())
+						//	stmt.close();
+						stmt.execute();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 					
-					stmt.close();
+				
 					//c.commit();
 					//c.close();
 					
 			}catch(Exception e){
 				e.printStackTrace();
+				
+			}finally{
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
+		}
+		public List<List<String>> pegaHistoricoChaves(String matricula){
+			String query = "select chave.numero ,chave.localizacao,dataEmprestou, horaEmprestou,dataDevolveu,horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where pessoa.matricula='"+matricula+"'";
+			List<List<String>> l2 = new ArrayList<>();
+			try{
+				List<String> lista; //= new ArrayList();
+				
+				stmt = c.prepareStatement(query);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					lista = new ArrayList<>();
+					lista.add(Integer.toString(rs.getInt(1)));
+					for(int i=2;i<=6;i++ ){
+						lista.add(rs.getString(i));
+					}	
+					l2.add(lista);
+				}
+								
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			
+			
+			return l2;
 		}
 		
 }

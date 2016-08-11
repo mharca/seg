@@ -376,6 +376,18 @@ public void deletar(String id){
 	return lista2;
 }
 	
+public int getNextId(){
+	String query = "SELECT MAX(id) from achadoseperdidos";
+	try{
+		stmt = c.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		
+		return rs.getInt(1)+1;
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return 0;
+}
 		
 public List<List<String>> selectByMes(String data){
 		

@@ -1,6 +1,7 @@
 package org.harca.seg.garagem.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
@@ -68,8 +69,9 @@ public class JanGaragemListarTag extends JPanel{
 					}
 				});
 				
-			
+			t.run();
 		}
+			
 			});
 		
 		JButton btnApagar = new JButton("Apagar selecionados");
@@ -100,8 +102,11 @@ public class JanGaragemListarTag extends JPanel{
 				File fp = new File("Tag.xls");
 				
 				toExcel(table, fp);
-				
-				
+				try{
+					Desktop.getDesktop().open(fp);
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null, "Arquivo não pode ser aberto");
+				}
 			}
 		});
 		jpSul.add(btnApagar);
