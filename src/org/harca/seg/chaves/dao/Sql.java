@@ -361,7 +361,35 @@ import org.harca.seg.util.*;
 			}
 			
 		}
-		public List<List<String>> pegaHistoricoChaves(String matricula){
+		
+		
+		public List<List<String>> pegaHistoricoChaves(int id){
+			String query = "select pessoa.nome, pessoa.matricula, dataEmprestou, horaEmprestou, dataDevolveu, horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where chave.id="+id+";";
+			
+			List<List<String>> l2 = new ArrayList<>();
+			try{
+				List<String> lista;
+				
+				stmt = c.prepareStatement(query);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					lista = new ArrayList<>();
+					
+					for(int i = 1; i <= 6; i++)
+						lista.add(rs.getString(i));
+					
+					l2.add(lista);
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			return l2;
+		}
+		
+		
+		public List<List<String>> pegaHistoricoPessoa(String matricula){
 			String query = "select chave.numero ,chave.localizacao,dataEmprestou, horaEmprestou,dataDevolveu,horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where pessoa.matricula='"+matricula+"'";
 			List<List<String>> l2 = new ArrayList<>();
 			try{

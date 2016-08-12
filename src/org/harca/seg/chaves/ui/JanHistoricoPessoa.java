@@ -79,7 +79,7 @@ public class JanHistoricoPessoa extends JFrame{
 			final String[] colunas = {"Numero","Localizacao","Retirou/Dia", "Retirou/Hora", "Devolveu/Dia", "Devolveu/Hora"};
 			List<List<String>> lista= new ArrayList<>();
 			Controle c = new Controle();
-			lista = c.pegaHistoricoChaves(mat);
+			lista = c.pegaHistoricoPessoa(mat);
 			ModeloDynDevolver modelo = new ModeloDynDevolver(colunas, lista);
 			tabela = new JTable(modelo);
 		

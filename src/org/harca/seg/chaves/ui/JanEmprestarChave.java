@@ -1,10 +1,12 @@
 package org.harca.seg.chaves.ui;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.Component;
@@ -268,6 +270,8 @@ public class JanEmprestarChave extends JPanel{
 		jpAtalhos.add(btnTA1sub);
 		jpAtalhos.add(btnTB1sub);
 		
+		
+		
 		jtable = new JTable(modeloTabela){
 			// PINTAR LINHAS
 			
@@ -326,6 +330,28 @@ public class JanEmprestarChave extends JPanel{
 				
 			}
 		});
+		
+		
+
+		JPopupMenu popmenu = new JPopupMenu();
+		JMenuItem menuHistoricoChave = new JMenuItem("Historico da chave");
+		menuHistoricoChave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String Sid = jtable.getValueAt(jtable.getSelectedRow(), ID).toString();
+				int id = Integer.parseInt(Sid);
+				String num = jtable.getValueAt(jtable.getSelectedRow(), 0).toString();
+				String local = jtable.getValueAt(jtable.getSelectedRow(), 1).toString();
+				new JanHistoricoChave(id,local,num);
+				
+			}
+		});
+		
+		popmenu.add(menuHistoricoChave);
+		jtable.setComponentPopupMenu(popmenu);
+		
+		
 		JScrollPane jsp = new JScrollPane(jtable);
 		jsp.setViewportView(jtable);
 		//jsp.add(jtable);
