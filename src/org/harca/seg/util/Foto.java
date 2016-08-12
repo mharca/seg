@@ -22,7 +22,11 @@ public class Foto extends JPanel {
 		lFoto = new JLabel();
 		this.setBorder(BorderFactory.createTitledBorder("Foto"));
 		//String fotoUrl="http://static.batanga.com.br/sites/default/files/bozo_cc_div.jpg";
-		String fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+mat+".jpg";
+		String fotoUrl=null;
+		if(mat.length() == 7)
+			 fotoUrl = "http://apl.ti.petrobras.com.br/fotos/0"+mat+".jpg";
+		if(mat.length() < 7)
+			fotoUrl = "http://apl.ti.petrobras.com.br/fotos/00"+mat+".jpg";
 		try{
 			URL url = new URL(fotoUrl);
 			BufferedImage image = ImageIO.read(url);

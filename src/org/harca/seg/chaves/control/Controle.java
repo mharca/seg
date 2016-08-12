@@ -44,9 +44,14 @@ public class Controle {
 		Sql sql = new Sql();
 		return sql.getEmpresa(mat);
 	}
-	public List<List<String> > pegaHistoricoChaves(String matricula){
+	public List<List<String> > pegaHistoricoPessoa(String matricula){
 		Sql sql = new Sql();
-		return sql.pegaHistoricoChaves(matricula);
+		return sql.pegaHistoricoPessoa(matricula);
 	}
 	
+	public List<List<String> > pegaHistoricoChaves(int id){
+		Sql sql = new Sql();
+		return sql.pegaHistoricoChaves(id);
+	}
+
 }
