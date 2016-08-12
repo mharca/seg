@@ -22,7 +22,7 @@ public class JanHistoricoChave extends JFrame{
 	public JanHistoricoChave(int id, String local, String numero){
 		
 		setLayout(new BorderLayout());
-		setSize(800,600);
+		setSize(800,400);
 	//	add(new JLabel("ID "+id));
 		setLocationRelativeTo(null);
 		JPanel pLabels = new JPanel(new GridLayout(2,2));

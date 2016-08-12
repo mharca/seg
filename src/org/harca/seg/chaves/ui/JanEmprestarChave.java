@@ -405,7 +405,7 @@ public class JanEmprestarChave extends JPanel{
 		//jpPessoaEfoto.add(fotoTemp);
 		jpPessoaEfoto.setLayout(new GridLayout(1,2));
 		//jpPessoaEfoto.setBorder(BorderFactory.createTitledBorder("Pessoa e foto"));
-		jpPessoaEfoto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		//jpPessoaEfoto.setBorder(BorderFactory.createTitledBorder());
 		//jp.add(jpessoa);
 	//	jp.add(fotoTemp);
 		

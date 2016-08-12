@@ -129,7 +129,7 @@ import org.harca.seg.util.*;
 			}
 		}
 		
-		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public int getChaveIdByEmprestimoID(int id){
 			int i = 0;
 			try{
@@ -143,7 +143,7 @@ import org.harca.seg.util.*;
 		}
 		
 		
-		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public String getEmpresa(String mat){
 			try{
 				stmt = c.prepareStatement("SELECT empresa FROM pessoa WHERE matricula='"+mat+"';");
@@ -164,7 +164,7 @@ import org.harca.seg.util.*;
 			return "Empresa nao encontrada";
 		}
 		
-		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public List<Key> select(String query){
 			List<Key> listaChaves = new ArrayList<Key>();
 			Key key = new Key();
@@ -196,22 +196,25 @@ import org.harca.seg.util.*;
 			return listaChaves;
 			
 		}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public List<Key> selectByAndarEtorre(int andar, String torre){
 			query = ("SELECT * from chave WHERE andar='"+andar+"' AND torre='"+torre+"'");
 			
 			return select(query);
 		}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public List<Key> selectAll(){
 			query = "SELECT * FROM chave;";
 			return select(query);
 			
 		}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public List<Key> selectByWord(String palavra){
 			query = "SELECT * FROM chave WHERE localizacao LIKE '%"+palavra+"%' OR numero LIKE '%"+palavra+"%'";
 			return select(query);
 			
 		}
-		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public List<List<String>> selectGenerico(String query){
 			List <List<String>> ls = new ArrayList<>();
 			List <String>lista = new ArrayList<>();
@@ -338,45 +341,33 @@ import org.harca.seg.util.*;
 			DateFormat horaFormat = new SimpleDateFormat("HH:mm");
 			DateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date date = new Date();
-			
-			
+						
 			String horaDevolveu = horaFormat.format(date).toString();
 			String dataDevolveu = dataFormat.format(date).toString();
-			
-			System.out.println(horaDevolveu);
+						
 			// PEGAR ID
 			String query = "UPDATE emprestimoKey SET horaDevolveu='"+horaDevolveu+"',dataDevolveu='"+dataDevolveu+"' WHERE id="+id+";";
 			try{
 					//stmt.close();
+					PreparedStatement stmt;
 					stmt = c.prepareStatement(query);
-					try{
-						
-					//	if(!stmt.isClosed())
-						//	stmt.close();
-						stmt.execute();
-					}catch(Exception e){
-						e.printStackTrace();
-					}
-					
-				
+					stmt.executeUpdate();
+									
 					//c.commit();
 					//c.close();
+				//	stmt.close();	
 					
 			}catch(Exception e){
 				e.printStackTrace();
 				
 			}finally{
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
+				System.out.println("-----");
 			}
 			
 		}
 		
-		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public List<List<String>> pegaHistoricoChaves(int id){
 			String query = "select pessoa.nome, pessoa.matricula, dataEmprestou, horaEmprestou, dataDevolveu, horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where chave.id="+id+";";
 			
@@ -389,12 +380,13 @@ import org.harca.seg.util.*;
 				while(rs.next()){
 					lista = new ArrayList<>();
 					
-					for(int i = 1; i <= 6; i++)
+					for(int i = 1; i <= 6; i++){
 						lista.add(rs.getString(i));
+					}
 					
 					l2.add(lista);
 				}
-				
+			stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -402,7 +394,7 @@ import org.harca.seg.util.*;
 			return l2;
 		}
 		
-		
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		public List<List<String>> pegaHistoricoPessoa(String matricula){
 			String query = "select chave.numero ,chave.localizacao,dataEmprestou, horaEmprestou,dataDevolveu,horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where pessoa.matricula='"+matricula+"'";
 			List<List<String>> l2 = new ArrayList<>();
@@ -419,7 +411,7 @@ import org.harca.seg.util.*;
 					}	
 					l2.add(lista);
 				}
-								
+				stmt.close();				
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -429,4 +421,5 @@ import org.harca.seg.util.*;
 			return l2;
 		}
 		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

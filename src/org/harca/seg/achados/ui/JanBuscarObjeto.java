@@ -20,7 +20,7 @@ import org.harca.seg.achados.control.Control;
 
 public class JanBuscarObjeto extends JanBuscarGenerico{
 	JTextField textoObjeto;
-	Control control = new Control();
+	//Control control = new Control();
 
 	public JanBuscarObjeto(){
 		JPanel panel = new JPanel();
@@ -70,6 +70,7 @@ public class JanBuscarObjeto extends JanBuscarGenerico{
 	private void procurar(){
 		
 		try{
+			Control control = new Control();
 			List<List<String>> ls2 = control.selectByTipo(textoObjeto.getText()); 
 			ModeloTabela mt = new ModeloTabela(ls2.get(0));
 			

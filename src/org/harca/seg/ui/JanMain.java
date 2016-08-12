@@ -57,7 +57,7 @@ public class JanMain extends JFrame{
 		mnLerPlanilha.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("sdfsefsdfsdf");
+			//	System.out.println("sdfsefsdfsdf");
 				new JanLerPlanilha();
 				
 			}
@@ -89,8 +89,8 @@ public class JanMain extends JFrame{
 					for (LookAndFeelInfo manager : UIManager.getInstalledLookAndFeels()){
 						System.out.println(manager.getClassName());
 					}
-				//	UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-					UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+				//	UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 					//UIManager.setLookAndFeel(â€œcom.jtattoo.plaf.aluminium.AluminiumLookAndFeelâ€�);
 
 				} catch (ClassNotFoundException e1) {
@@ -114,7 +114,7 @@ public class JanMain extends JFrame{
 		mnTemas.add(mntmMotif);
 		
 		 jtoolbar = new JToolBar();
-		 jtoolbar.add(new JLabel("Buscar nome/chave/matricula: "));
+		 jtoolbar.add(new JLabel("Buscar nome/ramal/chave/matricula: "));
 
 		 	tbusca = new JTextField();
 		 	tbusca.addActionListener(new ActionListener() {
@@ -125,6 +125,7 @@ public class JanMain extends JFrame{
 					
 				}
 			});
+		 //	jtoolbar.setLayout(new BorderLayout());
 		 	jtoolbar.add(tbusca);
 		 bbuscar = new JButton("Buscar");
 		 bbuscar.addActionListener(new ActionListener() {
