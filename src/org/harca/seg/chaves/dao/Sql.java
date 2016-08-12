@@ -130,6 +130,20 @@ import org.harca.seg.util.*;
 		}
 		
 		
+		public int getChaveIdByEmprestimoID(int id){
+			int i = 0;
+			try{
+				stmt = c.prepareStatement("SELECT chave.id FROM emprestimoKey JOIN chave on chave.id=key_id WHERE emprestimoKey.id="+id+"");
+				ResultSet rs = stmt.executeQuery();
+				i = rs.getInt(1);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return i;
+		}
+		
+		
+		
 		public String getEmpresa(String mat){
 			try{
 				stmt = c.prepareStatement("SELECT empresa FROM pessoa WHERE matricula='"+mat+"';");

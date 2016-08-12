@@ -53,5 +53,9 @@ public class Controle {
 		Sql sql = new Sql();
 		return sql.pegaHistoricoChaves(id);
 	}
+	public int getChaveIdByEmprestimoID(int id){
+		Sql sql = new Sql();
+		return sql.getChaveIdByEmprestimoID(id);
+	}
 
 }

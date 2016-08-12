@@ -37,6 +37,8 @@ public class JanHistoricoPessoa extends JFrame{
 	HtmlParser parser;
 	
 	public JanHistoricoPessoa(String nome, String mat){
+		
+		setSize(800,600);
 		setLocationRelativeTo(null); // Centro da tela
 		JPanel pdados = new JPanel(new GridLayout(10, 2));
 			lNome = new JLabel("Nome: ");

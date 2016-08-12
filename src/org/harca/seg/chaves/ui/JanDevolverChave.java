@@ -98,6 +98,24 @@ public class JanDevolverChave extends JPanel {
 				
 			}
 		});
+		
+		JMenuItem menuHistoricoChave = new JMenuItem("Historico da chave");
+		menuHistoricoChave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String Sid = jtable.getValueAt(jtable.getSelectedRow(), 8).toString(); // 9 = ID
+				int id = Integer.parseInt(Sid);
+				String num = jtable.getValueAt(jtable.getSelectedRow(), 1).toString();
+				String local = jtable.getValueAt(jtable.getSelectedRow(), 2).toString();
+				Controle c = new Controle();
+				int chaveID = c.getChaveIdByEmprestimoID(id);
+				new JanHistoricoChave(chaveID,local,num);
+				
+			}
+		});
+		
+		popmenu.add(menuHistoricoChave);
 		menuDevolver.addActionListener(new ActionListener() {
 			
 			@Override
