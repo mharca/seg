@@ -26,8 +26,8 @@ import org.harca.seg.util.*;
 			 
 			    try {
 			      Class.forName("org.sqlite.JDBC");
-			      c = DriverManager.getConnection("jdbc:sqlite:bancodedados/chaves.db");
-			      c.setAutoCommit(true);
+			      this.c = DriverManager.getConnection("jdbc:sqlite:bancodedados/chaves.db");
+			      this.c.setAutoCommit(true);
 			    }catch(Exception e){
 			    	e.printStackTrace();
 			    }
@@ -136,6 +136,7 @@ import org.harca.seg.util.*;
 				stmt = c.prepareStatement("SELECT chave.id FROM emprestimoKey JOIN chave on chave.id=key_id WHERE emprestimoKey.id="+id+"");
 				ResultSet rs = stmt.executeQuery();
 				i = rs.getInt(1);
+				stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -346,17 +347,29 @@ import org.harca.seg.util.*;
 			String dataDevolveu = dataFormat.format(date).toString();
 						
 			// PEGAR ID
-			String query = "UPDATE emprestimoKey SET horaDevolveu='"+horaDevolveu+"',dataDevolveu='"+dataDevolveu+"' WHERE id="+id+";";
+			//String query = "UPDATE emprestimoKey SET horaDevolveu='"+horaDevolveu+"',dataDevolveu='"+dataDevolveu+"' WHERE id="+id+";";
+			
 			try{
 					//stmt.close();
-					PreparedStatement stmt;
+					
+					//PreparedStatement stmt;
+					//c.close();
+					//stmt.close();
+				String query = "UPDATE emprestimoKey SET horaDevolveu=?,dataDevolveu=? WHERE id=?;";
+					conectar();
 					stmt = c.prepareStatement(query);
+					
+					stmt.setString(1, horaDevolveu);
+					stmt.setString(2, dataDevolveu);
+					stmt.setInt(3, id);
+					
 					stmt.executeUpdate();
-									
+					
+			
 					//c.commit();
 					//c.close();
-				//	stmt.close();	
-					
+						
+					stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 				
@@ -369,24 +382,31 @@ import org.harca.seg.util.*;
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public List<List<String>> pegaHistoricoChaves(int id){
-			String query = "select pessoa.nome, pessoa.matricula, dataEmprestou, horaEmprestou, dataDevolveu, horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where chave.id="+id+";";
+		
 			
 			List<List<String>> l2 = new ArrayList<>();
+			
 			try{
+		
+				String query = "select pessoa.nome, pessoa.matricula, dataEmprestou, horaEmprestou, dataDevolveu, horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where chave.id=?";
 				List<String> lista;
+				conectar();
 				
 				stmt = c.prepareStatement(query);
+				stmt.setInt(1, id);
 				ResultSet rs = stmt.executeQuery();
+				
 				while(rs.next()){
 					lista = new ArrayList<>();
 					
-					for(int i = 1; i <= 6; i++){
-						lista.add(rs.getString(i));
-					}
+						for(int i = 1; i <= 6; i++){
+							lista.add(rs.getString(i));
+						}
 					
 					l2.add(lista);
 				}
-			stmt.close();
+			rs.close();
+				stmt.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -396,11 +416,12 @@ import org.harca.seg.util.*;
 		
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		public List<List<String>> pegaHistoricoPessoa(String matricula){
-			String query = "select chave.numero ,chave.localizacao,dataEmprestou, horaEmprestou,dataDevolveu,horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where pessoa.matricula='"+matricula+"'";
+			
 			List<List<String>> l2 = new ArrayList<>();
 			try{
+				String query = "select chave.numero ,chave.localizacao,dataEmprestou, horaEmprestou,dataDevolveu,horaDevolveu from emprestimoKey join chave,pessoa on key_id=chave.id AND pessoa_id=pessoa.id where pessoa.matricula='"+matricula+"'";
 				List<String> lista; //= new ArrayList();
-				
+				conectar();
 				stmt = c.prepareStatement(query);
 				ResultSet rs = stmt.executeQuery();
 				while(rs.next()){

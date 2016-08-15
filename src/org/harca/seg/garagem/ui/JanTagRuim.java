@@ -30,6 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JCheckBox;
+import javax.swing.border.TitledBorder;
 
 public class JanTagRuim extends JPanel {
 	private JTextField textChaveMat;
@@ -38,6 +39,7 @@ public class JanTagRuim extends JPanel {
 	private JTextArea textAreaObs;
 	private JFormattedTextField textData;
 	JCheckBox chckbxManterData;
+	private JLabel lFoto;
 	public JanTagRuim() {
 		setLayout(null);
 		//setBorder(BorderFactory.createLineBorder(getForeground()));
@@ -134,12 +136,6 @@ public class JanTagRuim extends JPanel {
 		btnProcurar.setBounds(297, 44, 112, 23);
 		add(btnProcurar);
 		
-		
-		
-		JLabel lblObservao = new JLabel("Observa\u00E7\u00E3o:");
-		lblObservao.setBounds(36, 164, 72, 14);
-		add(lblObservao);
-		
 		chckbxManterData = new JCheckBox("Manter data");
 		chckbxManterData.setBounds(268, 119, 112, 24);
 		add(chckbxManterData);
@@ -210,6 +206,21 @@ public class JanTagRuim extends JPanel {
 		btnNewButton.setBounds(36, 276, 113, 26);
 		add(btnNewButton);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Observacao", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(7, 146, 438, 188);
+		add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(5, 18, 428, 165);
+		panel_1.add(panel);
+		
+	//	lFoto = new JLabel("");
+	//	lFoto.setBounds(427, 47, 185, 265);
+		
+	//	add(lFoto);
+		
 		
 		
 		
@@ -218,6 +229,10 @@ public class JanTagRuim extends JPanel {
 		String matricula = textChaveMat.getText();
 		if(!textChaveMat.getText().isEmpty()){
 			
+			Foto foto = new Foto(matricula);
+			foto.setBounds(450, 55, 250, 265);
+			add(foto);
+			revalidate();
 			HtmlParser parser = new HtmlParser(matricula);
 			textNome.setText(parser.getNome());
 			textNome.setBackground(null);
@@ -234,5 +249,8 @@ public class JanTagRuim extends JPanel {
 		textNome.setText("");
 		textPlaca.setText("");
 		textData.setText("");
+		JLabel lAux = new JLabel("");
+		lAux.setBounds(450, 55, 250, 265);
+		revalidate();
 	}
 }
