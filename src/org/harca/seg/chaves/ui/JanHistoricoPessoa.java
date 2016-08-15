@@ -2,19 +2,26 @@ package org.harca.seg.chaves.ui;
 import java.util.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,6 +42,7 @@ public class JanHistoricoPessoa extends JFrame{
 	JLabel lFoto, lNome, lMat, lEmpr;
 	JTable tabela;
 	HtmlParser parser;
+	JButton bPetronet;
 	
 	public JanHistoricoPessoa(String nome, String mat){
 		
@@ -47,7 +55,7 @@ public class JanHistoricoPessoa extends JFrame{
 			
 			tNome = new JTextField();	 tNome.setEditable(false); tNome.setText(nome);
 			tMat = new JTextField();	 tMat.setEditable(false); tMat.setText(mat);
-				tEmpr = new JTextField(); tEmpr.setEditable(false); tEmpr.setText("Buscando empresa..."); 
+			tEmpr = new JTextField(); tEmpr.setEditable(false); tEmpr.setText("Buscando empresa..."); 
 				
 				//tEmpr.setText(buscando);
 				final String matAux = mat;
@@ -62,10 +70,31 @@ public class JanHistoricoPessoa extends JFrame{
 				});
 				t.run();
 				
+		bPetronet = new JButton("Buscar na Petronet");
+		bPetronet.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+					if(Desktop.isDesktopSupported())
+					{
+					  try {
+						 // String busca = tbusca.getText().replace(" ", "%20");
+						  String busca = tMat.getText();
+						  Desktop.getDesktop().browse(new URI("http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=dctm_landing_page_localizador_de_pessoas_a_petrobras&origem=buscalope&unico="+busca+"&locale=pt"));
+					  } catch (IOException e) {
+							  e.printStackTrace();
+					  } catch (URISyntaxException e) {
+							e.printStackTrace();
+					}
+				
+					
+				}
+			}
+			});
 		pdados.add(lNome); pdados.add(tNome);
 		pdados.add(lMat); pdados.add(tMat);
 		pdados.add(lEmpr); pdados.add(tEmpr);
+		pdados.add(bPetronet);
 		
 		JPanel pFoto = new JPanel();
 			Foto foto = new Foto(mat);
