@@ -16,6 +16,13 @@ public class Control {
 		return sql.selectTag();
 		
 	}
+	public List<List<String>> filtrarTag(String filtro){
+		Sql sql = new Sql();
+		return sql.filtrarTag(filtro);
+		
+	}
+	
+	
 	public void delete(int i){
 		Sql sql = new Sql();
 		sql.delete(i);

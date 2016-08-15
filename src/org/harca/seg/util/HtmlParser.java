@@ -140,12 +140,10 @@ public class HtmlParser {
 				e.printStackTrace();
 			} catch (MalformedURLException e) {
 				System.out.println("2");
-				//e.printStackTrace();
 			} catch (IOException e) {
 				System.out.println("3");
-				//e.printStackTrace();
 			}
-			System.out.println("FIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIM ");
+			//System.out.println("FIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIM ");
 			webclient.close();
 		}
 		
