@@ -36,7 +36,7 @@ public class JanMain extends JFrame{
 	
 	final JSplitPane splitPane;
 	public JanMain(){
-		setSize(800, 600);
+		setSize(1000, 600);
 		setTitle("Controle de seguranca");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -170,6 +170,7 @@ public class JanMain extends JFrame{
 			}
 		});
 		 splitPane = new JSplitPane();
+		 splitPane.setDividerSize(1);
 		//splitPane.setLayout(new GridBagLayout());
 		 
 		 jsp.add(splitPane);
@@ -228,7 +229,10 @@ public class JanMain extends JFrame{
 						setTitle("Chaves");
 						if (node.getUserObject() == "Emprestar"){
 						//	splitPane.setEnabled(false);
+							double i = splitPane.getDividerLocation();
+							System.out.println(i);
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanEmprestarChave());
+							splitPane.setDividerLocation(0.15);
 						}
 						else if (node.getUserObject() == "Devolver")
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanDevolverChave());
