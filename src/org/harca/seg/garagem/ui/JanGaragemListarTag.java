@@ -188,7 +188,7 @@ public class JanGaragemListarTag extends JPanel{
 		
 		
 		
-		table.setModel(new TagTabelaModelo(l2));
+		//table.setModel(new TagTabelaModelo(l2));
 		table.repaint();
 		
 	}
