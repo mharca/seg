@@ -184,11 +184,14 @@ public class JanGaragemListarTag extends JPanel{
 		List<List<String>> l2;
 		
 		Control c = new Control();
-		l2 = c.filtrarTag(tBusca.getText());
+		//l2 = c.filtrarTag(tBusca.getText());
+	
 		
-		
-		
+<<<<<<< HEAD
 		//table.setModel(new TagTabelaModelo(l2));
+=======
+		table.setModel(new TagTabelaModelo(tBusca.getText()));
+>>>>>>> 93ad7acafb937b2870e78871a8641dee40a79bdd
 		table.repaint();
 		
 	}

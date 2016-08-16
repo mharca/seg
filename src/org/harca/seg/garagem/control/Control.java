@@ -5,7 +5,10 @@ import java.util.List;
 import org.harca.seg.garagem.dao.Sql;
 
 public class Control {
-	
+	//Sql sql;
+	public Control(){
+		//Sql sql = new Sql();
+	}
 	public void insertTag(TagUser t){
 		Sql sql = new Sql();
 		sql.cadastrarTag(t);
