@@ -5,13 +5,16 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 import java.awt.List;
 
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ListSelectionEvent;
@@ -37,6 +40,7 @@ import java.util.Vector;
 
 
 
+
 /*
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -55,13 +59,18 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.text.TableView.TableRow;
 
 import org.harca.seg.Main;
 import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.chaves.dao.Sql;
+import org.harca.seg.util.Foto;
 import org.harca.seg.util.HtmlParser;
 
-import sun.awt.image.URLImageSource;
+import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
+//import com.sun.corba.se.spi.orbutil.fsm.Action;
+
+//import sun.awt.image.URLImageSource;
 
 public class JanEmprestarChave extends JPanel{
 	JLabel lmat, lnome,lempresa,llocal, ltorre, landar, lNumero;
@@ -69,15 +78,17 @@ public class JanEmprestarChave extends JPanel{
 	JTextField tlocal,tnome,tNumero, tEmpresa;
 	JTextField tmat;
 	List andarA,AndarB;
-	JPanel jp,jpessoa,jpchave,jpNumero;
+	JPanel jp,jpessoa,jpchave,jpNumero,jpAtalhos, jpFoto;
 	Vector<Integer> andaresa,andaresb;
 	JTable jtable;
 	HtmlParser parser;
 	ModeloTabela modeloTabela;
-	JButton btnEmprestar;
+	JButton btnEmprestar, btnNovoEmprestimo;
 	private static int ID = 6; // Magic number do id
+	private static int NUMERO = 0;
 	public JanEmprestarChave(){
 		setLayout(new BorderLayout());
+	//	setLayout(new FlowLayout());
 		lmat = new JLabel("Matricula:");
 		lnome = new JLabel("Nome:");
 		lempresa = new JLabel("Empresa:");
@@ -106,10 +117,15 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		modeloTabela = new ModeloTabela();
+<<<<<<< HEAD
 //<<<<<<< HEAD
 		jtable = new JTable(modeloTabela);
 		jtable.setAutoCreateRowSorter(true);
 //=======
+=======
+		jtable = new JTable(modeloTabela);
+		jtable.setAutoCreateRowSorter(true);
+>>>>>>> 52f034e43fe428bdac6024cfc41729ff9382d769
 		jtable = new JTable(modeloTabela){
 			public Component prepareRenderer(TableCellRenderer renderer, int row,int col){
 				Component c = super.prepareRenderer(renderer, 2, 2);
@@ -119,7 +135,10 @@ public class JanEmprestarChave extends JPanel{
 			}
 		};
 		
+<<<<<<< HEAD
 //>>>>>>> afa61f276028386bb1065984d5d5525099edf88c
+=======
+>>>>>>> 52f034e43fe428bdac6024cfc41729ff9382d769
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
@@ -131,25 +150,11 @@ public class JanEmprestarChave extends JPanel{
 				if(ctorre.getSelectedItem().equals("A")){
 					candar.setModel(new DefaultComboBoxModel(andaresa));
 					tlocal.setText("");
-					//andar = candar.getSelectedIndex();
-					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
-
-					modeloTabela = new ModeloTabela(c.selectByAndarEtorre(2, "A"));
-					modeloTabela.limpar();
-					modeloTabela.fireTableDataChanged();
-					jtable.setModel(modeloTabela);
-					*/
+				
 				}else if (ctorre.getSelectedItem().equals("B")){
 					candar.setModel(new DefaultComboBoxModel(andaresb));
 					tlocal.setText("");
-					/*andar = Integer.parseInt(candar.getSelectedItem().toString());
-					modeloTabela = new ModeloTabela(c.selectByAndarEtorre(6, "B"));
-					modeloTabela.limpar();
-
-					modeloTabela.fireTableDataChanged();
-					jtable.setModel(modeloTabela);
-
-*/
+					
 				}
 				modeloTabela.fireTableDataChanged();
 				jtable.setModel(modeloTabela);
@@ -171,12 +176,13 @@ public class JanEmprestarChave extends JPanel{
 					}
 				});
 		
-		jp = new JPanel(new GridLayout(2,2));
-		jpessoa = new JPanel(new GridLayout(3,2));
+		jp = new JPanel(new GridLayout(2,3));
+		jpessoa = new JPanel(new GridLayout(3,3));
 		jpessoa.setBorder(BorderFactory.createTitledBorder("Pessoa"));
-		jpessoa.add(lmat);
-		tmat=new JTextField();
+		
+		jpessoa.add(lmat);		tmat=new JTextField();
 		/* */
+		final JPanel fotoTemp = new JPanel();
 		tmat.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -187,13 +193,19 @@ public class JanEmprestarChave extends JPanel{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						if(tmat.getText().length() > 3)
+						if(tmat.getText().length() > 3){
 							perdeFoco();
+							Foto foto = new Foto(tmat.getText(), 90,90);
+							foto.setLayout(new FlowLayout());
+							fotoTemp.add(foto);
+							fotoTemp.repaint();
+						}
 					}
 				});
-				if(tnome.getText().equals(""))
+				if(tnome.getText().equals("")){
+					
 					t.start();
-			
+				}
 				
 				
 			}
@@ -206,6 +218,7 @@ public class JanEmprestarChave extends JPanel{
 		});
 		/****** */
 		jpessoa.add(tmat);
+	//	jpessoa.add(fotoTemp);
 		jpessoa.add(lnome);
 		
 		
@@ -217,7 +230,7 @@ public class JanEmprestarChave extends JPanel{
 		jpessoa.add(lempresa);
 		jpessoa.add(tEmpresa);
 		
-		jpchave = new JPanel(new GridLayout(3,1));
+		jpchave = new JPanel(new GridLayout(3,2));
 		jpchave.setBorder(BorderFactory.createTitledBorder("Chave"));
 		jpchave.add(ltorre);
 		jpchave.add(ctorre);
@@ -227,22 +240,6 @@ public class JanEmprestarChave extends JPanel{
 		jpchave.add(llocal);
 		tlocal = new JTextField();
 	
-		/*
-		 * JLabel jl = new JLabel("bob");
-		 
-		jl.setToolTipText("Label with image in Tooltip!");
-		URL urlImage=null;
-		try {
-			 urlImage = new URL("http://www.lsv.ens-cachan.fr/~sankur/java/first_files/tooltip.png");
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	    jl.setToolTipText("<html><img src=\"" + new ImageIcon(urlImage)
-	            + "\"> \nTooltip ");
-		jpchave.add(jl);
-		
-		*/
 		tlocal.addKeyListener(new KeyListener() {
 			
 			@Override
@@ -267,12 +264,60 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		
-		jtable = new JTable(modeloTabela);
+		jpAtalhos = new JPanel(new GridLayout(2,2));
+		jpAtalhos.setBorder(BorderFactory.createTitledBorder("Atalhos"));
+		JButton btnPoolB = new JButton("Pool Torre B terreo");
+		btnPoolB.addActionListener(new btnPoolBclicked());
+		JButton btnTA1sub = new JButton("Torre A 1SS");
+		btnTA1sub.addActionListener(new btnTASSclicked());
+		JButton btnTB1sub = new JButton("Torre B 1SS");
+		btnTB1sub.addActionListener(new  btnTBSSclicked());
 		
 		
 		
-	
-		//jtable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		jpAtalhos.add(btnPoolB);
+		jpAtalhos.add(btnTA1sub);
+		jpAtalhos.add(btnTB1sub);
+		
+		jtable = new JTable(modeloTabela){
+			// PINTAR LINHAS
+			
+			@Override	
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int col){
+					Component c = super.prepareRenderer(renderer, row, col);
+					//TableCellRenderer c = super.getCellRenderer(row, col);
+					Color verde = new Color(0,170,0);
+					Font f2 = c.getFont();
+					
+					Font f = new Font(getName(), f2.BOLD, 12);
+					//System.out.println(getValueAt(row, 5));
+					if( !isCellSelected(row, col)){
+							switch(getValueAt(row, 1).toString()){
+								case "Localização":
+									System.out.println("LLL");
+									c.setBackground(Color.GRAY);
+									break;
+								default:
+									c.setBackground(Color.WHITE);
+									break;
+							}
+							switch(getValueAt(row, 5).toString()){
+							case "verde":
+								c.setForeground(verde);
+								c.setFont(f);
+								break;
+							default:
+								c.setForeground(Color.BLACK);
+								break;
+							}
+					}
+			
+						return c;
+				}
+
+		};
+		
+
 		jtable.getColumnModel().getColumn(2).setWidth(500);
 		
 		jtable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -280,18 +325,12 @@ public class JanEmprestarChave extends JPanel{
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				ArrayList<String> aux = new ArrayList<String>();
-			//	aux.add(jtable.getValueAt(jtable.getSelectedRow(), 0).toString());
 				int[] rows = jtable.getSelectedRows();
 				
 			
 				for (int i = 0; i < rows.length; i++){
 					aux.add(jtable.getValueAt(rows[i], 0).toString());
-				/*	System.out.println(jtable.getValueAt(rows[i], 5).toString());
-					if(jtable.getValueAt(rows[i], 5).toString().equals("verde")){
-						System.out.println("ok");
-						
-					}
-					*/
+				
 				}
 				tNumero.setText(aux.toString());
 				
@@ -315,29 +354,57 @@ public class JanEmprestarChave extends JPanel{
 				
 				int[] rows = jtable.getSelectedRows();
 
-				
-				for (int i:rows)
-					c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText());
-				
+				if(tmat.getText().isEmpty() || tnome.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Erro, sem matricula ou nome");
+				else
+					for (int i:rows)
+						c.inserirEmprestimo((Integer.parseInt(modeloTabela.getValueAt(i, ID).toString())), Integer.parseInt(tmat.getText()), tnome.getText(),tEmpresa.getText());
+					
 			}
 		});
+		
+		btnNovoEmprestimo = new JButton("Novo emprestimo");
+		btnNovoEmprestimo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				tnome.setText("");
+				tmat.setText("");
+				tNumero.setText("");
+				tEmpresa.setText("");
+			}
+		});
+		
 		jpNumero = new JPanel(new FlowLayout());
 		
 		jpNumero.add(lNumero);
 		jpNumero.add(tNumero);
 		jpNumero.add(btnEmprestar);
+		jpNumero.add(btnNovoEmprestimo);
 		
 		
+		JPanel jpPessoaEfoto = new JPanel();
+		jpPessoaEfoto.add(jpessoa);
 		
+		//jpPessoaEfoto.add(fotoTemp);
+		jpPessoaEfoto.setLayout(new GridLayout(1,2));
+		//jpPessoaEfoto.setBorder(BorderFactory.createTitledBorder("Pessoa e foto"));
+		jpPessoaEfoto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		//jp.add(jpessoa);
+	//	jp.add(fotoTemp);
 		
-		jp.add(jpessoa);
+		jp.add(jpPessoaEfoto);
 		jp.add(jpchave);
 		jp.add(jpNumero);
+		jp.add(jpAtalhos);
 
 		add(jp,BorderLayout.NORTH);
 		//add(jpNumero);
 		add(jsp,BorderLayout.CENTER);
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void perdeFoco(){
 		
 				// TODO Auto-generated method stub
@@ -346,23 +413,47 @@ public class JanEmprestarChave extends JPanel{
 				tnome.setBackground(Color.RED);
 				tnome.setText("Buscando nome");
 				
+				tEmpresa.setBackground(Color.RED);
+				tEmpresa.setText("Buscando empresa");
+				
 				
 				if(tmat.getText().length()!=0){
+					try{
 					parser = new HtmlParser(tmat.getText());
+					
+					
+								 s = parser.getNome();
+								 tnome.setText(s);
+																	
+								s = parser.getEmpresa();
+								tEmpresa.setText(s);
 								
-					s = parser.getNome();
-						tnome.setText(s);
+					}catch(Exception e){
+						tnome.setText("MATRICULA NAO ENCONTRADA, MODO MANUAL");
+						for(int i=0; i < 200; i++){
+							
+							tnome.setBackground(Color.WHITE);
+							tnome.setBackground(Color.YELLOW);
+							
+						}
+					//	tnome.setText("");
+						tnome.setEditable(true);
+						tnome.selectAll();
+						
+						tnome.setBackground(Color.YELLOW);
+						tEmpresa.setEditable(true);
+						tEmpresa.setText("");
+					}
 					
-					//s = parser.getEmpresa();
-					//	tEmpresa.setText(s);
-					
+					//tEmpresa.setText("");
+					tEmpresa.setBackground(Color.WHITE);
 					tnome.setBackground(Color.WHITE);
 				}
 		
 		
 	}
 	private void procurar(){
-		Controle c = new Controle();
+		//Controle c = new Controle();
 		modeloTabela = new ModeloTabela(tlocal.getText());
 		jtable.setModel(modeloTabela);
 		jtable.repaint();
@@ -375,6 +466,130 @@ public class JanEmprestarChave extends JPanel{
 	    }
 	    return intArray;
 	}
+	private class btnPoolBclicked implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			java.util.List<Integer> lnumeros = new ArrayList<>();
+			for(int i=401; i<=408;i++)
+				lnumeros.add(i);
+			for(int i=842; i<=848;i++)
+				lnumeros.add(i);
+			lnumeros.add(419);
+			Controle c = new Controle();
+			ctorre.setSelectedIndex(1); // Torre B
+			candar.setSelectedIndex(15); // Terreo
+			modeloTabela = new ModeloTabela(c.selectByAndarEtorre(0, "B"));
+			modeloTabela.fireTableChanged(null);
+			jtable.setModel(modeloTabela);
+		//	jtable.setRowSelectionInterval(5, 10);
+			jtable.setRowSelectionAllowed(true);
+			jtable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			//int i = jtable.getRowCount();
+			int contador=16;
+			
+			for(int i=0; i < jtable.getRowCount();i++){
+				int aux = (int)jtable.getValueAt(i, NUMERO );
+				System.out.println(aux);
+				
+				for(int j=0; j < lnumeros.size();j++){
+					if(contador != 0 && lnumeros.get(j) == aux){
+						jtable.getSelectionModel().addSelectionInterval(i, i);
+						contador--;
+					}
+				}
+			}
+						
+			tNumero.setText(lnumeros.toString());
+			
+		}
+		
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+	private class btnTBSSclicked implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			java.util.List<Integer> lnumeros = new ArrayList<>();
+			for(int i=382; i<=392;i++)
+				lnumeros.add(i);
+			for(int i=394; i<=395;i++)
+				lnumeros.add(i);
+			//lnumeros.add(419);
+			Controle c = new Controle();
+			ctorre.setSelectedIndex(1); // Torre B
+			candar.setSelectedIndex(16); // 1 SS
+			modeloTabela = new ModeloTabela(c.selectByAndarEtorre(-1, "B"));
+			modeloTabela.fireTableChanged(null);
+			jtable.setModel(modeloTabela);
+			jtable.setRowSelectionAllowed(true);
+			jtable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			
+			int contador=13;
+			
+			for(int i=0; i < jtable.getRowCount();i++){
+				int aux = (int)jtable.getValueAt(i, NUMERO );
+				System.out.println(aux);
+				
+				for(int j=0; j < lnumeros.size();j++){
+					if(contador != 0 && lnumeros.get(j) == aux){
+						jtable.getSelectionModel().addSelectionInterval(i, i);
+						contador--;
+					}
+				}
+			}
+						
+			tNumero.setText(lnumeros.toString());
+			
+		}
+		
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	private class btnTASSclicked implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			java.util.List<Integer> lnumeros = new ArrayList<>();
+			for(int i=409; i<=418;i++)
+				lnumeros.add(i);
+			//for(int i=842; i<=848;i++)
+				lnumeros.add(400);
+				lnumeros.add(432);
+				lnumeros.add(435);
+				lnumeros.add(438);
+			//lnumeros.add(419);
+			Controle c = new Controle();
+			ctorre.setSelectedIndex(0); // Torre A
+			candar.setSelectedIndex(23); // 1 SS
+			modeloTabela = new ModeloTabela(c.selectByAndarEtorre(-1, "A"));
+			modeloTabela.fireTableChanged(null);
+			jtable.setModel(modeloTabela);
+		//	jtable.setRowSelectionInterval(5, 10);
+			jtable.setRowSelectionAllowed(true);
+			jtable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			//int i = jtable.getRowCount();
+			int contador=14;
+			
+			for(int i=0; i < jtable.getRowCount();i++){
+				int aux = (int)jtable.getValueAt(i, NUMERO );
+				System.out.println(aux);
+				
+				for(int j=0; j < lnumeros.size();j++){
+					if(contador != 0 && lnumeros.get(j) == aux){
+						jtable.getSelectionModel().addSelectionInterval(i, i);
+						contador--;
+					}
+				}
+			}
+						
+			tNumero.setText(lnumeros.toString());
+			
+		}
+	
+	}
+	
 }
+
+

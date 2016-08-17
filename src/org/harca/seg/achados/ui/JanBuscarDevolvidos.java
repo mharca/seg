@@ -20,8 +20,9 @@ public class JanBuscarDevolvidos extends JanBuscarGenerico {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			
 		final JScrollPane scrollp = new JScrollPane();
-		scrollp.add(table);
+		
 		table = new JTable();
+		scrollp.add(table);
 		
 		JButton jb = new JButton("Listar devolvidos");
 		jb.addActionListener(new ActionListener() {

@@ -23,9 +23,9 @@ import javax.swing.table.TableModel;
 
 import org.harca.seg.util.Empregado;
 
-import com.sun.javafx.binding.StringFormatter;
+//import com.sun.javafx.binding.StringFormatter;
 
-import sun.net.www.protocol.mailto.MailToURLConnection;
+//import sun.net.www.protocol.mailto.MailToURLConnection;
 
 public class JanLeitor extends JPanel{
 	JTextField tNome, tMatricula, tChave;
@@ -33,6 +33,7 @@ public class JanLeitor extends JPanel{
 	JTable table;
 	JButton btnEnviarCorreio;
 	List<String> matriculas;
+	List<List<String>> l2;
 	
 	public JanLeitor(){
 		tNome = new JTextField();		tNome.setEditable(false);
@@ -40,6 +41,7 @@ public class JanLeitor extends JPanel{
 		tChave = new JTextField();		tChave.setEditable(false);
 		
 		matriculas = new ArrayList<String>();
+		l2 = new ArrayList<>();
 		
 		tMatricula.selectAll();
 		tMatricula.addActionListener(new ActionListener() {
@@ -48,7 +50,7 @@ public class JanLeitor extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 					matriculas.add(tMatricula.getText());
 					
-					table.setValueAt(tMatricula.getText(), 1, 2);
+				//	table.setValueAt(tMatricula.getText(), 1, 2);
 					System.out.println(matriculas);
 					TableModel tm = table.getModel();
 					
@@ -79,15 +81,16 @@ public class JanLeitor extends JPanel{
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-			String[] colunas = {"Matricula", "Chave", "Nome"};
+			String[] colunas = {"Cracha", "Chave", "Nome"};
 			@Override
 			public Object getValueAt(int linha, int coluna) {
 				// TODO Auto-generated method stub
 				switch(coluna){
 					case 0: return matriculas.get(linha).toString();
 					case 1: return "scdc";
+					case 2: return "Nome";
 				}
-				
+				fireTableDataChanged();
 				return null;
 			}
 			@Override

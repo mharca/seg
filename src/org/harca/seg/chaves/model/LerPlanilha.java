@@ -49,7 +49,7 @@ public class LerPlanilha {
 					for(Row row:folha){
 						Key key = new Key();
 						for(Cell cell:row){
-							System.out.print(" Andar ->     "+(i-2));
+							System.out.print(" Andar ->     "+(i-1));
 							switch(cell.getCellType()){
 							
 							case Cell.CELL_TYPE_NUMERIC:
@@ -61,6 +61,7 @@ public class LerPlanilha {
 							case Cell.CELL_TYPE_STRING:
 								
 								if(cell.getColumnIndex() == 2){
+									
 										key.setLocalizacao(cell.getStringCellValue().toString());
 										style = (XSSFCellStyle) cell.getCellStyle();
 																				
@@ -72,7 +73,7 @@ public class LerPlanilha {
 											aux="amarelo";
 										
 										key.setCor(aux);
-										key.setAndar(Integer.toString(i-2));
+										key.setAndar(Integer.toString(i-1));
 										key.setTorre(torre);
 										System.out.println("KKKKKKKK"+key.getNumero()+"/"+key.getLocalizacao()+"/"+key.getTorre());
 										sql.inserir(key);

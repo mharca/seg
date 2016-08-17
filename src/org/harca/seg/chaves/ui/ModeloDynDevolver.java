@@ -27,15 +27,30 @@ public class ModeloDynDevolver extends ModeloDevolverTabela{
 	}
 	@Override
 	public int getRowCount(){
-		
-		return lista.size();
+	//	if(lista.size() > 0)
+			return lista.size();
+		//return 10;
 	}
 	
 	@Override
-	public Object getValueAt(int arg0, int arg1) {
+	public Object getValueAt(int linha, int coluna) {
 		// TODO Auto-generated method stub
 		
-		return super.getValueAt(arg0, arg1);
+		switch(coluna){
+		
+		case 0: return list.get(linha).get(0);
+		case 1: return list.get(linha).get(1);
+		case 2: return list.get(linha).get(2);
+		case 3: return list.get(linha).get(3);
+		case 4: return list.get(linha).get(4);
+		case 5: return list.get(linha).get(5);
+		case 6: return list.get(linha).get(6);
+		case 7: return list.get(linha).get(7);
+		case 8: return list.get(linha).get(8);
+}
+		
+		return null;
+		//return super.getValueAt(arg0, arg1);
 	}
 	
 }

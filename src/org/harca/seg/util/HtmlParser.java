@@ -10,7 +10,7 @@ import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 */
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CookieManager;
+//import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 //import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -18,8 +18,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
 
 public class HtmlParser {
-		String site = "http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=home_a_petrobras";
-		Worker empregado = new Empregado();
+		//String site = "http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=home_a_petrobras";
+		
+	String site;
+	Worker empregado = new Empregado();
 
 		public HtmlParser(String matricula){
 			WebClient webclient = new WebClient(BrowserVersion.FIREFOX_45);
@@ -32,12 +34,13 @@ public class HtmlParser {
 			webclient.getOptions().setRedirectEnabled(true);
 	*/		
 			try {
+				site="http://portalpetrobras.petrobras.com.br/PetrobrasPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=dctm_landing_page_localizador_de_pessoas_a_petrobras&origem=buscalope&unico="+matricula+"&locale=pt";
 				final HtmlPage startPage = webclient.getPage(site);
 							
 				//List<HtmlForm> listaForm = startPage.getForms();
 			//	HtmlForm form = listaForm.get(0);
 				
-						
+	/*					
 				startPage.getElementByName("buscar").click();
 				HtmlTextInput input = (HtmlTextInput) startPage.getElementById("txt-buscar");
 				input.setValueAttribute(matricula);
@@ -49,18 +52,22 @@ public class HtmlParser {
 				HtmlSubmitInput submit = (HtmlSubmitInput) startPage.getElementByName("botao");
 				
 				HtmlPage site2 = submit.click();
-
-				final List<FrameWindow> lfw = site2.getFrames();
+*/
+				final List<FrameWindow> lfw = startPage.getFrames();
 				final HtmlPage p2 = (HtmlPage) lfw.get(1).getEnclosedPage();
 				
 				
 				
 			//	DomElement element = (DomElement) p2.getByXPath("//div[@class='span9']").get(0);
 			//	empregado.setNome(element.asText());
+				DomElement element;
 				
-				DomElement element = (DomElement) p2.getByXPath("//div[@class='span9']").get(1);
-				empregado.setChave(element.asText());
-				
+				try{
+					element = (DomElement) p2.getByXPath("//div[@class='span9']").get(1);
+					empregado.setChave(element.asText());
+				}catch(Exception e){
+					empregado.setChave("Sem chave.");
+				}
 				element = (DomElement) p2.getByXPath("//div[@class='row-fluid']").get(4);
 				empregado.setNome(element.asText());
 				
@@ -71,35 +78,49 @@ public class HtmlParser {
 				
 				
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(2);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(2); // Genero
 				empregado.setGenero(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3); // Email
 				empregado.setEmail(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(4);
-				empregado.setEmpresa(element.asText());
+				try{
+					element = (DomElement) p2.getElementById("empresaContratada");
+					element = (DomElement) element.getLastElementChild();
+					empregado.setEmpresa(element.asText());
+					System.out.println(element.asText());
+					
+				}catch(Exception e){
+					element = (DomElement) p2.getElementById("empresa");
+					element = (DomElement) element.getLastElementChild();
+					empregado.setEmpresa(element.asText());
+					System.out.println(element.asText());
+
+				}
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(5);
+			//	element = (DomElement) p2.getByXPath("//div[@class='span9']").get(4); // Empresa
+			//	empregado.setEmpresa(element.asText());
+				
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(5); // Pais
 				empregado.setPais(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(6);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(6); // Matricula
 				empregado.setMatricula(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(7);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(7); // Cargo
 				empregado.setCargo(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(8);
+				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(8); // Imovel
 				empregado.setImovel(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span4']").get(1);
+				element = (DomElement) p2.getByXPath("//div[@class='span4']").get(1); // Ramal
 				empregado.setRamal(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(10);
-				empregado.setEndereco(element.asText());
+		//		element = (DomElement) p2.getByXPath("//div[@class='span9']").get(10); // Endereco
+		//		empregado.setEndereco(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(11);
-				empregado.setLotacao(element.asText());
+		//		element = (DomElement) p2.getByXPath("//div[@class='span9']").get(11); // Lotacao
+		//		empregado.setLotacao(element.asText());
 				
 				/*
 				for(int i=0;i< 9;i++){
