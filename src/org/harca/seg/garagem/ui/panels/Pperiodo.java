@@ -11,10 +11,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 public class Pperiodo extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JFormattedTextField tdia,tate;
 	JCheckBox checkExt;
 	public Pperiodo(){

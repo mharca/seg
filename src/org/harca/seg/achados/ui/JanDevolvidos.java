@@ -7,6 +7,10 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
 public class JanDevolvidos extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	public JanDevolvidos() {
 		setTitle("Devolvidos");

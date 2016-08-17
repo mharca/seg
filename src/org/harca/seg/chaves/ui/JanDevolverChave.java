@@ -3,7 +3,6 @@ package org.harca.seg.chaves.ui;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +11,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -24,6 +22,10 @@ import org.harca.seg.chaves.control.Controle;
 import javax.swing.JButton;
 
 public class JanDevolverChave extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField tnumero;
 	JButton bdevolver;
 	JTable jtable;
@@ -98,6 +100,24 @@ public class JanDevolverChave extends JPanel {
 				
 			}
 		});
+		
+		JMenuItem menuHistoricoChave = new JMenuItem("Historico da chave");
+		menuHistoricoChave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String Sid = jtable.getValueAt(jtable.getSelectedRow(), 8).toString(); // 9 = ID
+				int id = Integer.parseInt(Sid);
+				String num = jtable.getValueAt(jtable.getSelectedRow(), 1).toString();
+				String local = jtable.getValueAt(jtable.getSelectedRow(), 2).toString();
+				Controle c = new Controle();
+				int chaveID = c.getChaveIdByEmprestimoID(id);
+				new JanHistoricoChave(chaveID,local,num);
+				
+			}
+		});
+		
+		popmenu.add(menuHistoricoChave);
 		menuDevolver.addActionListener(new ActionListener() {
 			
 			@Override

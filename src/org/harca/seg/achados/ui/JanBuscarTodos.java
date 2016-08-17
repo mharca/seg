@@ -8,6 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class JanBuscarTodos extends JanBuscarGenerico{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public JanBuscarTodos(){
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.NORTH);

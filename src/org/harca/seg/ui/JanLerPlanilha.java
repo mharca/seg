@@ -1,7 +1,6 @@
 package org.harca.seg.ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +14,10 @@ import javax.swing.JTextField;
 import org.harca.seg.chaves.model.LerPlanilha;
 
 public class JanLerPlanilha extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JTextField tplanilhaPath;
 	JButton btOK;
 	JPanel jp;

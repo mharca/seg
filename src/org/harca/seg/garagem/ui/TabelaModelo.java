@@ -1,10 +1,13 @@
 package org.harca.seg.garagem.ui;
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 public class TabelaModelo extends AbstractTableModel{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] colunas = {"Visitante", "Placa", "Visitado", "Cor", "Modelo", "Correio"};
 	@Override
 	public int getColumnCount() {

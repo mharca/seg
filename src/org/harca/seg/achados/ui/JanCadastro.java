@@ -2,32 +2,17 @@ package org.harca.seg.achados.ui;
 import org.harca.seg.achados.control.*;
 import org.harca.seg.util.Foto;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 
 import java.awt.GridLayout;
 
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
-import javax.swing.border.LineBorder;
-
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.FlowLayout;
-
 import javax.swing.border.EtchedBorder;
 
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,9 +21,12 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.image.BufferedImage;
 
 public class JanCadastro extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField tipoObjeto;
 	private JTextField local;
 	private JFormattedTextField letraEscaninho;
@@ -307,11 +295,11 @@ public class JanCadastro extends JPanel{
 	//	panel_4.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBounds(337, 17, 274, 426);
 		
-		panel_4.setLayout(null);
+	panel_4.setLayout(null);
 		
-		final JPanel panel_3 = new JPanel(new GridLayout());
-		panel_3.setBounds(5, 16, 264, 405);
-		panel_4.add(panel_3);
+	//	final JPanel panel_3 = new JPanel(new GridLayout());
+	//	panel_3.setBounds(5, 16, 264, 405);
+	//	panel_4.add(panel_3);
 		
 		JButton btnVerificar = new JButton("Verificar");
 		btnVerificar.addActionListener(new ActionListener() {
@@ -329,52 +317,29 @@ public class JanCadastro extends JPanel{
 									
 									nomeLocalizou.setText(nome);
 									nomeLocalizou.setBackground(Color.WHITE);
-									
-									
+		
+								
 									JLabel lblNewLabel;
 									lblNewLabel	 = new JLabel(new ImageIcon("semfoto.jpg"));
-									
 									try{
 										
 										Thread t = new Thread();
-										//URL fotoUrl = new URL("foto.jpg");
-										String fotoUrl = "foto.jpg";
+									
 										String fotoErro = "semfoto.jpg";
-										//BufferedImage image = ImageIO.read(fotoUrl);
-										
-							/*
-										ImageIcon imageIcon = new ImageIcon("semfoto.jpg");
-											try{
-												String aux = new String(matriculaTexto.getText());
-												URL url = new URL(new Control().getFotoByMatriculaChave(aux));
-																			
-												imageIcon = new ImageIcon(ImageIO.read(url));
-											
-											}catch(Exception e){
-												imageIcon = new ImageIcon("semfoto.jpg");
-											}
-										
-										lblNewLabel	 = new JLabel(imageIcon);
-													
-										
-											panel_3.add(lblNewLabel);
-											System.out.println("foto resize");
-											panel_3.setBounds(5, 16, 264, 406);
-										
-											*/
+										JPanel panel_3 = new JPanel(new GridLayout());
+										panel_3.setBounds(5, 16, 264, 405);
 										Foto foto = new Foto(matriculaTexto.getText(),250,300);
-										panel_3.add(foto);
+										panel_3.add(foto,BorderLayout.CENTER);
+										
+										panel_4.add(panel_3,BorderLayout.CENTER);
+										panel_4.revalidate();
+										
+										panel_3.revalidate();
 									}catch(Exception e){
 										e.printStackTrace();
 									}
-									panel_3.setLayout(new FlowLayout());
-									panel_3.revalidate();
-									panel_4.add(panel_3);
-									
-								//	panel_4.repaint();
-								//	panel_3.repaint();
-									//panel_4.add(foto);
 									add(panel_4);
+									
 								}catch(Exception e){
 									nomeLocalizou.setText("");
 									JOptionPane.showMessageDialog(null, "Não foi possível buscar o nome\nEdite o nome manualmente.");
@@ -386,10 +351,9 @@ public class JanCadastro extends JPanel{
 								
 							}
 						});
+										
 						t.start();
-						
-						
-			repaint();
+						repaint();
 					
 				}
 			

@@ -1,6 +1,6 @@
 package org.harca.seg.achados.model;
 
-import java.util.Calendar;
+//import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.awt.Desktop;
@@ -11,11 +11,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.model.io.HWPFFileSystem;
+//import org.apache.poi.hwpf.model.io.HWPFFileSystem;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
+//import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+//import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.harca.seg.util.*;
 
 import org.harca.seg.achados.control.Control;

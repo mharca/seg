@@ -1,22 +1,19 @@
 package org.harca.seg.chaves.ui;
 
 import javax.swing.JPanel;
-
-import java.awt.GridBagLayout;
+import javax.swing.JPopupMenu;
 
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 import java.awt.List;
 
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -29,9 +26,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -48,31 +42,23 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 */
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.text.TableView.TableRow;
-
-import org.harca.seg.Main;
 import org.harca.seg.chaves.control.Controle;
-import org.harca.seg.chaves.dao.Sql;
 import org.harca.seg.util.Foto;
 import org.harca.seg.util.HtmlParser;
-
-import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
-//import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 //import sun.awt.image.URLImageSource;
 
 public class JanEmprestarChave extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JLabel lmat, lnome,lempresa,llocal, ltorre, landar, lNumero;
 	JComboBox ctorre,candar;
 	JTextField tlocal,tnome,tNumero, tEmpresa;
@@ -127,6 +113,11 @@ public class JanEmprestarChave extends JPanel{
 		jtable.setAutoCreateRowSorter(true);
 >>>>>>> 52f034e43fe428bdac6024cfc41729ff9382d769
 		jtable = new JTable(modeloTabela){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public Component prepareRenderer(TableCellRenderer renderer, int row,int col){
 				Component c = super.prepareRenderer(renderer, 2, 2);
 				c.setForeground(Color.green);
@@ -145,7 +136,7 @@ public class JanEmprestarChave extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Controle c = new Controle();
+				//Controle c = new Controle();
 				int andar = 10;
 				if(ctorre.getSelectedItem().equals("A")){
 					candar.setModel(new DefaultComboBoxModel(andaresa));
@@ -279,9 +270,16 @@ public class JanEmprestarChave extends JPanel{
 		jpAtalhos.add(btnTA1sub);
 		jpAtalhos.add(btnTB1sub);
 		
+		
+		
 		jtable = new JTable(modeloTabela){
 			// PINTAR LINHAS
 			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override	
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int col){
 					Component c = super.prepareRenderer(renderer, row, col);
@@ -337,6 +335,28 @@ public class JanEmprestarChave extends JPanel{
 				
 			}
 		});
+		
+		
+
+		JPopupMenu popmenu = new JPopupMenu();
+		JMenuItem menuHistoricoChave = new JMenuItem("Historico da chave");
+		menuHistoricoChave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String Sid = jtable.getValueAt(jtable.getSelectedRow(), ID).toString();
+				int id = Integer.parseInt(Sid);
+				String num = jtable.getValueAt(jtable.getSelectedRow(), 0).toString();
+				String local = jtable.getValueAt(jtable.getSelectedRow(), 1).toString();
+				new JanHistoricoChave(id,local,num);
+				
+			}
+		});
+		
+		popmenu.add(menuHistoricoChave);
+		jtable.setComponentPopupMenu(popmenu);
+		
+		
 		JScrollPane jsp = new JScrollPane(jtable);
 		jsp.setViewportView(jtable);
 		//jsp.add(jtable);
@@ -390,7 +410,7 @@ public class JanEmprestarChave extends JPanel{
 		//jpPessoaEfoto.add(fotoTemp);
 		jpPessoaEfoto.setLayout(new GridLayout(1,2));
 		//jpPessoaEfoto.setBorder(BorderFactory.createTitledBorder("Pessoa e foto"));
-		jpPessoaEfoto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		//jpPessoaEfoto.setBorder(BorderFactory.createTitledBorder());
 		//jp.add(jpessoa);
 	//	jp.add(fotoTemp);
 		

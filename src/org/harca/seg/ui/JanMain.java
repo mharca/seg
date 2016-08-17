@@ -7,9 +7,6 @@ import javax.swing.event.TreeSelectionListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
@@ -25,18 +22,20 @@ import javax.swing.tree.DefaultTreeModel;
 
 
 import org.harca.seg.leitor.JanLeitor;
-import org.harca.seg.util.HtmlParser;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class JanMain extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JToolBar jtoolbar;
 	JTextField tbusca;
 	JButton bbuscar,btEscala,btTelUteis;
 	
 	final JSplitPane splitPane;
 	public JanMain(){
-		setSize(800, 600);
+		setSize(1000, 600);
 		setTitle("Controle de seguranca");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -57,7 +56,7 @@ public class JanMain extends JFrame{
 		mnLerPlanilha.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("sdfsefsdfsdf");
+			//	System.out.println("sdfsefsdfsdf");
 				new JanLerPlanilha();
 				
 			}
@@ -89,8 +88,8 @@ public class JanMain extends JFrame{
 					for (LookAndFeelInfo manager : UIManager.getInstalledLookAndFeels()){
 						System.out.println(manager.getClassName());
 					}
-				//	UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-					UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+				//	UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 					//UIManager.setLookAndFeel(â€œcom.jtattoo.plaf.aluminium.AluminiumLookAndFeelâ€�);
 
 				} catch (ClassNotFoundException e1) {
@@ -114,7 +113,7 @@ public class JanMain extends JFrame{
 		mnTemas.add(mntmMotif);
 		
 		 jtoolbar = new JToolBar();
-		 jtoolbar.add(new JLabel("Buscar nome/chave/matricula: "));
+		 jtoolbar.add(new JLabel("Buscar nome/ramal/chave/matricula: "));
 
 		 	tbusca = new JTextField();
 		 	tbusca.addActionListener(new ActionListener() {
@@ -125,6 +124,7 @@ public class JanMain extends JFrame{
 					
 				}
 			});
+		 //	jtoolbar.setLayout(new BorderLayout());
 		 	jtoolbar.add(tbusca);
 		 bbuscar = new JButton("Buscar");
 		 bbuscar.addActionListener(new ActionListener() {
@@ -169,6 +169,7 @@ public class JanMain extends JFrame{
 			}
 		});
 		 splitPane = new JSplitPane();
+		 splitPane.setDividerSize(1);
 		//splitPane.setLayout(new GridBagLayout());
 		 
 		 jsp.add(splitPane);
@@ -182,6 +183,11 @@ public class JanMain extends JFrame{
 		final JTree tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("Seg") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
 				{
 					DefaultMutableTreeNode node_1;
 					DefaultMutableTreeNode node_2;
@@ -227,7 +233,10 @@ public class JanMain extends JFrame{
 						setTitle("Chaves");
 						if (node.getUserObject() == "Emprestar"){
 						//	splitPane.setEnabled(false);
+							double i = splitPane.getDividerLocation();
+							System.out.println(i);
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanEmprestarChave());
+							splitPane.setDividerLocation(0.15);
 						}
 						else if (node.getUserObject() == "Devolver")
 							splitPane.setRightComponent(new org.harca.seg.chaves.ui.JanDevolverChave());

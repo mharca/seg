@@ -4,40 +4,38 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
-import org.harca.seg.util.*;
-
 import org.harca.seg.garagem.control.Control;
 import org.harca.seg.garagem.control.TagUser;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JCheckBox;
+import javax.swing.border.TitledBorder;
 
 public class JanTagRuim extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textChaveMat;
 	private JFormattedTextField textPlaca;
 	private JTextField textNome;
 	private JTextArea textAreaObs;
 	private JFormattedTextField textData;
 	JCheckBox chckbxManterData;
+	private JLabel lFoto;
 	public JanTagRuim() {
 		setLayout(null);
 		//setBorder(BorderFactory.createLineBorder(getForeground()));
@@ -134,12 +132,6 @@ public class JanTagRuim extends JPanel {
 		btnProcurar.setBounds(297, 44, 112, 23);
 		add(btnProcurar);
 		
-		
-		
-		JLabel lblObservao = new JLabel("Observa\u00E7\u00E3o:");
-		lblObservao.setBounds(36, 164, 72, 14);
-		add(lblObservao);
-		
 		chckbxManterData = new JCheckBox("Manter data");
 		chckbxManterData.setBounds(268, 119, 112, 24);
 		add(chckbxManterData);
@@ -210,6 +202,21 @@ public class JanTagRuim extends JPanel {
 		btnNewButton.setBounds(36, 276, 113, 26);
 		add(btnNewButton);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Observacao", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(7, 146, 438, 188);
+		add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(5, 18, 428, 165);
+		panel_1.add(panel);
+		
+	//	lFoto = new JLabel("");
+	//	lFoto.setBounds(427, 47, 185, 265);
+		
+	//	add(lFoto);
+		
 		
 		
 		
@@ -218,6 +225,10 @@ public class JanTagRuim extends JPanel {
 		String matricula = textChaveMat.getText();
 		if(!textChaveMat.getText().isEmpty()){
 			
+			Foto foto = new Foto(matricula);
+			foto.setBounds(450, 55, 250, 265);
+			add(foto);
+			revalidate();
 			HtmlParser parser = new HtmlParser(matricula);
 			textNome.setText(parser.getNome());
 			textNome.setBackground(null);
@@ -234,5 +245,8 @@ public class JanTagRuim extends JPanel {
 		textNome.setText("");
 		textPlaca.setText("");
 		textData.setText("");
+		JLabel lAux = new JLabel("");
+		lAux.setBounds(450, 55, 250, 265);
+		revalidate();
 	}
 }

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,13 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import org.harca.seg.util.Empregado;
-
-//import com.sun.javafx.binding.StringFormatter;
-
-//import sun.net.www.protocol.mailto.MailToURLConnection;
 
 public class JanLeitor extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JTextField tNome, tMatricula, tChave;
 	JLabel lNome, lMatricula, lChave;
 	JTable table;
@@ -136,7 +134,8 @@ public class JanLeitor extends JPanel{
 			
 			
 			String subject = "Cracha novo.";
-			String body = "Prezado(a).\nSeu novo cracha esta disponivel para ser retirado na seguranca corporativa";
+			String body = "Prezado,%20Seu%20novo%20cracha%20esta%20disponivel%20para%20ser%20retirado%20na%20seguranca%20corporativa";
+		//	String body="teste";
 			try {
 				List<String> chaves = new ArrayList<String>();
 				String mail;
@@ -146,7 +145,7 @@ public class JanLeitor extends JPanel{
 				}
 				String s = chaves.toString();
 				String aux = s.replaceAll("\\s","");
-				URI uri = new URI("mailto:"+aux+"?Subject=Cracha%20para%20retirada");
+				URI uri = new URI("mailto:"+aux+"?Subject=Cracha%20para%20retirada?body="+body+"");
 				Desktop.getDesktop().browse(uri);
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block

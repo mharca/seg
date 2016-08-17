@@ -2,11 +2,14 @@ package org.harca.seg.garagem.ui;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
 public class JanGaragemListarVisitante extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	public JanGaragemListarVisitante(){
 		setLayout(new BorderLayout(0, 0));

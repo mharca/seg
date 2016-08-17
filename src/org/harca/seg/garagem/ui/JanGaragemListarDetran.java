@@ -12,14 +12,15 @@ import java.net.URL;
 
 import javax.swing.JTextField;
 import com.jgoodies.forms.layout.*;
-import com.jgoodies.forms.*;
-import com.jgoodies.*;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class JanGaragemListarDetran extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;

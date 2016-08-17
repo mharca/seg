@@ -1,8 +1,6 @@
 package org.harca.seg.garagem.ui.panels;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -13,9 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import org.apache.bcel.generic.Select;
-
 public class Pcarro extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JFormattedTextField tplaca;
 	JTextField tmodelo;
 	JTextField tcor;
