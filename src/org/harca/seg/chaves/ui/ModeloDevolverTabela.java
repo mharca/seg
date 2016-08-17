@@ -5,6 +5,10 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloDevolverTabela extends AbstractTableModel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] colunas = {"Nome", "Numero", "Local", "Data retirado", "Hora retirado", "Torre", "Andar"};
 	List<List<String>> list;
 	

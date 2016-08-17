@@ -9,6 +9,10 @@ import org.harca.seg.achados.control.Control;
 
 public class ModeloTabelaDevolvido extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] colunas = {"ID", "Objeto","Descricao", "Local", "Encontrado", "Devolvido"};
 	private Control control;
 	List<List<String>> lista = new ArrayList<>();

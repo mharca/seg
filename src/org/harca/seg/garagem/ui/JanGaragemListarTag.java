@@ -9,10 +9,7 @@ import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.List;
-
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,15 +18,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import org.apache.log4j.helpers.FileWatchdog;
 import org.harca.seg.garagem.control.Control;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Cache;
-
-//import jdk.internal.jfr.events.FileWriteEvent;
-import net.miginfocom.layout.Grid;
-
 public class JanGaragemListarTag extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	TagTabelaModelo ttm;
 	JTextField tBusca;
@@ -181,17 +176,9 @@ public class JanGaragemListarTag extends JPanel{
 	}
 	
 	public void procurar(){
-		List<List<String>> l2;
-		
-		Control c = new Control();
-		//l2 = c.filtrarTag(tBusca.getText());
 	
-		
-<<<<<<< HEAD
-		//table.setModel(new TagTabelaModelo(l2));
-=======
+
 		table.setModel(new TagTabelaModelo(tBusca.getText()));
->>>>>>> 93ad7acafb937b2870e78871a8641dee40a79bdd
 		table.repaint();
 		
 	}

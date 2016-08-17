@@ -4,6 +4,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class JanPrincipal extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public JanPrincipal() {
 		setSize(391,235);
 		JMenuBar menuBar = new JMenuBar();

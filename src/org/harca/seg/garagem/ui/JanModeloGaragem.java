@@ -6,6 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class JanModeloGaragem extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public JanModeloGaragem(){
 		this.setLayout(new BorderLayout());
 		JScrollPane jsp = new JScrollPane();//new JTableGaragem());

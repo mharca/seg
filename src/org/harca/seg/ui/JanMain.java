@@ -7,9 +7,6 @@ import javax.swing.event.TreeSelectionListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
@@ -25,11 +22,13 @@ import javax.swing.tree.DefaultTreeModel;
 
 
 import org.harca.seg.leitor.JanLeitor;
-import org.harca.seg.util.HtmlParser;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class JanMain extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JToolBar jtoolbar;
 	JTextField tbusca;
 	JButton bbuscar,btEscala,btTelUteis;
@@ -184,6 +183,11 @@ public class JanMain extends JFrame{
 		final JTree tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("Seg") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
 				{
 					DefaultMutableTreeNode node_1;
 					DefaultMutableTreeNode node_2;

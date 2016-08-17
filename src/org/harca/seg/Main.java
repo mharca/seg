@@ -1,6 +1,4 @@
 package org.harca.seg;
-import javax.swing.*;
-
 import org.harca.seg.ui.*;
 
 public class Main {

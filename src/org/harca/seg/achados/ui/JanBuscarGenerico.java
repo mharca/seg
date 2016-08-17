@@ -3,25 +3,21 @@ package org.harca.seg.achados.ui;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.text.MaskFormatter;
-
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.border.Border;
 
 public class JanBuscarGenerico extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JTable table;
 	JButton btDevolver;
 	public JanBuscarGenerico() {

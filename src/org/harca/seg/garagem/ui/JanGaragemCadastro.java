@@ -2,37 +2,22 @@ package org.harca.seg.garagem.ui;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Properties;
-
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-
-import org.apache.bcel.classfile.PMGClass;
 import org.harca.seg.garagem.ui.panels.Pcarro;
 import org.harca.seg.garagem.ui.panels.Pperiodo;
 import org.harca.seg.garagem.ui.panels.Pvisitado;
 import org.harca.seg.garagem.ui.panels.Pvisitante;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 public class JanGaragemCadastro extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//JPanels
 	Pvisitante pv;
 	Pvisitado pvtado;

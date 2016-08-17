@@ -6,21 +6,20 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.FlowLayout;
-
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 
 import org.harca.seg.chaves.control.Controle;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
 import java.util.List;
 
 public class JanListarChave extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel jpanel1;
 	private JScrollPane jsp;
 	private JTable jtable;

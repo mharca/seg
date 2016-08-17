@@ -4,11 +4,14 @@ import org.harca.seg.achados.control.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabela extends AbstractTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] colunas = {"ID", "Objeto","Descricao", "Local", "Data encontrado", "Hora encontrado", "Inspetor", "Data recebido", "Hora Recebido","Escaninho"}; 
 	private Control control;
 	List<List<String>> lista = new ArrayList<>();

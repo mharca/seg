@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import org.harca.seg.achados.control.Control;
 import org.harca.seg.achados.model.*;
-import org.harca.seg.util.*;
 public class Sql {
 
 	Connection c = null;
