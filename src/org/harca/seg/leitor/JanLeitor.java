@@ -20,6 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
+import org.apache.log4j.lf5.viewer.FilteredLogTableModel;
+import org.harca.seg.util.HtmlParser;
+
 
 public class JanLeitor extends JPanel{
 	/**
@@ -32,7 +35,7 @@ public class JanLeitor extends JPanel{
 	JButton btnEnviarCorreio;
 	List<String> matriculas;
 	List<List<String>> l2;
-	
+	HtmlParser parser;
 	public JanLeitor(){
 		tNome = new JTextField();		tNome.setEditable(false);
 		tMatricula = new JTextField(); 	
@@ -48,14 +51,46 @@ public class JanLeitor extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 					matriculas.add(tMatricula.getText());
 					
-				//	table.setValueAt(tMatricula.getText(), 1, 2);
-					System.out.println(matriculas);
-					TableModel tm = table.getModel();
+					String cAux = new String();
+					String mAux = new String();
 					
-					tm.setValueAt("sdfsdf", 1,2);
-					//table.getModel().
-					table.setModel(tm);
+					mAux = tMatricula.getText().substring(6, 12);
+					//cAux = 
+					for(int i=0; i<10;i++){
+						//mAux = mAux+Integer.toString(i);
+						try{
+							parser = new HtmlParser(mAux+Integer.toString(i));
+							if(parser.getNome()!=null){
+								System.out.println(parser.getNome()+"-"+parser.getChave());
+								
+								tNome.setText(parser.getNome());
+								tChave.setText(parser.getChave());
+								List<String> listaEmpregado = new ArrayList<>();
+									listaEmpregado.add(tMatricula.getText());
+									listaEmpregado.add(parser.getChave());
+									listaEmpregado.add(parser.getNome());
+								//table.getModel().setValueAt(parser.getNome(),1, 2);
+								table.revalidate();
+								l2.add(listaEmpregado);
+								break;
+							}
+						
+						}catch(Exception e){
+							
+						}
+						
+						
+					}
+				//	mAux = mAux+"2";
+				//	parser = new HtmlParser(mAux);
+				//	System.out.println(parser.getNome());
+					
+					System.out.println(matriculas+" - "+ mAux);
 					tMatricula.setText("");
+					table.repaint();
+					table.revalidate();
+					
+					
 					
 			}
 		});
@@ -85,10 +120,10 @@ public class JanLeitor extends JPanel{
 				// TODO Auto-generated method stub
 				switch(coluna){
 					case 0: return matriculas.get(linha).toString();
-					case 1: return "scdc";
-					case 2: return "Nome";
+					case 1: return l2.get(linha).get(1).toString();
+					case 2: return l2.get(linha).get(2).toString();
 				}
-				fireTableDataChanged();
+				
 				return null;
 			}
 			@Override
@@ -100,11 +135,14 @@ public class JanLeitor extends JPanel{
 			public int getRowCount() {
 				// TODO Auto-generated method stub
 				return matriculas.size();
+				//return 4;
 			}
 			@Override
 			public void fireTableDataChanged() {
 				// TODO Auto-generated method stub
-				super.fireTableDataChanged();
+				//super.
+				//revalidate();
+				fireTableDataChanged();
 			}
 			@Override
 			public int getColumnCount() {
@@ -140,11 +178,15 @@ public class JanLeitor extends JPanel{
 				List<String> chaves = new ArrayList<String>();
 				String mail;
 				for(int i =0; i < table.getRowCount();i++){
-					chaves.add(table.getValueAt(i, 0).toString());
+					chaves.add(table.getValueAt(i, 1).toString());
 					
 				}
 				String s = chaves.toString();
-				String aux = s.replaceAll("\\s","");
+				String aux2 = s.replaceAll("\\[","");
+				//String aux = aux2.toString();
+				//String aux = aux2.replaceAll("\\]","");
+			//	String aux = aux2.toString();
+				String aux = s.toString();
 				URI uri = new URI("mailto:"+aux+"?Subject=Cracha%20para%20retirada?body="+body+"");
 				Desktop.getDesktop().browse(uri);
 			} catch (URISyntaxException e) {

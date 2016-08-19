@@ -159,6 +159,9 @@ public class HtmlParser {
 		public String getEmpresa(){
 			return empregado.getEmpresa();
 		}
+		public String getChave(){
+			return empregado.getChave();
+		}
 		
 }
 	
