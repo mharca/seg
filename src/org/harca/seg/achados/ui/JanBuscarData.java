@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -20,6 +19,10 @@ import javax.swing.text.MaskFormatter;
 import org.harca.seg.achados.control.Control;
 
 public class JanBuscarData extends JanBuscarGenerico{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ModeloTabela mt;
 	public JanBuscarData(){
 		JPanel panel = new JPanel();

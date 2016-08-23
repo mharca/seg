@@ -1,6 +1,7 @@
 package org.harca.seg.leitor;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,20 +21,22 @@ import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import org.harca.seg.util.Empregado;
+import org.apache.log4j.lf5.viewer.FilteredLogTableModel;
+import org.harca.seg.util.HtmlParser;
 
-//import com.sun.javafx.binding.StringFormatter;
-
-//import sun.net.www.protocol.mailto.MailToURLConnection;
 
 public class JanLeitor extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JTextField tNome, tMatricula, tChave;
 	JLabel lNome, lMatricula, lChave;
 	JTable table;
 	JButton btnEnviarCorreio;
 	List<String> matriculas;
 	List<List<String>> l2;
-	
+	HtmlParser parser;
 	public JanLeitor(){
 		tNome = new JTextField();		tNome.setEditable(false);
 		tMatricula = new JTextField(); 	
@@ -43,6 +45,7 @@ public class JanLeitor extends JPanel{
 		matriculas = new ArrayList<String>();
 		l2 = new ArrayList<>();
 		
+		tMatricula.setBackground(Color.YELLOW);
 		tMatricula.selectAll();
 		tMatricula.addActionListener(new ActionListener() {
 			
@@ -50,14 +53,65 @@ public class JanLeitor extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 					matriculas.add(tMatricula.getText());
 					
-				//	table.setValueAt(tMatricula.getText(), 1, 2);
-					System.out.println(matriculas);
-					TableModel tm = table.getModel();
+				//	String cAux = new String();
+					String mAux = new String();
 					
-					tm.setValueAt("sdfsdf", 1,2);
-					//table.getModel().
-					table.setModel(tm);
+					mAux = tMatricula.getText().substring(6, 12);
+					
+					//cAux = 
+					for(int i=0; i<10;i++){
+						//mAux = mAux+Integer.toString(i);
+						try{
+							parser = new HtmlParser(mAux+Integer.toString(i));
+							
+							if(parser.getNome()!=null){
+										
+								tNome.setText(parser.getNome());
+								tChave.setText(parser.getChave());
+								
+								final List<String> listaEmpregado = new ArrayList<>();
+									listaEmpregado.add(tMatricula.getText());
+									Thread t = new Thread(new Runnable() {
+										
+										@Override
+										public void run() {
+											// TODO Auto-generated method stub
+											listaEmpregado.add(parser.getChave());
+											listaEmpregado.add(parser.getEmail());
+											listaEmpregado.add(parser.getNome());
+											l2.add(listaEmpregado);
+										}
+									});
+									t.run();
+									
+								table.revalidate();
+								Thread t2 = new Thread(new Runnable() {
+									
+									@Override
+									public void run() {
+										// TODO Auto-generated method stub
+										tMatricula.setText("");
+										tMatricula.selectAll();
+												
+									}
+								});
+								t2.run();
+								break;
+							}
+						
+						}catch(Exception e){
+							
+						}
+						
+						
+					}
+				
+					System.out.println(matriculas+" - "+ mAux);
 					tMatricula.setText("");
+					table.repaint();
+					table.revalidate();
+					
+					
 					
 			}
 		});
@@ -81,16 +135,17 @@ public class JanLeitor extends JPanel{
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-			String[] colunas = {"Cracha", "Chave", "Nome"};
+			String[] colunas = {"Cracha", "Chave", "Correio", "Nome"};
 			@Override
 			public Object getValueAt(int linha, int coluna) {
-				// TODO Auto-generated method stub
+
 				switch(coluna){
-					case 0: return matriculas.get(linha).toString();
-					case 1: return "scdc";
-					case 2: return "Nome";
+					case 0: return matriculas.get(linha).toString();	// cracha
+					case 1: return l2.get(linha).get(1).toString();		// chave
+					case 2: return l2.get(linha).get(2).toString(); 	//correio
+					case 3: return l2.get(linha).get(3).toString();		// nome
 				}
-				fireTableDataChanged();
+				
 				return null;
 			}
 			@Override
@@ -100,17 +155,14 @@ public class JanLeitor extends JPanel{
 			
 			@Override
 			public int getRowCount() {
-				// TODO Auto-generated method stub
-				return matriculas.size();
+				return matriculas.size();	
 			}
 			@Override
 			public void fireTableDataChanged() {
-				// TODO Auto-generated method stub
-				super.fireTableDataChanged();
+				fireTableDataChanged();
 			}
 			@Override
 			public int getColumnCount() {
-				// TODO Auto-generated method stub
 				return colunas.length;
 			}
 		});
@@ -123,6 +175,7 @@ public class JanLeitor extends JPanel{
 		panelMail.add(btnEnviarCorreio);
 		
 		add(panelMail,BorderLayout.SOUTH);
+		tMatricula.selectAll();
 	}
 	//******************************************************************************************************//
 	private class enviarCorreio implements ActionListener{
@@ -131,36 +184,29 @@ public class JanLeitor extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			System.out.println("teste");
 			table.setValueAt(matriculas, 0, 0);
-		//	table.firePropertyChange(null, 1, 1);
 			
-			
-			
-			String subject = "Cracha novo.";
-			String body = "Prezado(a).\nSeu novo cracha esta disponivel para ser retirado na seguranca corporativa";
+			String body = "Prezado,%20Seu%20novo%20crachá%20está%20disponível%20para%20ser%20retirado%20na%20segurança%20corporativa,%20localizada%20no%20térreo%20da%20torre%20A";
+		
 			try {
-				List<String> chaves = new ArrayList<String>();
-				String mail;
+				String mail="";
 				for(int i =0; i < table.getRowCount();i++){
-					chaves.add(table.getValueAt(i, 0).toString());
-					
+					if(mail.length()>1)
+						mail = mail+","+table.getValueAt(i, 2).toString();
+					else mail=table.getValueAt(i, 2).toString();
 				}
-				String s = chaves.toString();
-				String aux = s.replaceAll("\\s","");
-				URI uri = new URI("mailto:"+aux+"?Subject=Cracha%20para%20retirada");
+				System.out.println("--->"+mail);
+			
+				URI uri = new URI("mailto:"+mail+"?Subject=Crachá%20para%20retirada?body="+body+"");
 				Desktop.getDesktop().browse(uri);
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
+		
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+		
 				e.printStackTrace();
 			}
 			
-			//table.setModel(table.getModel());
-		
-			
-			
-		}
+		} // action performed
 		
 	}
 }

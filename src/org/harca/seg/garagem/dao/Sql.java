@@ -43,6 +43,39 @@ public class Sql {
 			e.printStackTrace();
 		}
 	}	
+	
+	public List<List<String>> filtrarTag(String filtro){
+		String query = "SELECT * FROM TAG WHERE nome  LIKE '%"+filtro+"%'";
+		List<List<String>> l2 = new ArrayList<>();
+		try{
+			stmt = c.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+			
+		
+			while(rs.next()){
+				List<String> lista = new ArrayList<>();
+				lista.add(rs.getString("id"));
+				lista.add(rs.getString("placa"));
+				lista.add(rs.getString("matrChave"));
+				lista.add(rs.getString("Nome"));
+				lista.add(rs.getString("Data"));
+				lista.add(rs.getString("obs"));
+				
+				l2.add(lista);
+			}
+			
+
+			stmt.close();
+			c.close();
+	}catch(Exception e){
+		e.printStackTrace();
+		System.out.println("Erro tabela");
+	}
+		return l2;
+		
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public List<List<String>> selectTag()
 	{
 		String query = "SELECT * FROM TAG ORDER BY nome;";

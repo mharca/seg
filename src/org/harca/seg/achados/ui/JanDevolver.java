@@ -12,22 +12,20 @@ import org.harca.seg.util.Foto;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 public class JanDevolver extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField matriculaTexto;
 	JLabel labelImagem;
 	private JTextField textField;

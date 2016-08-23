@@ -1,26 +1,13 @@
 package org.harca.seg.chaves.ui;
 import java.util.*;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Desktop;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,16 +15,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.table.DefaultTableModel;
-
-import org.apache.poi.ss.formula.functions.Code;
 //import org.apache.xmlbeans.impl.jam.annotation.DefaultAnnotationProxy;
 import org.harca.seg.chaves.control.Controle;
 import org.harca.seg.util.Foto;
 import org.harca.seg.util.HtmlParser;
 
 public class JanHistoricoPessoa extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JTextField tNome, tMat, tEmpr;
 	JLabel lFoto, lNome, lMat, lEmpr;
 	JTable tabela;
@@ -126,7 +113,7 @@ public class JanHistoricoPessoa extends JFrame{
 		pack();
 	}
 	private String getEmpresa(String mat){
-		final String matAux = mat;
+	//	final String matAux = mat;
 		/*
 		parser = new HtmlParser(matAux);
 		return parser.getEmpresa();

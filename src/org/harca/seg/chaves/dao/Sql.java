@@ -4,14 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
-import java.util.concurrent.ArrayBlockingQueue;
-
-import javax.swing.JOptionPane;
-
-	import org.harca.seg.achados.control.Control;
-import org.harca.seg.achados.model.*;
 import org.harca.seg.chaves.control.Key;
-import org.harca.seg.util.*;
 	public class Sql {
 
 		Connection c = null;

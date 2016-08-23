@@ -1,7 +1,6 @@
 package org.harca.seg.chaves.ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +12,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.table.TableModel;
-
 import org.harca.seg.chaves.control.Controle;
 
 public class JanHistoricoChave extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public JanHistoricoChave(int id, String local, String numero){
 		
 		setLayout(new BorderLayout());

@@ -9,18 +9,20 @@ import javax.swing.text.MaskFormatter;
 import org.harca.seg.achados.control.Control;
 
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
-import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 public class JanBuscar extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField tipo_textField;
 	private JTable table = new JTable();
 	JPopupMenu popMenu = new JPopupMenu();
@@ -203,7 +205,7 @@ JMenuItem menuItemDeletar = new JMenuItem("Deletar");
 				Control control = new Control();
 				control.selectByDate(buscaData.getText());
 				
-				List<String> ls = new ArrayList();
+			
 				
 				List<List<String>> ls2 = control.selectByDate(buscaData.getText());
 				

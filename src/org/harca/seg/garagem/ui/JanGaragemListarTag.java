@@ -1,6 +1,7 @@
 package org.harca.seg.garagem.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -8,29 +9,58 @@ import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileWriter;
-
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import org.apache.log4j.helpers.FileWatchdog;
 import org.harca.seg.garagem.control.Control;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Cache;
-
-//import jdk.internal.jfr.events.FileWriteEvent;
-import net.miginfocom.layout.Grid;
-
 public class JanGaragemListarTag extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	TagTabelaModelo ttm;
+	JTextField tBusca;
 	public JanGaragemListarTag(){
 		
 		setLayout(new BorderLayout());
+		
+		JPanel panel = new JPanel(new GridLayout(1,3));
+		JLabel lBuscar = new JLabel("Filtrar nome/matricula/chave:");
+		 tBusca = new JTextField();
+		tBusca.setBackground(Color.YELLOW);
+		JButton bbuscar = new JButton("Procurar");
+		
+		tBusca.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				procurar();
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		panel.add(lBuscar);
+		panel.add(tBusca); 
+		panel.add(bbuscar);
 		
 		ttm = new TagTabelaModelo();
 		 table = new JTable();
@@ -41,7 +71,7 @@ public class JanGaragemListarTag extends JPanel{
 		jsp.setViewportView(table);
 		
 		//table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		
+		add(panel,BorderLayout.NORTH);
 		add(jsp,BorderLayout.CENTER);
 		JPanel jpSul = new JPanel();
 		jpSul.setLayout(new FlowLayout());
@@ -143,6 +173,14 @@ public class JanGaragemListarTag extends JPanel{
 			JOptionPane.showMessageDialog(null,"Erro ao criar arquivo");
 			e.printStackTrace();
 		}
+	}
+	
+	public void procurar(){
+	
+
+		table.setModel(new TagTabelaModelo(tBusca.getText()));
+		table.repaint();
+		
 	}
 
 }

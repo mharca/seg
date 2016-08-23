@@ -1,11 +1,11 @@
 package org.harca.seg.ui;
-import java.awt.image.BufferedImage;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 public class EscalaPanel extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String fotoUrl="Arquivos/escala2016.gif";
 
 	public EscalaPanel(){

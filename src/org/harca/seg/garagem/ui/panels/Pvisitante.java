@@ -13,6 +13,10 @@ import javax.swing.JTextField;
 import org.harca.seg.util.HtmlParser;
 
 public class Pvisitante extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JLabel lmatricula, lnome,lempresa;
 	JTextField tmatricula,tnome,tempresa;
 	HtmlParser parser;

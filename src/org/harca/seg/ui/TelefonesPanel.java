@@ -6,6 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class TelefonesPanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String fotoUrl="Arquivos/Ramais2.jpg";
 
 	public TelefonesPanel(){

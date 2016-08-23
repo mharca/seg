@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class JanGaragemListarVisitado extends JanModeloGaragem {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JPanel panelNorth;
 	public JanGaragemListarVisitado(){
 	panelNorth = new JPanel(new FlowLayout());

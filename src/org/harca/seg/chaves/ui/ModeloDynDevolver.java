@@ -3,6 +3,10 @@ package org.harca.seg.chaves.ui;
 import java.util.List;
 
 public class ModeloDynDevolver extends ModeloDevolverTabela{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] colunas;
 	private List<List<String>> lista;
 	

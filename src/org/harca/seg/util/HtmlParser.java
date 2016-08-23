@@ -83,6 +83,7 @@ public class HtmlParser {
 				
 				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3); // Email
 				empregado.setEmail(element.asText());
+				System.out.println("email"+empregado.getEmail());
 				
 				try{
 					element = (DomElement) p2.getElementById("empresaContratada");
@@ -140,12 +141,10 @@ public class HtmlParser {
 				e.printStackTrace();
 			} catch (MalformedURLException e) {
 				System.out.println("2");
-				//e.printStackTrace();
 			} catch (IOException e) {
 				System.out.println("3");
-				//e.printStackTrace();
 			}
-			System.out.println("FIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIM ");
+			//System.out.println("FIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIM ");
 			webclient.close();
 		}
 		
@@ -160,6 +159,13 @@ public class HtmlParser {
 		}
 		public String getEmpresa(){
 			return empregado.getEmpresa();
+		}
+		public String getChave(){
+			return empregado.getChave();
+		}
+		
+		public String getEmail(){
+			return empregado.getEmail();
 		}
 		
 }

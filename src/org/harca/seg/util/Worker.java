@@ -23,7 +23,7 @@ public  class Worker {
 	}
 	
 	public String getEmail() {
-		return chave;
+		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;

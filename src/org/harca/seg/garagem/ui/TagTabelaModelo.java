@@ -30,6 +30,20 @@ public class TagTabelaModelo extends AbstractTableModel{
 		
 		l2 = c.selectTag();
 	}
+	public TagTabelaModelo(String filtro){
+		Control c = new Control();
+		l2 = new ArrayList<>();
+		l2 = c.filtrarTag(filtro);
+	}
+	/*
+	public TagTabelaModelo( List< List<String>> l2 ) {
+		//Control c = new Control();
+	//	this.l2 = new ArrayList<>();
+		
+		this.l2 = l2;
+	}
+	*/
+	
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
