@@ -103,15 +103,15 @@ public class JanEmprestarChave extends JPanel{
 		
 		
 		modeloTabela = new ModeloTabela();
-<<<<<<< HEAD
+
 //<<<<<<< HEAD
 		jtable = new JTable(modeloTabela);
 		jtable.setAutoCreateRowSorter(true);
 //=======
-=======
+//=======
 		jtable = new JTable(modeloTabela);
 		jtable.setAutoCreateRowSorter(true);
->>>>>>> 52f034e43fe428bdac6024cfc41729ff9382d769
+//>>>>>>> 52f034e43fe428bdac6024cfc41729ff9382d769
 		jtable = new JTable(modeloTabela){
 			/**
 			 * 
@@ -126,10 +126,10 @@ public class JanEmprestarChave extends JPanel{
 			}
 		};
 		
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //>>>>>>> afa61f276028386bb1065984d5d5525099edf88c
-=======
->>>>>>> 52f034e43fe428bdac6024cfc41729ff9382d769
+//=======
+//>>>>>>> 52f034e43fe428bdac6024cfc41729ff9382d769
 		ctorre = new JComboBox<String>(storre);
 		ctorre.addActionListener(new ActionListener() {
 			
@@ -291,7 +291,7 @@ public class JanEmprestarChave extends JPanel{
 					//System.out.println(getValueAt(row, 5));
 					if( !isCellSelected(row, col)){
 							switch(getValueAt(row, 1).toString()){
-								case "Localização":
+								case "Localizaï¿½ï¿½o":
 									System.out.println("LLL");
 									c.setBackground(Color.GRAY);
 									break;
