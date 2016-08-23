@@ -83,6 +83,7 @@ public class HtmlParser {
 				
 				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3); // Email
 				empregado.setEmail(element.asText());
+				System.out.println("email"+empregado.getEmail());
 				
 				try{
 					element = (DomElement) p2.getElementById("empresaContratada");
@@ -158,6 +159,13 @@ public class HtmlParser {
 		}
 		public String getEmpresa(){
 			return empregado.getEmpresa();
+		}
+		public String getChave(){
+			return empregado.getChave();
+		}
+		
+		public String getEmail(){
+			return empregado.getEmail();
 		}
 		
 }
