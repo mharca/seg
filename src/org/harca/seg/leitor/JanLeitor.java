@@ -37,6 +37,7 @@ public class JanLeitor extends JPanel{
 	List<String> matriculas;
 	List<List<String>> l2;
 	HtmlParser parser;
+	
 	public JanLeitor(){
 		tNome = new JTextField();		tNome.setEditable(false);
 		tMatricula = new JTextField(); 	
@@ -52,20 +53,20 @@ public class JanLeitor extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 					matriculas.add(tMatricula.getText());
-					
-				//	String cAux = new String();
 					String mAux = new String();
-					
+					String mAuxTerceiro = new String();
 					mAux = tMatricula.getText().substring(6, 12);
-					
-					//cAux = 
+					mAuxTerceiro = "4"+tMatricula.getText().substring(6, 12);
 					for(int i=0; i<10;i++){
-						//mAux = mAux+Integer.toString(i);
+					
 						try{
 							parser = new HtmlParser(mAux+Integer.toString(i));
-							
+						
 							if(parser.getNome()!=null){
-										
+							/*
+								if(parser.getEmpresa() != "PETROBRAS") // outra empresa
+									parser = new HtmlParser(mAuxTerceiro+Integer.toString(i)); // tenta matricula terceiro
+						*/		
 								tNome.setText(parser.getNome());
 								tChave.setText(parser.getChave());
 								
@@ -110,9 +111,7 @@ public class JanLeitor extends JPanel{
 					tMatricula.setText("");
 					table.repaint();
 					table.revalidate();
-					
-					
-					
+						
 			}
 		});
 		lMatricula = new JLabel("Matricula: ");
@@ -120,20 +119,15 @@ public class JanLeitor extends JPanel{
 		lChave = new JLabel("Chave: ");
 		setLayout(new BorderLayout());
 		JPanel panel1 = new JPanel();
-		
-		
+				
 		panel1.setLayout(new GridLayout(3,2));
 		panel1.add(lMatricula); 	panel1.add(tMatricula);
 		panel1.add(lChave);			panel1.add(tChave);
 		panel1.add(lNome);			panel1.add(tNome);
 		
 		add(panel1,BorderLayout.NORTH);
-		
-		
+				
 		table = new JTable(new AbstractTableModel() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 			String[] colunas = {"Cracha", "Chave", "Correio", "Nome"};
 			@Override
@@ -170,7 +164,7 @@ public class JanLeitor extends JPanel{
 		add(jsp,BorderLayout.CENTER);
 		
 		JPanel panelMail = new JPanel();
-		btnEnviarCorreio = new JButton("Enviar correio");
+		btnEnviarCorreio = new JButton("Criar correio");
 		btnEnviarCorreio.addActionListener(new enviarCorreio());
 		panelMail.add(btnEnviarCorreio);
 		
