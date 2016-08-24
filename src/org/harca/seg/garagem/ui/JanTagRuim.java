@@ -1,10 +1,13 @@
 package org.harca.seg.garagem.ui;
 import org.harca.seg.util.*;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
 import org.harca.seg.garagem.control.Control;
 import org.harca.seg.garagem.control.TagUser;
 
@@ -12,7 +15,9 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
@@ -23,7 +28,13 @@ import java.util.Date;
 
 import javax.swing.JCheckBox;
 import javax.swing.border.TitledBorder;
-
+/*
+public class JanTagRuim extends JPanel{
+	public JanTagRuim(){
+		add(new JanTagRuim2(),BorderLayout.CENTER);
+	}
+}
+*/
 public class JanTagRuim extends JPanel {
 	/**
 	 * 
@@ -38,7 +49,8 @@ public class JanTagRuim extends JPanel {
 	private JLabel lFoto;
 	public JanTagRuim() {
 		setLayout(null);
-		//setBorder(BorderFactory.createLineBorder(getForeground()));
+	//	getParent().getParent().setLayout(new BorderLayout());
+		//setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		
 		JLabel lblChaveOuMatrcula = new JLabel("Chave ou matr\u00EDcula:");
 		lblChaveOuMatrcula.setBounds(36, 48, 128, 14);
