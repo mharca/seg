@@ -81,3 +81,6 @@ Clavicul*
 bin/org/harca/seg/chaves/ui/JanEmprestarChave.class
 ./bin/lib ./bin/org
 /bin/
+Arquivos
+banco/
+bancodedados/
