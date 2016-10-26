@@ -87,6 +87,7 @@ public class JanLeitor extends JPanel{
 									t.run();
 									
 								table.revalidate();
+							
 								Thread t2 = new Thread(new Runnable() {
 									
 									@Override
@@ -102,9 +103,10 @@ public class JanLeitor extends JPanel{
 							}
 						
 						}catch(Exception e){
-							
+							JOptionPane.showMessageDialog(null, "Problemas para encontrar os dados deste cracha");
 						}
 						
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						
 					}
 				
