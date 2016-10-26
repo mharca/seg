@@ -60,6 +60,7 @@ public class JanLeitor extends JPanel{
 					mAuxTerceiro = "4"+tMatricula.getText().substring(6, 12);
 					for(int i=0; i<10;i++){
 					
+												
 						try{
 							parser = new HtmlParser(mAux+Integer.toString(i));
 						
