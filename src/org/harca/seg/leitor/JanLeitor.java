@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -55,7 +56,7 @@ public class JanLeitor extends JPanel{
 					matriculas.add(tMatricula.getText());
 					String mAux = new String();
 					String mAuxTerceiro = new String();
-					mAux = tMatricula.getText().substring(6, 12);
+					mAux = tMatricula.getText().substring(6, 12);				// Pega numeros entre 6 e 12
 					mAuxTerceiro = "4"+tMatricula.getText().substring(6, 12);
 					for(int i=0; i<10;i++){
 					
@@ -192,13 +193,13 @@ public class JanLeitor extends JPanel{
 				}
 				System.out.println("--->"+mail);
 			
-				URI uri = new URI("mailto:"+mail+"?Subject=Crachá%20para%20retirada?body="+body+"");
+				URI uri = new URI("mailto:"+mail+"?Subject=Crachá%20para%20retirada.?body="+body+"");
 				Desktop.getDesktop().browse(uri);
 			} catch (URISyntaxException e) {
-		
+				JOptionPane.showMessageDialog(null, "Erro na sintaxe do endereco");
 				e.printStackTrace();
 			} catch (IOException e) {
-		
+				JOptionPane.showMessageDialog(null, "Erro de entrada e saida");
 				e.printStackTrace();
 			}
 			
