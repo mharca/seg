@@ -19,9 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
+//import javax.swing.table.TableModel;
 
-import org.apache.log4j.lf5.viewer.FilteredLogTableModel;
+//import org.apache.log4j.lf5.viewer.FilteredLogTableModel;
 import org.harca.seg.util.HtmlParser;
 
 
@@ -129,10 +129,12 @@ public class JanLeitor extends JPanel{
 				
 		table = new JTable(new AbstractTableModel() {
 			private static final long serialVersionUID = 1L;
-			String[] colunas = {"Cracha", "Chave", "Correio", "Nome"};
+			String[] colunas = {"Cracha", "chave", "Correio", "Nome"};
+			//String[] colunas = {"Cracha", "Correio", "Nome"};
 			@Override
+			
 			public Object getValueAt(int linha, int coluna) {
-
+				
 				switch(coluna){
 					case 0: return matriculas.get(linha).toString();	// cracha
 					case 1: return l2.get(linha).get(1).toString();		// chave
@@ -179,7 +181,7 @@ public class JanLeitor extends JPanel{
 			System.out.println("teste");
 			table.setValueAt(matriculas, 0, 0);
 			
-			String body = "Prezado,%20Seu%20novo%20crachá%20está%20disponível%20para%20ser%20retirado%20na%20segurança%20corporativa,%20localizada%20no%20térreo%20da%20torre%20A";
+			String body = "Prezado(a),%20Seu%20novo%20crachá%20está%20disponível%20para%20ser%20retirado%20na%20segurança%20corporativa,%20localizada%20no%20térreo%20da%20torre%20A.";
 		
 			try {
 				String mail="";
