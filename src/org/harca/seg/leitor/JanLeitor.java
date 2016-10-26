@@ -103,7 +103,8 @@ public class JanLeitor extends JPanel{
 							}
 						
 						}catch(Exception e){
-							JOptionPane.showMessageDialog(null, "Problemas para encontrar os dados deste cracha");
+						//	JOptionPane.showMessageDialog(null, "Problemas para encontrar os dados deste cracha");
+							System.out.println("Tentando outro digito verificador");
 						}
 						
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

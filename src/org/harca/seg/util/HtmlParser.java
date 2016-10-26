@@ -22,6 +22,7 @@ public class HtmlParser {
 		
 	String site;
 	Worker empregado = new Empregado();
+	DomElement element;
 
 		public HtmlParser(String matricula){
 			WebClient webclient = new WebClient(BrowserVersion.FIREFOX_45);
@@ -60,16 +61,48 @@ public class HtmlParser {
 				
 			//	DomElement element = (DomElement) p2.getByXPath("//div[@class='span9']").get(0);
 			//	empregado.setNome(element.asText());
-				DomElement element;
 				
-				try{
-					element = (DomElement) p2.getByXPath("//div[@class='span9']").get(1);
-					empregado.setChave(element.asText());
-				}catch(Exception e){
-					empregado.setChave("Sem chave.");
-				}
-				element = (DomElement) p2.getByXPath("//div[@class='row-fluid']").get(4);
-				empregado.setNome(element.asText());
+				Thread tdChave = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+						try{
+							element = (DomElement) p2.getByXPath("//div[@class='span9']").get(1);
+							empregado.setChave(element.asText());
+						}catch(Exception e){
+							empregado.setChave("Sem chave.");
+						}
+					}
+				});
+				
+				tdChave.run();
+				Thread tdNome = new Thread(new Runnable(){
+				
+					@Override 
+					public void run(){
+						element = (DomElement) p2.getByXPath("//div[@class='row-fluid']").get(4);
+						empregado.setNome(element.asText());
+					}
+				});
+				
+				tdNome.run();
+				
+				Thread tdEmail = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3); // Email
+						empregado.setEmail(element.asText());
+						System.out.println("email"+empregado.getEmail());
+								
+						
+					}
+				});
+				
+				tdEmail.run();
+				
 				
 			//	element = (DomElement) p2.getByXPath("//div[@class='row-fluid']").get(9);
 				
@@ -81,27 +114,37 @@ public class HtmlParser {
 				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(2); // Genero
 				empregado.setGenero(element.asText());
 				
-				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(3); // Email
-				empregado.setEmail(element.asText());
-				System.out.println("email"+empregado.getEmail());
-				
-				try{
-					element = (DomElement) p2.getElementById("empresaContratada");
-					element = (DomElement) element.getLastElementChild();
-					empregado.setEmpresa(element.asText());
-					System.out.println(element.asText());
+				Thread tdEmp = new Thread( new Runnable() {
 					
-				}catch(Exception e){
-					element = (DomElement) p2.getElementById("empresa");
-					element = (DomElement) element.getLastElementChild();
-					empregado.setEmpresa(element.asText());
-					System.out.println(element.asText());
+					@Override
+					public void run() {
+						try{
+							element = (DomElement) p2.getElementById("empresaContratada");
+							element = (DomElement) element.getLastElementChild();
+							empregado.setEmpresa(element.asText());
+							System.out.println(element.asText());
+							
+						}catch(Exception e){
+							element = (DomElement) p2.getElementById("empresa");
+							element = (DomElement) element.getLastElementChild();
+							empregado.setEmpresa(element.asText());
+							System.out.println(element.asText());
 
-				}
+						}
+
+						
+					}
+				});
 				
+				tdEmp.run();
+				
+							
 			//	element = (DomElement) p2.getByXPath("//div[@class='span9']").get(4); // Empresa
 			//	empregado.setEmpresa(element.asText());
 				
+				
+				/*************** OK apenas tentando otimizar ****************************
+				 
 				element = (DomElement) p2.getByXPath("//div[@class='span9']").get(5); // Pais
 				empregado.setPais(element.asText());
 				
@@ -116,6 +159,11 @@ public class HtmlParser {
 				
 				element = (DomElement) p2.getByXPath("//div[@class='span4']").get(1); // Ramal
 				empregado.setRamal(element.asText());
+				
+				
+				
+				*************** OK apenas tentando otimizar ****************************/
+				
 				
 		//		element = (DomElement) p2.getByXPath("//div[@class='span9']").get(10); // Endereco
 		//		empregado.setEndereco(element.asText());
@@ -137,12 +185,12 @@ public class HtmlParser {
 					*/			
 				
 			} catch (FailingHttpStatusCodeException e) {
-				System.out.println("1");
+				System.out.println("Problemas no http status");
 				e.printStackTrace();
 			} catch (MalformedURLException e) {
-				System.out.println("2");
+				System.out.println("Url errada.");
 			} catch (IOException e) {
-				System.out.println("3");
+				System.out.println("Erro de entrada e saida");
 			}
 			//System.out.println("FIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIMFIM ");
 			webclient.close();
